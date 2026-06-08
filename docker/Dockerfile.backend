@@ -12,6 +12,9 @@ COPY backend/package.json ./backend/
 # Install all dependencies (root + workspace)
 RUN npm ci
 
+# Install backend workspace dependencies
+RUN npm ci --workspace=backend
+
 # Development stage
 FROM base AS development
 WORKDIR /app
