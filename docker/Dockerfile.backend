@@ -9,8 +9,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY backend/package.json ./backend/
 
-# Install dependencies
-RUN npm ci --workspace=backend
+# Install all dependencies (root + workspace)
+RUN npm ci
 
 # Development stage
 FROM base AS development
