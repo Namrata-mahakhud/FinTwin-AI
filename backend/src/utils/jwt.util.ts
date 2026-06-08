@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
 import { config } from '../config/environment';
 import { JWTPayload } from '../types';
 
@@ -7,18 +7,22 @@ export class JWTUtil {
    * Generate access token
    */
   static generateAccessToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): string {
-    return jwt.sign(payload, config.jwt.secret, {
-      expiresIn: config.jwt.expiresIn as string,
-    });
+    const options: SignOptions = {
+      expiresIn: config.jwt.expiresIn as unknown as SignOptions['expiresIn'],
+    };
+
+    return jwt.sign(payload, config.jwt.secret as Secret, options);
   }
 
   /**
    * Generate refresh token
    */
   static generateRefreshToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): string {
-    return jwt.sign(payload, config.jwt.refreshSecret, {
-      expiresIn: config.jwt.refreshExpiresIn as string,
-    });
+    const options: SignOptions = {
+      expiresIn: config.jwt.refreshExpiresIn as unknown as SignOptions['expiresIn'],
+    };
+
+    return jwt.sign(payload, config.jwt.refreshSecret as Secret, options);
   }
 
   /**

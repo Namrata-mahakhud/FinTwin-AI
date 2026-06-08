@@ -26,7 +26,7 @@ export class Validator {
   /**
    * Validate a single field
    */
-  validateField(rule: ValidationRule): boolean {
+validateField<T = unknown>(rule: ValidationRule<T>): boolean {
     const { field, value, rules } = rule;
 
     // Required check
@@ -57,7 +57,8 @@ export class Validator {
 
     // Min/Max for numbers
     if (rules.type === 'number') {
-      if (rules.min !== undefined && value < rules.min) {
+      const numericValue = value as number;
+      if (rules.min !== undefined && numericValue < rules.min) {
         this.errors.push({
           field,
           message: `${field} must be at least ${rules.min}`,
@@ -65,7 +66,7 @@ export class Validator {
         });
         return false;
       }
-      if (rules.max !== undefined && value > rules.max) {
+      if (rules.max !== undefined && numericValue > rules.max) {
         this.errors.push({
           field,
           message: `${field} must be at most ${rules.max}`,
@@ -77,7 +78,7 @@ export class Validator {
 
     // MinLength/MaxLength for strings and arrays
     if (rules.type === 'string' || rules.type === 'array') {
-      const length = rules.type === 'string' ? value.length : value.length;
+      const length = (value as { length: number }).length;
       if (rules.minLength !== undefined && length < rules.minLength) {
         this.errors.push({
           field,
@@ -98,7 +99,7 @@ export class Validator {
 
     // Pattern check for strings
     if (rules.pattern && rules.type === 'string') {
-      if (!rules.pattern.test(value)) {
+      if (!rules.pattern.test(value as string)) {
         this.errors.push({
           field,
           message: `${field} format is invalid`,
@@ -109,7 +110,7 @@ export class Validator {
     }
 
     // Enum check
-    if (rules.enum && !rules.enum.includes(value)) {
+    if (rules.enum && !rules.enum.includes(value as T)) {
       this.errors.push({
         field,
         message: `${field} must be one of: ${rules.enum.join(', ')}`,
