@@ -1,0 +1,97 @@
+{
+  "agent": {
+    "name": "Code Generation Agent",
+    "version": "1.0.0",
+    "type": "code_generation",
+    "description": "Generates ICA-compliant code for FinTwin AI application"
+  },
+  "capabilities": [
+    "generate_api_routes",
+    "generate_services",
+    "generate_models",
+    "generate_tests",
+    "generate_documentation"
+  ],
+  "context_sources": [
+    ".ica/context/domain-context.json",
+    ".ica/patterns/service-layer-pattern.md",
+    ".ica/templates/"
+  ],
+  "code_generation_rules": {
+    "language": "TypeScript",
+    "style_guide": "ICA TypeScript Standards",
+    "patterns": [
+      "Service Layer Pattern",
+      "Repository Pattern",
+      "Dependency Injection",
+      "Factory Pattern"
+    ],
+    "naming_conventions": {
+      "files": "kebab-case",
+      "classes": "PascalCase",
+      "functions": "camelCase",
+      "constants": "UPPER_SNAKE_CASE"
+    },
+    "code_quality": {
+      "max_function_length": 50,
+      "max_file_length": 300,
+      "cyclomatic_complexity": 10,
+      "test_coverage": 80
+    }
+  },
+  "templates": {
+    "service": ".ica/templates/service.template.ts",
+    "controller": ".ica/templates/controller.template.ts",
+    "model": ".ica/templates/model.template.ts",
+    "test": ".ica/templates/test.template.ts"
+  },
+  "validation": {
+    "pre_generation": [
+      "validate_context",
+      "check_dependencies",
+      "verify_patterns"
+    ],
+    "post_generation": [
+      "lint_code",
+      "run_tests",
+      "check_coverage",
+      "security_scan"
+    ]
+  },
+  "learning": {
+    "feedback_sources": [
+      "code_reviews",
+      "test_results",
+      "production_metrics"
+    ],
+    "improvement_areas": [
+      "code_quality",
+      "performance",
+      "security",
+      "maintainability"
+    ]
+  },
+  "integration": {
+    "ica_context_studio": {
+      "enabled": true,
+      "sync_interval": "on_demand",
+      "context_refresh": "before_generation"
+    },
+    "version_control": {
+      "auto_commit": false,
+      "branch_strategy": "feature_branches",
+      "commit_message_format": "conventional_commits"
+    },
+    "ci_cd": {
+      "trigger_pipeline": true,
+      "run_tests": true,
+      "deploy_on_success": false
+    }
+  },
+  "prompts": {
+    "service_generation": "Generate a TypeScript service class following ICA Service Layer Pattern. Include business logic, error handling, and logging. Use dependency injection. Add JSDoc comments.",
+    "api_generation": "Generate Fastify API routes following RESTful principles. Include request validation, error handling, and Swagger documentation.",
+    "model_generation": "Generate Mongoose model with schema validation, indexes, and methods. Follow ICA data modeling standards.",
+    "test_generation": "Generate comprehensive unit tests using Jest. Include happy path, edge cases, and error scenarios. Aim for 80%+ coverage."
+  }
+}

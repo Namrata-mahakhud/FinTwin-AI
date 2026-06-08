@@ -1,0 +1,227 @@
+name: Agentic SDLC Workflow
+version: 1.0.0
+description: End-to-end development workflow using Bob agents and ICA Context Studio
+
+workflow:
+  phases:
+    - name: Requirements Analysis
+      agents:
+        - requirements_agent
+      steps:
+        - action: analyze_requirements
+          input: user_stories
+          output: structured_requirements
+        - action: sync_with_ica_context
+          input: structured_requirements
+          output: domain_context
+        - action: generate_acceptance_criteria
+          input: structured_requirements
+          output: acceptance_criteria
+
+    - name: Design
+      agents:
+        - architecture_agent
+        - design_agent
+      steps:
+        - action: load_ica_patterns
+          input: domain_context
+          output: applicable_patterns
+        - action: generate_architecture
+          input: [requirements, patterns]
+          output: architecture_design
+        - action: create_api_specs
+          input: architecture_design
+          output: api_specifications
+        - action: design_database_schema
+          input: domain_context
+          output: database_schema
+
+    - name: Code Generation
+      agents:
+        - code_generation_agent
+      steps:
+        - action: generate_backend_structure
+          input: architecture_design
+          output: backend_scaffold
+        - action: generate_services
+          input: [api_specifications, ica_patterns]
+          output: service_layer
+        - action: generate_api_routes
+          input: api_specifications
+          output: api_layer
+        - action: generate_models
+          input: database_schema
+          output: data_models
+        - action: generate_frontend_structure
+          input: architecture_design
+          output: frontend_scaffold
+        - action: generate_components
+          input: ui_specifications
+          output: react_components
+
+    - name: Testing
+      agents:
+        - testing_agent
+      steps:
+        - action: generate_unit_tests
+          input: service_layer
+          output: unit_tests
+          coverage_target: 80
+        - action: generate_integration_tests
+          input: api_layer
+          output: integration_tests
+        - action: generate_e2e_tests
+          input: user_stories
+          output: e2e_tests
+        - action: run_all_tests
+          input: [unit_tests, integration_tests]
+          output: test_results
+
+    - name: Code Review
+      agents:
+        - review_agent
+      steps:
+        - action: static_code_analysis
+          input: generated_code
+          output: code_quality_report
+        - action: security_scan
+          input: generated_code
+          output: security_report
+        - action: ica_compliance_check
+          input: generated_code
+          output: compliance_report
+        - action: suggest_improvements
+          input: [quality_report, security_report]
+          output: improvement_suggestions
+
+    - name: Documentation
+      agents:
+        - documentation_agent
+      steps:
+        - action: generate_api_docs
+          input: api_specifications
+          output: swagger_docs
+        - action: generate_architecture_docs
+          input: architecture_design
+          output: architecture_diagrams
+        - action: generate_user_guide
+          input: user_stories
+          output: user_documentation
+        - action: generate_deployment_guide
+          input: deployment_config
+          output: deployment_docs
+
+    - name: Deployment
+      agents:
+        - deployment_agent
+      steps:
+        - action: build_artifacts
+          input: generated_code
+          output: build_artifacts
+        - action: run_pre_deployment_tests
+          input: build_artifacts
+          output: test_results
+        - action: deploy_to_environment
+          input: [build_artifacts, environment_config]
+          output: deployment_status
+        - action: run_smoke_tests
+          input: deployed_application
+          output: smoke_test_results
+
+    - name: Monitoring & Learning
+      agents:
+        - monitoring_agent
+        - learning_agent
+      steps:
+        - action: setup_monitoring
+          input: deployed_application
+          output: monitoring_dashboard
+        - action: collect_metrics
+          input: production_environment
+          output: performance_metrics
+        - action: analyze_feedback
+          input: [user_feedback, metrics]
+          output: insights
+        - action: update_context
+          input: insights
+          output: updated_ica_context
+
+triggers:
+  - event: new_feature_request
+    start_phase: Requirements Analysis
+  - event: code_review_approved
+    start_phase: Deployment
+  - event: test_failure
+    start_phase: Code Generation
+    action: regenerate_failed_component
+  - event: production_issue
+    start_phase: Monitoring & Learning
+    action: analyze_and_fix
+
+integrations:
+  ica_context_studio:
+    enabled: true
+    sync_mode: bidirectional
+    update_frequency: on_phase_completion
+  
+  version_control:
+    system: git
+    auto_commit: true
+    branch_strategy: gitflow
+  
+  ci_cd:
+    platform: github_actions
+    trigger_on: code_generation_complete
+    auto_deploy: false
+
+quality_gates:
+  - phase: Code Generation
+    checks:
+      - lint_pass: true
+      - type_check_pass: true
+      - ica_pattern_compliance: true
+  
+  - phase: Testing
+    checks:
+      - unit_test_coverage: ">= 80%"
+      - integration_tests_pass: true
+      - security_scan_pass: true
+  
+  - phase: Code Review
+    checks:
+      - code_quality_score: ">= 8/10"
+      - security_vulnerabilities: "0 critical"
+      - ica_compliance: "100%"
+
+notifications:
+  - event: phase_complete
+    channels: [slack, email]
+  - event: quality_gate_failed
+    channels: [slack, email]
+    priority: high
+  - event: deployment_complete
+    channels: [slack]
+  - event: production_issue
+    channels: [slack, pagerduty]
+    priority: critical
+
+learning:
+  feedback_collection:
+    - code_review_comments
+    - test_results
+    - production_metrics
+    - user_feedback
+  
+  improvement_areas:
+    - code_quality
+    - test_coverage
+    - performance
+    - security
+    - ica_compliance
+  
+  model_updates:
+    frequency: weekly
+    validation: required
+    rollback_on_regression: true
+
+# Made with Bob

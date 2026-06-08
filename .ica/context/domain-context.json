@@ -1,0 +1,70 @@
+{
+  "domain": "Financial Technology",
+  "subdomain": "Market Simulation & Risk Analysis",
+  "version": "1.0.0",
+  "description": "FinTwin AI domain context for financial market simulation and portfolio analysis",
+  "terminology": {
+    "scenario": "A defined economic event or market condition to simulate",
+    "simulation": "The execution of a scenario against a portfolio to predict outcomes",
+    "portfolio": "A collection of financial assets with allocations",
+    "risk_score": "Quantitative measure of potential loss or volatility",
+    "market_agent": "AI component analyzing market reactions",
+    "impact_analysis": "Assessment of scenario effects on portfolio value"
+  },
+  "business_rules": {
+    "scenario_creation": {
+      "required_fields": ["name", "eventType", "parameters", "targetDate"],
+      "event_types": [
+        "INTEREST_RATE_CHANGE",
+        "INFLATION_CHANGE",
+        "SECTOR_CRASH",
+        "CURRENCY_FLUCTUATION",
+        "OIL_PRICE_CHANGE",
+        "GLOBAL_CRISIS"
+      ],
+      "validation": "All parameters must be within realistic ranges"
+    },
+    "portfolio_management": {
+      "min_assets": 1,
+      "max_assets": 100,
+      "allocation_sum": 100,
+      "risk_appetites": ["CONSERVATIVE", "MODERATE", "AGGRESSIVE"]
+    },
+    "simulation_execution": {
+      "max_duration": "5 minutes",
+      "timeout_handling": "Return partial results with warning",
+      "concurrent_simulations": 5
+    }
+  },
+  "data_models": {
+    "scenario": {
+      "properties": ["id", "name", "description", "eventType", "parameters", "targetDate", "status"],
+      "relationships": ["createdBy:User", "generates:Simulation"]
+    },
+    "portfolio": {
+      "properties": ["id", "name", "userId", "totalValue", "riskAppetite", "assets"],
+      "relationships": ["ownedBy:User", "analyzedIn:Simulation"]
+    },
+    "simulation": {
+      "properties": ["id", "scenarioId", "portfolioId", "status", "results"],
+      "relationships": ["basedOn:Scenario", "analyzes:Portfolio", "produces:Results"]
+    }
+  },
+  "constraints": {
+    "performance": {
+      "api_response_time": "< 200ms",
+      "simulation_time": "< 5 minutes",
+      "concurrent_users": 1000
+    },
+    "security": {
+      "authentication": "JWT with 7-day expiry",
+      "authorization": "Role-based access control",
+      "data_encryption": "At rest and in transit"
+    },
+    "compliance": {
+      "data_retention": "7 years",
+      "audit_logging": "All user actions",
+      "disclaimer": "Simulations are for educational purposes only"
+    }
+  }
+}
