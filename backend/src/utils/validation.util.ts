@@ -4,9 +4,9 @@
 
 import { ValidationError, ErrorDetails } from './errors.util';
 
-export interface ValidationRule {
+export interface ValidationRule<T = unknown> {
   field: string;
-  value: any;
+  value: T;
   rules: {
     required?: boolean;
     type?: 'string' | 'number' | 'boolean' | 'object' | 'array' | 'date';
@@ -15,8 +15,8 @@ export interface ValidationRule {
     minLength?: number;
     maxLength?: number;
     pattern?: RegExp;
-    enum?: any[];
-    custom?: (value: any) => boolean | string;
+    enum?: T[];
+    custom?: (value: T) => boolean | string;
   };
 }
 
@@ -249,7 +249,10 @@ export const sanitizeString = (input: string): string => {
 /**
  * Validate pagination parameters
  */
-export const validatePagination = (page?: number, limit?: number): { page: number; limit: number } => {
+export const validatePagination = (
+  page?: number,
+  limit?: number
+): { page: number; limit: number } => {
   const validPage = Math.max(1, page || 1);
   const validLimit = Math.min(100, Math.max(1, limit || 10));
   return { page: validPage, limit: validLimit };
@@ -305,8 +308,8 @@ export const createValidationSchema = (schema: Record<string, ValidationRule['ru
 /**
  * Fastify schema to JSON schema converter helper
  */
-export const toJSONSchema = (rules: ValidationRule['rules']) => {
-  const schema: any = {};
+export const toJSONSchema = (rules: ValidationRule['rules']): Record<string, unknown> => {
+  const schema: Record<string, unknown> = {};
 
   if (rules.type) {
     schema.type = rules.type;
@@ -339,4 +342,4 @@ export const toJSONSchema = (rules: ValidationRule['rules']) => {
   return schema;
 };
 
-// Made with Bob
+

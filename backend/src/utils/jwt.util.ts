@@ -9,7 +9,7 @@ export class JWTUtil {
   static generateAccessToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): string {
     return jwt.sign(payload, config.jwt.secret, {
       expiresIn: config.jwt.expiresIn as string,
-    } as jwt.SignOptions);
+    });
   }
 
   /**
@@ -18,7 +18,7 @@ export class JWTUtil {
   static generateRefreshToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): string {
     return jwt.sign(payload, config.jwt.refreshSecret, {
       expiresIn: config.jwt.refreshExpiresIn as string,
-    } as jwt.SignOptions);
+    });
   }
 
   /**
@@ -55,4 +55,3 @@ export class JWTUtil {
   }
 }
 
-// Made with Bob

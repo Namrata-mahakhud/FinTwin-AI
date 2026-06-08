@@ -22,12 +22,7 @@ export class ResponseFormatter {
   /**
    * Paginated response
    */
-  static paginated<T>(
-    data: T[],
-    page: number,
-    limit: number,
-    total: number
-  ) {
+  static paginated<T>(data: T[], page: number, limit: number, total: number) {
     const totalPages = Math.ceil(total / limit);
     return {
       success: true,
@@ -46,7 +41,7 @@ export class ResponseFormatter {
   /**
    * List response with metadata
    */
-  static list<T>(items: T[], metadata?: Record<string, any>) {
+  static list<T>(items: T[], metadata?: Record<string, unknown>) {
     return {
       success: true,
       data: {
@@ -538,10 +533,10 @@ export class AsyncUtils {
 
       if (executing.length >= limit) {
         await Promise.race(executing);
-        executing.splice(
-          executing.findIndex((p) => p === promise),
-          1
-        );
+        const index = executing.findIndex((p) => p === promise);
+        if (index !== -1) {
+          executing.splice(index, 1);
+        }
       }
     }
 
