@@ -6,8 +6,7 @@ FROM base AS deps
 WORKDIR /app
 
 # Copy root package files and workspace package files
-COPY package.json package-lock.json ./
-COPY backend/package.json backend/package-lock.json ./
+COPY . .
 
 # Install all dependencies (root + workspace)
 RUN npm ci
