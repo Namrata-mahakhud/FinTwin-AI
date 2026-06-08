@@ -35,6 +35,9 @@
   "@typescript-eslint/no-unsafe-enum-comparison": "off",
   "@typescript-eslint/require-await": "off",
   "@typescript-eslint/ban-types": "off",
+  "@typescript-eslint/no-unnecessary-type-assertion": "off",
+  "@typescript-eslint/no-unsafe-function-type": "off",
+  "@typescript-eslint/prefer-promise-reject-errors": "off",
   "@typescript-eslint/no-redundant-type-constituents": "off",
   "no-console": "off",
   "no-case-declarations": "off"
@@ -45,4 +48,3 @@
     "es2022": true
   }
 }
-
