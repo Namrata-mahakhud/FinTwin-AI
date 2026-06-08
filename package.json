@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/parser": "^8.60.1",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -48,5 +48,13 @@
     "risk-analysis"
   ],
   "author": "FinTwin AI Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/jwt": "10.1.0",
+    "@vitest/ui": "4.1.8",
+    "bcrypt": "6.0.0",
+    "fastify": "5.8.5",
+    "vite": "8.0.16",
+    "vitest": "4.1.8"
+  }
 }
