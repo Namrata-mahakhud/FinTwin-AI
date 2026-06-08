@@ -41,18 +41,54 @@ const FinancialWarRoom: React.FC = () => {
 
   // Timeline events
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([
-    { day: 1, title: 'Inflation rises', description: 'Consumer prices increase by 3%', icon: '💰', status: 'pending' },
-    { day: 5, title: 'Banking drops', description: 'Banking sector declines 8%', icon: '🏦', status: 'pending' },
-    { day: 10, title: 'Currency weakens', description: 'Currency depreciation -12%', icon: '💱', status: 'pending' },
-    { day: 15, title: 'Portfolio impact', description: 'Portfolio value falls significantly', icon: '📉', status: 'pending' },
-    { day: 30, title: 'Recovery', description: 'Recovery strategies activated', icon: '🔄', status: 'pending' },
+    {
+      day: 1,
+      title: 'Inflation rises',
+      description: 'Consumer prices increase by 3%',
+      icon: '💰',
+      status: 'pending',
+    },
+    {
+      day: 5,
+      title: 'Banking drops',
+      description: 'Banking sector declines 8%',
+      icon: '🏦',
+      status: 'pending',
+    },
+    {
+      day: 10,
+      title: 'Currency weakens',
+      description: 'Currency depreciation -12%',
+      icon: '💱',
+      status: 'pending',
+    },
+    {
+      day: 15,
+      title: 'Portfolio impact',
+      description: 'Portfolio value falls significantly',
+      icon: '📉',
+      status: 'pending',
+    },
+    {
+      day: 30,
+      title: 'Recovery',
+      description: 'Recovery strategies activated',
+      icon: '🔄',
+      status: 'pending',
+    },
   ]);
 
   // AI Agent activities
   const [agentActivities, setAgentActivities] = useState<AgentActivity[]>([
     { agent: 'Market Agent', status: 'idle', message: 'Waiting...', icon: '📊', color: 'blue' },
     { agent: 'Risk Agent', status: 'idle', message: 'Waiting...', icon: '⚠️', color: 'red' },
-    { agent: 'Portfolio Agent', status: 'idle', message: 'Waiting...', icon: '💼', color: 'purple' },
+    {
+      agent: 'Portfolio Agent',
+      status: 'idle',
+      message: 'Waiting...',
+      icon: '💼',
+      color: 'purple',
+    },
     { agent: 'Recovery Agent', status: 'idle', message: 'Waiting...', icon: '🎯', color: 'green' },
   ]);
 
@@ -74,8 +110,8 @@ const FinancialWarRoom: React.FC = () => {
       setCurrentDay(day);
 
       // Update timeline events
-      setTimelineEvents(prev =>
-        prev.map(event => ({
+      setTimelineEvents((prev) =>
+        prev.map((event) => ({
           ...event,
           status: event.day <= day ? 'completed' : event.day === day + 1 ? 'active' : 'pending',
         }))
@@ -95,8 +131,8 @@ const FinancialWarRoom: React.FC = () => {
         updateAgentActivity('Recovery Agent', 'running', 'Generating recovery plan...');
       } else if (day >= 30) {
         updateAgentActivity('Recovery Agent', 'completed', 'Recommendations ready');
-        setTimelineEvents(prev =>
-          prev.map(event => ({
+        setTimelineEvents((prev) =>
+          prev.map((event) => ({
             ...event,
             status: 'completed',
           }))
@@ -108,8 +144,8 @@ const FinancialWarRoom: React.FC = () => {
   };
 
   const updateAgentActivity = (agent: string, status: AgentActivity['status'], message: string) => {
-    setAgentActivities(prev =>
-      prev.map(a => (a.agent === agent ? { ...a, status, message } : a))
+    setAgentActivities((prev) =>
+      prev.map((a) => (a.agent === agent ? { ...a, status, message } : a))
     );
   };
 
@@ -159,7 +195,9 @@ const FinancialWarRoom: React.FC = () => {
               <span>🎯</span>
               Financial War Room
             </h1>
-            <p className="text-red-200 text-sm mt-1">Crisis Command Center - Real-time Simulation Monitoring</p>
+            <p className="text-red-200 text-sm mt-1">
+              Crisis Command Center - Real-time Simulation Monitoring
+            </p>
           </div>
           <div className="flex items-center gap-4">
             {isSimulationRunning && (
@@ -188,7 +226,7 @@ const FinancialWarRoom: React.FC = () => {
                 <span>📋</span>
                 Selected Shock
               </h2>
-              
+
               <div className="space-y-4">
                 <div>
                   <div className="text-sm text-gray-400 mb-1">Scenario:</div>
@@ -265,7 +303,10 @@ const FinancialWarRoom: React.FC = () => {
 
               <div className="relative space-y-6 pb-16 min-h-[700px]">
                 {/* Timeline Line */}
-                <div className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-red-500 via-yellow-500 to-green-500" style={{ height: '100%', minHeight: '700px' }} />
+                <div
+                  className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-red-500 via-yellow-500 to-green-500"
+                  style={{ height: '100%', minHeight: '700px' }}
+                />
 
                 {timelineEvents.map((event, index) => (
                   <div
@@ -281,9 +322,13 @@ const FinancialWarRoom: React.FC = () => {
                         className={`
                           w-16 h-16 rounded-full flex items-center justify-center text-2xl
                           border-4 border-gray-900 shadow-lg transition-all duration-500
-                          ${event.status === 'completed' ? 'bg-green-600' : 
-                            event.status === 'active' ? 'bg-blue-600 animate-pulse-glow' : 
-                            'bg-gray-700'}
+                          ${
+                            event.status === 'completed'
+                              ? 'bg-green-600'
+                              : event.status === 'active'
+                                ? 'bg-blue-600 animate-pulse-glow'
+                                : 'bg-gray-700'
+                          }
                         `}
                       >
                         {event.icon}
@@ -302,9 +347,7 @@ const FinancialWarRoom: React.FC = () => {
                           <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">
                             DAY {event.day}
                           </div>
-                          <h4 className="font-bold text-white text-lg">
-                            {event.title}
-                          </h4>
+                          <h4 className="font-bold text-white text-lg">{event.title}</h4>
                         </div>
                         {event.status === 'completed' && (
                           <span className="text-green-500 text-xl">✓</span>
@@ -315,9 +358,7 @@ const FinancialWarRoom: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      <p className="text-sm text-gray-400">
-                        {event.description}
-                      </p>
+                      <p className="text-sm text-gray-400">{event.description}</p>
                     </div>
                   </div>
                 ))}
@@ -341,11 +382,13 @@ const FinancialWarRoom: React.FC = () => {
                     key={index}
                     className={`
                       p-3 rounded-lg border-2 transition-all duration-300
-                      ${activity.status === 'running' 
-                        ? 'border-blue-500 bg-blue-900/20 animate-pulse-glow' 
-                        : activity.status === 'completed'
-                        ? 'border-green-500 bg-green-900/20'
-                        : 'border-gray-600 bg-gray-700/50'}
+                      ${
+                        activity.status === 'running'
+                          ? 'border-blue-500 bg-blue-900/20 animate-pulse-glow'
+                          : activity.status === 'completed'
+                            ? 'border-green-500 bg-green-900/20'
+                            : 'border-gray-600 bg-gray-700/50'
+                      }
                     `}
                   >
                     <div className="flex items-center gap-2 mb-2">
@@ -355,14 +398,15 @@ const FinancialWarRoom: React.FC = () => {
                           {activity.agent}
                         </div>
                         <div className={`text-xs font-medium ${getStatusColor(activity.status)}`}>
-                          {activity.status === 'running' ? 'Running...' : 
-                           activity.status === 'completed' ? 'Complete' : 'Idle'}
+                          {activity.status === 'running'
+                            ? 'Running...'
+                            : activity.status === 'completed'
+                              ? 'Complete'
+                              : 'Idle'}
                         </div>
                       </div>
                     </div>
-                    <p className="text-xs text-gray-300">
-                      {activity.message}
-                    </p>
+                    <p className="text-xs text-gray-300">{activity.message}</p>
                   </div>
                 ))}
               </div>
@@ -398,7 +442,7 @@ const FinancialWarRoom: React.FC = () => {
             <span>⚡</span>
             {isSimulationRunning ? 'Simulation Running...' : 'Run Simulation'}
           </button>
-          
+
           <button
             disabled={!isSimulationRunning && currentDay === 0}
             className="px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
@@ -415,9 +459,7 @@ const FinancialWarRoom: React.FC = () => {
             Export Report
           </button>
 
-          <button
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
-          >
+          <button className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors flex items-center gap-2">
             <span>⚖️</span>
             Compare Scenarios
           </button>
@@ -426,8 +468,10 @@ const FinancialWarRoom: React.FC = () => {
             disabled={currentDay === 0}
             onClick={() => {
               setCurrentDay(0);
-              setTimelineEvents(prev => prev.map(e => ({ ...e, status: 'pending' as const })));
-              setAgentActivities(prev => prev.map(a => ({ ...a, status: 'idle' as const, message: 'Waiting...' })));
+              setTimelineEvents((prev) => prev.map((e) => ({ ...e, status: 'pending' as const })));
+              setAgentActivities((prev) =>
+                prev.map((a) => ({ ...a, status: 'idle' as const, message: 'Waiting...' }))
+              );
               handleRunSimulation();
             }}
             className="px-6 py-3 bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors flex items-center gap-2"

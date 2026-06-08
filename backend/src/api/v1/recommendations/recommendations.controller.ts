@@ -109,10 +109,7 @@ export async function getAppliedRecommendations(
 /**
  * Get recommendation effectiveness summary
  */
-export async function getEffectivenessSummary(
-  request: FastifyRequest,
-  reply: FastifyReply
-) {
+export async function getEffectivenessSummary(request: FastifyRequest, reply: FastifyReply) {
   try {
     const userId = request.user?.userId;
     if (!userId) {

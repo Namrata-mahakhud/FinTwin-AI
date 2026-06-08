@@ -136,10 +136,8 @@ const SimulationHistory: React.FC = () => {
   };
 
   const toggleSelection = (id: string) => {
-    setSelectedItems(prev =>
-      prev.includes(id)
-        ? prev.filter(item => item !== id)
-        : [...prev, id]
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
@@ -169,8 +167,8 @@ const SimulationHistory: React.FC = () => {
     navigate(`/simulations/${simulation.id}/results`);
   };
 
-  const filteredSimulations = simulations.filter(sim =>
-    filterStatus === 'all' || sim.status === filterStatus
+  const filteredSimulations = simulations.filter(
+    (sim) => filterStatus === 'all' || sim.status === filterStatus
   );
 
   if (isLoading) {
@@ -186,9 +184,7 @@ const SimulationHistory: React.FC = () => {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Simulation History
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Simulation History</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             View, replay, and compare past simulations
           </p>
@@ -213,15 +209,16 @@ const SimulationHistory: React.FC = () => {
               Filter by status:
             </span>
             <div className="flex gap-2">
-              {['all', 'completed', 'running', 'recovered', 'failed'].map(status => (
+              {['all', 'completed', 'running', 'recovered', 'failed'].map((status) => (
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
                   className={`
                     px-4 py-2 rounded-lg text-sm font-medium transition-colors
-                    ${filterStatus === status
-                      ? 'bg-primary-600 text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    ${
+                      filterStatus === status
+                        ? 'bg-primary-600 text-white'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                     }
                   `}
                 >
@@ -252,9 +249,10 @@ const SimulationHistory: React.FC = () => {
                       onClick={() => toggleSelection(simulation.id)}
                       className={`
                         w-6 h-6 rounded border-2 flex items-center justify-center transition-colors
-                        ${selectedItems.includes(simulation.id)
-                          ? 'border-primary-500 bg-primary-500'
-                          : 'border-gray-300 dark:border-gray-600 hover:border-primary-500'
+                        ${
+                          selectedItems.includes(simulation.id)
+                            ? 'border-primary-500 bg-primary-500'
+                            : 'border-gray-300 dark:border-gray-600 hover:border-primary-500'
                         }
                       `}
                     >
@@ -282,7 +280,8 @@ const SimulationHistory: React.FC = () => {
                           {formatDate(simulation.createdAt)}
                           {simulation.duration && (
                             <span className="ml-2">
-                              • Duration: {Math.round(simulation.duration / 60)}m {simulation.duration % 60}s
+                              • Duration: {Math.round(simulation.duration / 60)}m{' '}
+                              {simulation.duration % 60}s
                             </span>
                           )}
                         </p>

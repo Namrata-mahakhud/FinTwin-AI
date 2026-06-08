@@ -67,7 +67,7 @@ export const useSimulationStatus = (id: string, enabled: boolean = true) => {
     enabled: enabled && !!id,
     refetchInterval: (query) => {
       // Poll every 2 seconds if simulation is running
-      const simulation = query.state.data as Simulation | undefined;
+      const simulation = query.state.data;
       if (
         simulation?.status === SimulationStatus.RUNNING ||
         simulation?.status === SimulationStatus.PENDING

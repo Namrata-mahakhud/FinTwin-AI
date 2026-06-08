@@ -235,15 +235,18 @@ export class ArrayUtils {
    * Group by key
    */
   static groupBy<T>(array: T[], key: keyof T): Record<string, T[]> {
-  return array.reduce((result, item) => {
-    const groupKey = String(item[key]);
-    if (!result[groupKey]) {
-      result[groupKey] = [];
-    }
-    result[groupKey].push(item);
-    return result;
-  }, {} as Record<string, T[]>);
-}
+    return array.reduce(
+      (result, item) => {
+        const groupKey = String(item[key]);
+        if (!result[groupKey]) {
+          result[groupKey] = [];
+        }
+        result[groupKey].push(item);
+        return result;
+      },
+      {} as Record<string, T[]>
+    );
+  }
 
   /**
    * Sort by key
@@ -278,9 +281,7 @@ export class ArrayUtils {
   static median(array: number[]): number {
     const sorted = [...array].sort((a, b) => a - b);
     const mid = Math.floor(sorted.length / 2);
-    return sorted.length % 2 === 0
-      ? (sorted[mid - 1] + sorted[mid]) / 2
-      : sorted[mid];
+    return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
   }
 
   /**
@@ -308,10 +309,7 @@ export class ObjectUtils {
   /**
    * Pick specific keys from object
    */
-  static pick<T extends object, K extends keyof T>(
-    obj: T,
-    keys: K[]
-  ): Pick<T, K> {
+  static pick<T extends object, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
     const result = {} as Pick<T, K>;
     keys.forEach((key) => {
       if (key in obj) {
@@ -324,10 +322,7 @@ export class ObjectUtils {
   /**
    * Omit specific keys from object
    */
-  static omit<T extends object, K extends keyof T>(
-    obj: T,
-    keys: K[]
-  ): Omit<T, K> {
+  static omit<T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
     const result = { ...obj };
     keys.forEach((key) => {
       delete result[key];
@@ -352,13 +347,7 @@ export class ObjectUtils {
     if (source) {
       for (const key in source) {
         if (source[key] instanceof Object && key in target) {
-          Object.assign(
-            source[key],
-            this.deepMerge(
-              (target as any)[key],
-              (source as any)[key]
-            )
-          );
+          Object.assign(source[key], this.deepMerge((target as any)[key], (source as any)[key]));
         }
       }
       Object.assign(target, source);
@@ -584,11 +573,7 @@ export class CacheUtils {
   /**
    * Get or set cache value
    */
-  static async getOrSet<T>(
-    key: string,
-    fn: () => Promise<T>,
-    ttl: number = 3600000
-  ): Promise<T> {
+  static async getOrSet<T>(key: string, fn: () => Promise<T>, ttl: number = 3600000): Promise<T> {
     const cached = this.get<T>(key);
     if (cached !== null) return cached;
 

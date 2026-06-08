@@ -97,7 +97,7 @@ async function start() {
 
     // Build and start server
     const fastify = await buildServer();
-    
+
     await fastify.listen({
       port: config.app.port,
       host: '0.0.0.0',

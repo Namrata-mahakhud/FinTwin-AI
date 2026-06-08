@@ -41,9 +41,9 @@ export const API_ENDPOINTS = {
     HOLDINGS: {
       LIST: (portfolioId: string) => `/v1/portfolios/${portfolioId}/holdings`,
       ADD: (portfolioId: string) => `/v1/portfolios/${portfolioId}/holdings`,
-      UPDATE: (portfolioId: string, holdingId: string) => 
+      UPDATE: (portfolioId: string, holdingId: string) =>
         `/v1/portfolios/${portfolioId}/holdings/${holdingId}`,
-      DELETE: (portfolioId: string, holdingId: string) => 
+      DELETE: (portfolioId: string, holdingId: string) =>
         `/v1/portfolios/${portfolioId}/holdings/${holdingId}`,
     },
   },

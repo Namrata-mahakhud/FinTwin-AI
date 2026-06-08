@@ -114,8 +114,11 @@ const MarketShockTimeline: React.FC<MarketShockTimelineProps> = ({
                       </h4>
                     </div>
                     <div className="text-right">
-                      <div className={`text-lg font-bold ${event.impact < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                        {event.impact > 0 ? '+' : ''}{event.impact}%
+                      <div
+                        className={`text-lg font-bold ${event.impact < 0 ? 'text-red-600' : 'text-green-600'}`}
+                      >
+                        {event.impact > 0 ? '+' : ''}
+                        {event.impact}%
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400">
                         Risk: {event.riskScore}
@@ -148,27 +151,21 @@ const MarketShockTimeline: React.FC<MarketShockTimelineProps> = ({
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-red-600 dark:text-red-400">
-                {events.filter(e => e.type === 'shock').length}
+                {events.filter((e) => e.type === 'shock').length}
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                Market Shocks
-              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Market Shocks</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                {events.filter(e => e.type === 'impact').length}
+                {events.filter((e) => e.type === 'impact').length}
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                Portfolio Impacts
-              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Portfolio Impacts</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                {events.filter(e => e.type === 'recovery').length}
+                {events.filter((e) => e.type === 'recovery').length}
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                Recovery Events
-              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Recovery Events</div>
             </div>
           </div>
         </div>

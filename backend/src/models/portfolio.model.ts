@@ -90,10 +90,7 @@ const portfolioSchema = new Schema<IPortfolio>(
       type: [portfolioAssetSchema],
       validate: {
         validator: function (assets: IPortfolioAsset[]) {
-          const totalAllocation = assets.reduce(
-            (sum, asset) => sum + asset.allocationPercent,
-            0
-          );
+          const totalAllocation = assets.reduce((sum, asset) => sum + asset.allocationPercent, 0);
           return Math.abs(totalAllocation - 100) < 0.01; // Allow small floating point errors
         },
         message: 'Total asset allocation must equal 100%',

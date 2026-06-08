@@ -118,7 +118,7 @@ export class SimulationFlowService {
     return {
       scenarioId,
       scenarioName: scenario.name,
-      eventsSelected: events.map(e => ({
+      eventsSelected: events.map((e) => ({
         type: e.type.replace(/_/g, ' ').toUpperCase(),
         description: e.description,
       })),
@@ -256,14 +256,8 @@ export class SimulationFlowService {
     }
 
     // Calculate recovery impact
-    const totalRiskReduction = actions.reduce(
-      (sum, a) => sum + a.estimatedImpact.riskReduction,
-      0
-    );
-    const totalLossReduction = actions.reduce(
-      (sum, a) => sum + a.estimatedImpact.lossReduction,
-      0
-    );
+    const totalRiskReduction = actions.reduce((sum, a) => sum + a.estimatedImpact.riskReduction, 0);
+    const totalLossReduction = actions.reduce((sum, a) => sum + a.estimatedImpact.lossReduction, 0);
 
     const originalRisk = simulation.summary?.riskScore || 84;
     const originalLoss = simulation.summary?.totalImpact || -25;
@@ -273,13 +267,13 @@ export class SimulationFlowService {
 
     // Update simulation with recovery data
     simulationAny.recovery = {
-        applied: true,
-        actions: actions.map(a => a.id),
-        originalRisk,
-        newRisk,
-        originalLoss,
-        newLoss: -newLoss,
-        appliedAt: new Date(),
+      applied: true,
+      actions: actions.map((a) => a.id),
+      originalRisk,
+      newRisk,
+      originalLoss,
+      newLoss: -newLoss,
+      appliedAt: new Date(),
     };
 
     await simulation.save();
@@ -315,7 +309,7 @@ export class SimulationFlowService {
       .limit(50)
       .populate('scenarioId', 'name type');
 
-    return simulations.map(sim => ({
+    return simulations.map((sim) => ({
       id: sim._id.toString(),
       scenarioId: sim.scenarioId,
       scenarioName: (sim.scenarioId as any)?.name || 'Unknown',
@@ -331,9 +325,10 @@ export class SimulationFlowService {
           after: 2450000 * (1 + (sim.summary?.totalImpact || 0) / 100),
         },
       },
-      duration: sim.completedAt && sim.executedAt
-        ? Math.round((sim.completedAt.getTime() - sim.executedAt.getTime()) / 1000)
-        : undefined,
+      duration:
+        sim.completedAt && sim.executedAt
+          ? Math.round((sim.completedAt.getTime() - sim.executedAt.getTime()) / 1000)
+          : undefined,
     }));
   }
 
@@ -342,7 +337,7 @@ export class SimulationFlowService {
    */
   private extractEventsFromScenario(scenario: any): any[] {
     const events = [];
-    
+
     // Map scenario type to event
     const eventTypeMap: Record<string, string> = {
       market_crash: 'market_volatility',

@@ -9,12 +9,7 @@ interface CardProps {
   hover?: boolean;
 }
 
-export const Card: React.FC<CardProps> = ({ 
-  children, 
-  className = '', 
-  onClick,
-  hover = false 
-}) => {
+export const Card: React.FC<CardProps> = ({ children, className = '', onClick, hover = false }) => {
   return (
     <div
       className={`

@@ -5,7 +5,17 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card, CardBody } from '@/components/common';
 import { useCaseStore } from '@/store/caseStore';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from 'recharts';
 
 const CaseClosure: React.FC = () => {
   const navigate = useNavigate();
@@ -14,9 +24,7 @@ const CaseClosure: React.FC = () => {
   const [isExporting, setIsExporting] = useState(false);
 
   // Get the case to close (from params or active case)
-  const caseToClose = id 
-    ? cases.find(c => c.caseId === id) 
-    : activeCase;
+  const caseToClose = id ? cases.find((c) => c.caseId === id) : activeCase;
 
   if (!caseToClose) {
     return (
@@ -46,16 +54,29 @@ const CaseClosure: React.FC = () => {
 
   const riskReduction = caseToClose.initialRisk - caseToClose.currentRisk;
   const riskReductionPercent = ((riskReduction / caseToClose.initialRisk) * 100).toFixed(1);
-  const lossRecoveryPercent = caseToClose.initialLoss !== 0 
-    ? ((caseToClose.recoveredLoss / Math.abs(caseToClose.initialLoss)) * 100).toFixed(1)
-    : '0';
+  const lossRecoveryPercent =
+    caseToClose.initialLoss !== 0
+      ? ((caseToClose.recoveredLoss / Math.abs(caseToClose.initialLoss)) * 100).toFixed(1)
+      : '0';
 
   // Recovery timeline data
   const timelineData = [
     { stage: 'Initial', risk: caseToClose.initialRisk, loss: Math.abs(caseToClose.initialLoss) },
-    { stage: 'Analysis', risk: caseToClose.initialRisk - 3, loss: Math.abs(caseToClose.initialLoss) - 2 },
-    { stage: 'Recovery', risk: caseToClose.initialRisk - 5, loss: Math.abs(caseToClose.initialLoss) - 4 },
-    { stage: 'Final', risk: caseToClose.currentRisk, loss: Math.abs(caseToClose.initialLoss) - caseToClose.recoveredLoss },
+    {
+      stage: 'Analysis',
+      risk: caseToClose.initialRisk - 3,
+      loss: Math.abs(caseToClose.initialLoss) - 2,
+    },
+    {
+      stage: 'Recovery',
+      risk: caseToClose.initialRisk - 5,
+      loss: Math.abs(caseToClose.initialLoss) - 4,
+    },
+    {
+      stage: 'Final',
+      risk: caseToClose.currentRisk,
+      loss: Math.abs(caseToClose.initialLoss) - caseToClose.recoveredLoss,
+    },
   ];
 
   // Actions applied data
@@ -100,9 +121,7 @@ const CaseClosure: React.FC = () => {
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
           Crisis Case Closed
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">
-          {caseToClose.caseName}
-        </p>
+        <p className="text-xl text-gray-600 dark:text-gray-400">{caseToClose.caseName}</p>
       </div>
 
       {/* Summary Cards */}
@@ -168,9 +187,7 @@ const CaseClosure: React.FC = () => {
               <p className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-1">
                 {caseToClose.recommendations.length}
               </p>
-              <p className="text-xs text-gray-500">
-                recommendations
-              </p>
+              <p className="text-xs text-gray-500">recommendations</p>
               <p className="text-sm font-medium text-orange-600 dark:text-orange-400 mt-2">
                 All implemented
               </p>
@@ -286,18 +303,20 @@ const CaseClosure: React.FC = () => {
                 <span className="text-sm text-blue-600 dark:text-blue-400">Confidence: 89%</span>
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                Identified banking sector vulnerability and recommended immediate rebalancing. 
+                Identified banking sector vulnerability and recommended immediate rebalancing.
                 Market correlation analysis confirmed high systemic risk.
               </p>
             </div>
             <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
               <div className="flex items-center justify-between mb-2">
                 <p className="font-semibold text-gray-900 dark:text-white">Risk Agent</p>
-                <span className="text-sm text-purple-600 dark:text-purple-400">Confidence: 92%</span>
+                <span className="text-sm text-purple-600 dark:text-purple-400">
+                  Confidence: 92%
+                </span>
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                Portfolio risk reduced from critical to moderate levels through strategic diversification 
-                and hedging strategies.
+                Portfolio risk reduced from critical to moderate levels through strategic
+                diversification and hedging strategies.
               </p>
             </div>
             <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
@@ -306,8 +325,8 @@ const CaseClosure: React.FC = () => {
                 <span className="text-sm text-green-600 dark:text-green-400">Confidence: 85%</span>
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                Recovery recommendations successfully implemented. Portfolio resilience improved by 35% 
-                with optimized asset allocation.
+                Recovery recommendations successfully implemented. Portfolio resilience improved by
+                35% with optimized asset allocation.
               </p>
             </div>
           </div>
@@ -322,23 +341,40 @@ const CaseClosure: React.FC = () => {
           </h3>
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 space-y-4">
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Executive Summary</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                Executive Summary
+              </h4>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                Crisis case "{caseToClose.caseName}" successfully managed and closed. 
-                Initial risk of {caseToClose.initialRisk}/100 reduced to {caseToClose.currentRisk}/100 
-                through systematic application of {caseToClose.recommendations.length} recovery recommendations. 
-                Portfolio loss of {Math.abs(caseToClose.initialLoss).toFixed(1)}% partially recovered 
-                with {caseToClose.recoveredLoss.toFixed(1)}% improvement.
+                Crisis case "{caseToClose.caseName}" successfully managed and closed. Initial risk
+                of {caseToClose.initialRisk}/100 reduced to {caseToClose.currentRisk}/100 through
+                systematic application of {caseToClose.recommendations.length} recovery
+                recommendations. Portfolio loss of {Math.abs(caseToClose.initialLoss).toFixed(1)}%
+                partially recovered with {caseToClose.recoveredLoss.toFixed(1)}% improvement.
               </p>
             </div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Key Metrics</h4>
               <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-                <li>• Scenario: {caseToClose.scenario.name} ({caseToClose.scenario.severity})</li>
-                <li>• Portfolio: {caseToClose.portfolio.name} (${(caseToClose.portfolio.value / 1000000).toFixed(2)}M)</li>
-                <li>• Risk Reduction: {riskReduction} points ({riskReductionPercent}%)</li>
+                <li>
+                  • Scenario: {caseToClose.scenario.name} ({caseToClose.scenario.severity})
+                </li>
+                <li>
+                  • Portfolio: {caseToClose.portfolio.name} ($
+                  {(caseToClose.portfolio.value / 1000000).toFixed(2)}M)
+                </li>
+                <li>
+                  • Risk Reduction: {riskReduction} points ({riskReductionPercent}%)
+                </li>
                 <li>• Recovery Progress: {caseToClose.recoveryProgress}%</li>
-                <li>• Case Duration: {Math.floor((new Date(caseToClose.updatedAt).getTime() - new Date(caseToClose.createdAt).getTime()) / (1000 * 60 * 60 * 24))} days</li>
+                <li>
+                  • Case Duration:{' '}
+                  {Math.floor(
+                    (new Date(caseToClose.updatedAt).getTime() -
+                      new Date(caseToClose.createdAt).getTime()) /
+                      (1000 * 60 * 60 * 24)
+                  )}{' '}
+                  days
+                </li>
               </ul>
             </div>
           </div>
@@ -358,9 +394,7 @@ const CaseClosure: React.FC = () => {
               Exporting...
             </>
           ) : (
-            <>
-              📥 Export Full Report
-            </>
+            <>📥 Export Full Report</>
           )}
         </button>
         <button
@@ -389,9 +423,10 @@ const CaseClosure: React.FC = () => {
       {/* Disclaimer */}
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
         <p className="text-sm text-yellow-800 dark:text-yellow-400">
-          ⚠️ <strong>Disclaimer:</strong> This report is generated for risk planning purposes only and does not constitute financial advice. 
-          All simulations are based on historical data and statistical models with inherent uncertainties. 
-          Consult with qualified financial advisors before making investment decisions.
+          ⚠️ <strong>Disclaimer:</strong> This report is generated for risk planning purposes only
+          and does not constitute financial advice. All simulations are based on historical data and
+          statistical models with inherent uncertainties. Consult with qualified financial advisors
+          before making investment decisions.
         </p>
       </div>
     </div>

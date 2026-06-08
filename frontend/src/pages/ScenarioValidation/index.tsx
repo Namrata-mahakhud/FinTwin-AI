@@ -18,7 +18,7 @@ const ScenarioValidation: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { activeCase, updateCase, advanceStage } = useCaseStore();
-  
+
   const [isValidating, setIsValidating] = useState(true);
   const [validationChecks, setValidationChecks] = useState<ValidationCheck[]>([]);
   const [canProceed, setCanProceed] = useState(false);
@@ -84,8 +84,8 @@ const ScenarioValidation: React.FC = () => {
       },
     ];
 
-    const failedChecks = checks.filter(c => c.status === 'fail');
-    const missing = failedChecks.map(c => c.name);
+    const failedChecks = checks.filter((c) => c.status === 'fail');
+    const missing = failedChecks.map((c) => c.name);
 
     setValidationChecks(checks);
     setCanProceed(failedChecks.length === 0);
@@ -164,7 +164,10 @@ const ScenarioValidation: React.FC = () => {
               </p>
               <div className="mt-6 max-w-md mx-auto">
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full animate-pulse" style={{ width: '70%' }} />
+                  <div
+                    className="bg-blue-600 h-2 rounded-full animate-pulse"
+                    style={{ width: '70%' }}
+                  />
                 </div>
               </div>
             </div>
@@ -180,11 +183,11 @@ const ScenarioValidation: React.FC = () => {
             <CardBody>
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl ${
-                    canProceed 
-                      ? 'bg-green-500 text-white' 
-                      : 'bg-red-500 text-white'
-                  }`}>
+                  <div
+                    className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl ${
+                      canProceed ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                    }`}
+                  >
                     {canProceed ? '✓' : '✗'}
                   </div>
                   <div>
@@ -192,15 +195,16 @@ const ScenarioValidation: React.FC = () => {
                       {canProceed ? 'Validation Passed' : 'Validation Failed'}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      {canProceed 
-                        ? 'All checks passed. Ready to run simulation.' 
+                      {canProceed
+                        ? 'All checks passed. Ready to run simulation.'
                         : `${missingRequirements.length} requirement(s) missing`}
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {validationChecks.filter(c => c.status === 'pass').length}/{validationChecks.length}
+                    {validationChecks.filter((c) => c.status === 'pass').length}/
+                    {validationChecks.length}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Checks Passed</p>
                 </div>
@@ -208,7 +212,9 @@ const ScenarioValidation: React.FC = () => {
 
               {/* Scenario Summary */}
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mb-4">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Scenario Summary</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                  Scenario Summary
+                </h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">Scenario Name</p>
@@ -268,9 +274,7 @@ const ScenarioValidation: React.FC = () => {
                     className={`flex items-center justify-between p-4 rounded-lg border-2 ${getStatusColor(check.status)}`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="text-2xl">
-                        {getStatusIcon(check.status)}
-                      </div>
+                      <div className="text-2xl">{getStatusIcon(check.status)}</div>
                       <div>
                         <p className="font-semibold">{check.name}</p>
                         <p className="text-sm opacity-90">{check.message}</p>
@@ -319,7 +323,8 @@ const ScenarioValidation: React.FC = () => {
               </div>
               <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  <strong>Model Confidence:</strong> 87% • <strong>Data Source:</strong> Federal Reserve, Bloomberg • <strong>Last Updated:</strong> January 2024
+                  <strong>Model Confidence:</strong> 87% • <strong>Data Source:</strong> Federal
+                  Reserve, Bloomberg • <strong>Last Updated:</strong> January 2024
                 </p>
               </div>
             </CardBody>
@@ -349,8 +354,9 @@ const ScenarioValidation: React.FC = () => {
           {/* Disclaimer */}
           <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
             <p className="text-sm text-yellow-800 dark:text-yellow-400">
-              ⚠️ <strong>Disclaimer:</strong> Simulation output is for risk planning and is not financial advice. 
-              Validation checks ensure data integrity but do not guarantee prediction accuracy.
+              ⚠️ <strong>Disclaimer:</strong> Simulation output is for risk planning and is not
+              financial advice. Validation checks ensure data integrity but do not guarantee
+              prediction accuracy.
             </p>
           </div>
         </>

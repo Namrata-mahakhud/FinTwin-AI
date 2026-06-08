@@ -250,7 +250,10 @@ export class ScenarioService {
         break;
 
       case EventType.SECTOR_CRASH:
-        if (!parameters.severity || !['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'].includes(parameters.severity as string)) {
+        if (
+          !parameters.severity ||
+          !['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'].includes(parameters.severity as string)
+        ) {
           throw new ApiError(400, 'severity must be LOW, MEDIUM, HIGH, or CRITICAL');
         }
         break;

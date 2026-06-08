@@ -1,6 +1,7 @@
 # ICA Service Layer Pattern
 
 ## Overview
+
 The Service Layer pattern separates business logic from API routes and data access, following ICA architecture principles.
 
 ## Structure
@@ -16,6 +17,7 @@ backend/src/
 ## Implementation Guidelines
 
 ### 1. API Layer (Routes)
+
 **Responsibility**: Handle HTTP requests/responses, validation, and error handling
 
 ```typescript
@@ -32,6 +34,7 @@ export default async function scenarioRoutes(fastify: FastifyInstance) {
 ```
 
 ### 2. Service Layer
+
 **Responsibility**: Business logic, orchestration, and domain rules
 
 ```typescript
@@ -40,19 +43,20 @@ export class ScenarioService {
   async createScenario(data: CreateScenarioDto): Promise<Scenario> {
     // Validate business rules
     this.validateScenarioData(data);
-    
+
     // Apply domain logic
     const scenario = await this.scenarioModel.create(data);
-    
+
     // Trigger side effects
     await this.notificationService.notifyScenarioCreated(scenario);
-    
+
     return scenario;
   }
 }
 ```
 
 ### 3. Model Layer
+
 **Responsibility**: Data structure and database operations
 
 ```typescript

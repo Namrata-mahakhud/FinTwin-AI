@@ -4,10 +4,7 @@
 
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { MarketService } from '../../../services/market.service';
-import {
-  MarketDataQuery,
-  MarketSimulationParams,
-} from '../../../types/market.types';
+import { MarketDataQuery, MarketSimulationParams } from '../../../types/market.types';
 import { ResponseFormatter } from '../../../utils/helpers.util';
 import { asyncHandler } from '../../../middleware/error.middleware';
 
@@ -16,7 +13,7 @@ export class MarketController {
 
   getMarketData = asyncHandler(async (request: FastifyRequest, reply: FastifyReply) => {
     const { symbols, period, interval } = request.query as any;
-    
+
     const query: MarketDataQuery = {
       symbols: symbols.split(','),
       period,

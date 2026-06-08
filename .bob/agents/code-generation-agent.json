@@ -46,30 +46,12 @@
     "test": ".ica/templates/test.template.ts"
   },
   "validation": {
-    "pre_generation": [
-      "validate_context",
-      "check_dependencies",
-      "verify_patterns"
-    ],
-    "post_generation": [
-      "lint_code",
-      "run_tests",
-      "check_coverage",
-      "security_scan"
-    ]
+    "pre_generation": ["validate_context", "check_dependencies", "verify_patterns"],
+    "post_generation": ["lint_code", "run_tests", "check_coverage", "security_scan"]
   },
   "learning": {
-    "feedback_sources": [
-      "code_reviews",
-      "test_results",
-      "production_metrics"
-    ],
-    "improvement_areas": [
-      "code_quality",
-      "performance",
-      "security",
-      "maintainability"
-    ]
+    "feedback_sources": ["code_reviews", "test_results", "production_metrics"],
+    "improvement_areas": ["code_quality", "performance", "security", "maintainability"]
   },
   "integration": {
     "ica_context_studio": {

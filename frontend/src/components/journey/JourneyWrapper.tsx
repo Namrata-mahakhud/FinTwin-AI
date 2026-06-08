@@ -34,24 +34,22 @@ export const JourneyWrapper: React.FC<JourneyWrapperProps> = ({
   className = '',
 }) => {
   const { updateStage, isActive } = useJourneyStore();
-  
+
   useEffect(() => {
     // Update current stage when component mounts
     if (isActive) {
       updateStage(stage);
     }
   }, [stage, isActive, updateStage]);
-  
+
   return (
     <div className={`min-h-screen flex flex-col ${className}`}>
       {/* Progress Bar */}
       {showProgress && <JourneyProgressBar />}
-      
+
       {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        {children}
-      </div>
-      
+      <div className="flex-1 overflow-auto">{children}</div>
+
       {/* Navigation */}
       {showNavigation && (
         <ContextualNavigation

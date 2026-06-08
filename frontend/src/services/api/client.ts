@@ -28,7 +28,7 @@ class ApiClient {
         const token = this.getAccessToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
-          
+
           // Check if this is a demo token - if so, cancel the request
           if (this.isDemoToken(token)) {
             console.log('[ApiClient] Demo mode detected, skipping API call:', config.url);
@@ -104,10 +104,9 @@ class ApiClient {
           throw new Error('No refresh token available');
         }
 
-        const response = await axios.post(
-          `${API_CONFIG.BASE_URL}/v1/auth/refresh`,
-          { refreshToken }
-        );
+        const response = await axios.post(`${API_CONFIG.BASE_URL}/v1/auth/refresh`, {
+          refreshToken,
+        });
 
         const { accessToken } = response.data.data;
         localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, accessToken);

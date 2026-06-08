@@ -1,17 +1,21 @@
 # Journey Navigation Fix
 
 ## Issue
+
 When clicking "Run Simulation" button in the Scenario Builder, the application was logging out instead of navigating to the simulation page.
 
 ## Root Cause
+
 The journey navigation system was trying to navigate to `/simulations/run`, but this route didn't exist in the router configuration. When React Router couldn't find the route, it fell back to the catch-all route which redirected to `/dashboard`, and the authentication guard interpreted this as requiring login.
 
 ## Solution
 
 ### 1. Created RunSimulation Page
+
 **File**: `frontend/src/pages/RunSimulation/index.tsx`
 
 A dedicated page that:
+
 - Automatically starts simulation when loaded
 - Shows animated progress with phases (Initialize → Load → Fetch Data → Run → Calculate → Generate)
 - Displays real-time progress bar and statistics
@@ -19,9 +23,11 @@ A dedicated page that:
 - Automatically navigates to War Room (Crisis Center) when complete
 
 ### 2. Added Missing Routes
+
 **File**: `frontend/src/router/index.tsx`
 
 Added routes that were referenced in `STAGE_CONFIG` but missing from router:
+
 - `/simulations/run` → RunSimulation page
 - `/war-room` → FinancialWarRoom page
 - `/portfolio/impact` → PortfolioAnalysis page
@@ -30,6 +36,7 @@ Added routes that were referenced in `STAGE_CONFIG` but missing from router:
 - `/export` → SimulationResults page
 
 ### 3. Journey Flow Now Works
+
 The complete journey flow is now functional:
 
 ```
@@ -83,10 +90,12 @@ Export Report (/export)
 ## Files Modified/Created
 
 **Created**:
+
 - `frontend/src/pages/RunSimulation/index.tsx` (186 lines)
 - `docs/JOURNEY_NAVIGATION_FIX.md` (this file)
 
 **Modified**:
+
 - `frontend/src/router/index.tsx` (added 7 new routes)
 
 ---

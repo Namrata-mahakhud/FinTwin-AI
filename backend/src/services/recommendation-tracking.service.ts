@@ -3,7 +3,10 @@
  * Handles applying recommendations and tracking their effectiveness
  */
 
-import { AppliedRecommendation, IAppliedRecommendation } from '../models/applied-recommendation.model';
+import {
+  AppliedRecommendation,
+  IAppliedRecommendation,
+} from '../models/applied-recommendation.model';
 import { PortfolioSnapshot, IPortfolioSnapshot } from '../models/portfolio-snapshot.model';
 import { Scenario } from '../models/scenario.model';
 import { Recommendation } from '../types';
@@ -268,10 +271,7 @@ export class RecommendationTrackingService {
     const successfulRecs = recommendations.filter((rec) => (rec.effectiveness || 0) >= 70);
     const successRate = (successfulRecs.length / recommendations.length) * 100;
 
-    const totalImpact = recommendations.reduce(
-      (sum, rec) => sum + (rec.actualImpact || 0),
-      0
-    );
+    const totalImpact = recommendations.reduce((sum, rec) => sum + (rec.actualImpact || 0), 0);
 
     return {
       totalApplied: recommendations.length,
@@ -336,8 +336,7 @@ export class RecommendationTrackingService {
 
     // Calculate averages
     Object.keys(grouped).forEach((type) => {
-      grouped[type].averageEffectiveness =
-        grouped[type].averageEffectiveness / grouped[type].count;
+      grouped[type].averageEffectiveness = grouped[type].averageEffectiveness / grouped[type].count;
     });
 
     return grouped;

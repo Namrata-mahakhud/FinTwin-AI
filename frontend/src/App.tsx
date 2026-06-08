@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     console.log('📱 App mounted, current theme:', theme);
     console.log('📱 Document classes:', document.documentElement.className);
-    
+
     // Apply the stored theme to the document immediately
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');

@@ -44,29 +44,30 @@ export const useAuthStore = create<AuthStore>()(
           // Demo mode: Check for demo credentials
           if (credentials.email === 'demo@fintwin.ai' || credentials.email === 'admin@fintwin.ai') {
             // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
+            await new Promise((resolve) => setTimeout(resolve, 500));
+
             const demoUser: User = {
               id: 'demo-user-1',
               email: credentials.email,
               firstName: 'Demo',
               lastName: 'User',
-              role: credentials.email === 'admin@fintwin.ai' ? 'admin' as any : 'analyst' as any,
+              role:
+                credentials.email === 'admin@fintwin.ai' ? ('admin' as any) : ('analyst' as any),
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),
             };
-            
+
             const demoToken = 'demo-token-' + Date.now();
-            
+
             localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, demoToken);
             localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, demoToken);
-            
+
             console.log('[AuthStore] Demo login successful:', {
               email: demoUser.email,
               token: demoToken,
-              tokenStored: !!localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN)
+              tokenStored: !!localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN),
             });
-            
+
             set({
               user: demoUser,
               accessToken: demoToken,
@@ -76,14 +77,14 @@ export const useAuthStore = create<AuthStore>()(
             });
             return;
           }
-          
+
           // Real API call
           const response = await authApi.login(credentials);
-          
+
           // Store tokens
           localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, response.accessToken);
           localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, response.refreshToken);
-          
+
           set({
             user: response.user,
             accessToken: response.accessToken,
@@ -104,11 +105,11 @@ export const useAuthStore = create<AuthStore>()(
         set({ isLoading: true, error: null });
         try {
           const response = await authApi.register(data);
-          
+
           // Store tokens
           localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, response.accessToken);
           localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, response.refreshToken);
-          
+
           set({
             user: response.user,
             accessToken: response.accessToken,
@@ -142,12 +143,12 @@ export const useAuthStore = create<AuthStore>()(
           localStorage.removeItem(STORAGE_KEYS.THEME);
           localStorage.removeItem(STORAGE_KEYS.RECENT_SCENARIOS);
           localStorage.removeItem(STORAGE_KEYS.RECENT_PORTFOLIOS);
-          
+
           // Clear any journey-related data
           localStorage.removeItem('journey-storage');
-          
+
           console.log('[AuthStore] Logout complete, all state cleared');
-          
+
           set({
             user: null,
             accessToken: null,

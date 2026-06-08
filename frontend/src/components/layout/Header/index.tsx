@@ -40,9 +40,7 @@ const Header: React.FC = () => {
             </svg>
           </button>
 
-          <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
-            FinTwin AI
-          </h1>
+          <h1 className="text-xl font-semibold text-gray-800 dark:text-white">FinTwin AI</h1>
         </div>
 
         {/* Right Section */}
@@ -111,9 +109,7 @@ const Header: React.FC = () => {
               <p className="text-sm font-medium text-gray-800 dark:text-white">
                 {user?.firstName} {user?.lastName}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                {user?.role}
-              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{user?.role}</p>
             </div>
             <button
               onClick={handleLogout}

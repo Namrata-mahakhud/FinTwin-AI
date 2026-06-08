@@ -29,10 +29,7 @@ export class EnhancedScenarioService {
     this.simulationEngine = new SimulationEngine();
   }
 
-  async create(
-    data: CreateScenarioDTO,
-    userId: string
-  ): Promise<ScenarioDocument> {
+  async create(data: CreateScenarioDTO, userId: string): Promise<ScenarioDocument> {
     // Validate input
     this.validateCreateData(data);
 
@@ -73,11 +70,7 @@ export class EnhancedScenarioService {
     return scenario;
   }
 
-  async update(
-    id: string,
-    data: UpdateScenarioDTO,
-    userId: string
-  ): Promise<ScenarioDocument> {
+  async update(id: string, data: UpdateScenarioDTO, userId: string): Promise<ScenarioDocument> {
     // Check if scenario exists and belongs to user
     const existing = await this.repository.findByIdAndUserId(id, userId);
     if (!existing) {
@@ -220,10 +213,7 @@ export class EnhancedScenarioService {
         completedAt: new Date(),
       });
 
-      throw new BusinessLogicError(
-        'Simulation failed',
-        error.message
-      );
+      throw new BusinessLogicError('Simulation failed', error.message);
     }
   }
 
@@ -335,7 +325,7 @@ export class EnhancedScenarioService {
     return {
       scenarioId: id,
       scenarioName: scenario.name,
-      eventsSelected: events.map(e => ({
+      eventsSelected: events.map((e) => ({
         type: e.type.replace(/_/g, ' ').toUpperCase(),
         description: e.description,
       })),
@@ -446,7 +436,7 @@ export class EnhancedScenarioService {
    */
   private extractEventsFromScenario(scenario: any): any[] {
     const events = [];
-    
+
     // Map scenario type to event
     const eventTypeMap: Record<string, string> = {
       market_crash: 'market_volatility',
@@ -569,10 +559,7 @@ export class EnhancedScenarioService {
     }
   }
 
-  private validateScenarioParameters(
-    type: ScenarioType,
-    parameters: any
-  ): void {
+  private validateScenarioParameters(type: ScenarioType, parameters: any): void {
     const validator = new Validator();
 
     // Common parameter validations
@@ -636,33 +623,25 @@ export class EnhancedScenarioService {
     switch (type) {
       case ScenarioType.MARKET_CRASH:
         if (!parameters.marketVolatility || parameters.marketVolatility < 50) {
-          throw new ValidationError(
-            'Market crash scenario requires high volatility (>= 50)'
-          );
+          throw new ValidationError('Market crash scenario requires high volatility (>= 50)');
         }
         break;
 
       case ScenarioType.BULL_MARKET:
         if (!parameters.gdpGrowth || parameters.gdpGrowth < 2) {
-          throw new ValidationError(
-            'Bull market scenario requires positive GDP growth (>= 2)'
-          );
+          throw new ValidationError('Bull market scenario requires positive GDP growth (>= 2)');
         }
         break;
 
       case ScenarioType.RECESSION:
         if (!parameters.gdpGrowth || parameters.gdpGrowth >= 0) {
-          throw new ValidationError(
-            'Recession scenario requires negative GDP growth'
-          );
+          throw new ValidationError('Recession scenario requires negative GDP growth');
         }
         break;
 
       case ScenarioType.INFLATION:
         if (!parameters.inflationRate || parameters.inflationRate < 5) {
-          throw new ValidationError(
-            'Inflation scenario requires high inflation rate (>= 5)'
-          );
+          throw new ValidationError('Inflation scenario requires high inflation rate (>= 5)');
         }
         break;
 

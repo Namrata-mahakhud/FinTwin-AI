@@ -31,9 +31,9 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
 
   const calculatePreview = async () => {
     setIsCalculating(true);
-    
+
     // Simulate preview calculation API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Mock preview data
     const previewData: ImpactPreview = {
@@ -121,19 +121,12 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Impact Preview"
-      size="xl"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title="Impact Preview" size="xl">
       <div className="space-y-6">
         {isCalculating ? (
           <div className="flex flex-col items-center justify-center py-12">
             <LoadingSpinner size="lg" />
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
-              Calculating estimated impact...
-            </p>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Calculating estimated impact...</p>
             <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
               Running quick analysis without full Monte Carlo simulation
             </p>
@@ -151,9 +144,7 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
 
               <div className={`border-2 rounded-lg p-4 ${getRiskColor(preview.riskLevel)}`}>
                 <p className="text-sm mb-1">Banking Risk</p>
-                <p className="text-3xl font-bold uppercase">
-                  {preview.riskLevel}
-                </p>
+                <p className="text-3xl font-bold uppercase">{preview.riskLevel}</p>
               </div>
 
               <div className="bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500 rounded-lg p-4">
@@ -177,7 +168,7 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Portfolio Value Impact
               </h3>
-              
+
               <div className="grid grid-cols-3 gap-6">
                 <div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Before:</p>
@@ -219,7 +210,7 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Affected Sectors
               </h3>
-              
+
               <div className="grid grid-cols-2 gap-3">
                 {preview.affectedSectors.map((sector) => (
                   <div
@@ -232,12 +223,8 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
                     <div className="flex items-center gap-3">
                       <span className="text-3xl">{sector.icon}</span>
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white">
-                          {sector.name}
-                        </p>
-                        <p className="text-sm">
-                          {sector.estimatedImpact}% impact
-                        </p>
+                        <p className="font-semibold text-gray-900 dark:text-white">{sector.name}</p>
+                        <p className="text-sm">{sector.estimatedImpact}% impact</p>
                       </div>
                     </div>
                     <span className="text-2xl">{getRiskIcon(sector.riskLevel)}</span>
@@ -255,8 +242,9 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
                     Preview Estimate
                   </h4>
                   <p className="text-sm text-yellow-800 dark:text-yellow-400">
-                    This is a quick estimate. The full simulation with AI agent analysis will provide
-                    more accurate results with confidence intervals and detailed recommendations.
+                    This is a quick estimate. The full simulation with AI agent analysis will
+                    provide more accurate results with confidence intervals and detailed
+                    recommendations.
                   </p>
                 </div>
               </div>
@@ -273,7 +261,7 @@ const ImpactPreviewModal: React.FC<ImpactPreviewModalProps> = ({
             <span>←</span>
             Back to Validation
           </button>
-          
+
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}

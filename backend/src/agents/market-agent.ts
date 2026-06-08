@@ -20,7 +20,10 @@ export class MarketAgent extends BaseAgent {
 
     // Analyze market impact based on event type
     const sectorImpacts = this.analyzeSectorImpacts(scenario.eventType, scenario.parameters);
-    const marketVolatility = this.calculateMarketVolatility(scenario.eventType, scenario.parameters);
+    const marketVolatility = this.calculateMarketVolatility(
+      scenario.eventType,
+      scenario.parameters
+    );
     const priceMovements = this.predictPriceMovements(sectorImpacts);
 
     return {
@@ -35,11 +38,11 @@ export class MarketAgent extends BaseAgent {
     // Base confidence on data completeness and volatility
     const hasAllData = result.sectorImpacts && result.marketVolatility && result.priceMovements;
     const volatility = (result.marketVolatility as number) || 0;
-    
+
     // Lower confidence for high volatility scenarios
     const volatilityFactor = Math.max(0, 1 - volatility / 100);
-    
-    return hasAllData ? 0.7 + (volatilityFactor * 0.3) : 0.5;
+
+    return hasAllData ? 0.7 + volatilityFactor * 0.3 : 0.5;
   }
 
   /**
@@ -147,11 +150,15 @@ export class MarketAgent extends BaseAgent {
   /**
    * Predict price movements
    */
-  private predictPriceMovements(sectorImpacts: Record<string, number>): Record<string, {
-    direction: 'UP' | 'DOWN' | 'NEUTRAL';
-    magnitude: number;
-  }> {
-    const movements: Record<string, { direction: 'UP' | 'DOWN' | 'NEUTRAL'; magnitude: number }> = {};
+  private predictPriceMovements(sectorImpacts: Record<string, number>): Record<
+    string,
+    {
+      direction: 'UP' | 'DOWN' | 'NEUTRAL';
+      magnitude: number;
+    }
+  > {
+    const movements: Record<string, { direction: 'UP' | 'DOWN' | 'NEUTRAL'; magnitude: number }> =
+      {};
 
     for (const [sector, impact] of Object.entries(sectorImpacts)) {
       movements[sector] = {

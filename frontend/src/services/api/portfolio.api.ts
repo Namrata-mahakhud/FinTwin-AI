@@ -60,10 +60,9 @@ export const portfolioApi = {
    * Get portfolio analysis
    */
   getAnalysis: async (id: string, scenarioId?: string): Promise<PortfolioAnalysis> => {
-    const response = await apiClient.get<PortfolioAnalysis>(
-      API_ENDPOINTS.PORTFOLIO.ANALYSIS(id),
-      { params: { scenarioId } }
-    );
+    const response = await apiClient.get<PortfolioAnalysis>(API_ENDPOINTS.PORTFOLIO.ANALYSIS(id), {
+      params: { scenarioId },
+    });
     return response.data;
   },
 

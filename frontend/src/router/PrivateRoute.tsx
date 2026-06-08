@@ -30,10 +30,10 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRole }) =
   // This handles cases where store hasn't rehydrated yet after navigation
   const hasToken = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
   const storedUser = localStorage.getItem(STORAGE_KEYS.USER);
-  
+
   // Check if we have a demo token
   const isDemoMode = hasToken?.startsWith('demo-token-');
-  
+
   // User is authenticated if:
   // 1. Store says they are authenticated, OR
   // 2. They have a valid token in localStorage (including demo tokens)
@@ -48,7 +48,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRole }) =
     location: location.pathname,
     user: user?.email,
     storedUser: storedUser ? 'present' : 'missing',
-    isChecking
+    isChecking,
   });
 
   // Wait for initial check to complete

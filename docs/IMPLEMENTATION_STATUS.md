@@ -3,9 +3,11 @@
 ## Completed Components ✅
 
 ### 1. API Contracts Documentation
+
 **File**: `docs/API_CONTRACTS.md`
 
 Complete API specifications for all 6 modules:
+
 - Scenario Service (6 endpoints)
 - Market Engine (4 endpoints)
 - Portfolio Service (9 endpoints)
@@ -14,6 +16,7 @@ Complete API specifications for all 6 modules:
 - Report Service (6 endpoints)
 
 Includes:
+
 - Request/response schemas
 - Error responses
 - Rate limiting specs
@@ -23,6 +26,7 @@ Includes:
 ### 2. Shared Utilities
 
 #### Error Handling (`backend/src/utils/errors.util.ts`)
+
 - Custom error class hierarchy
 - 10+ specialized error types
 - Error handler utility
@@ -30,6 +34,7 @@ Includes:
 - Operational vs programming error distinction
 
 **Error Classes**:
+
 - `AppError` (base class)
 - `ValidationError` (400)
 - `UnauthorizedError` (401)
@@ -43,6 +48,7 @@ Includes:
 - `DatabaseError` (500)
 
 #### Validation Utilities (`backend/src/utils/validation.util.ts`)
+
 - Validator class with rule-based validation
 - Common validation patterns (email, phone, URL, MongoDB ID, etc.)
 - Pagination validation
@@ -51,6 +57,7 @@ Includes:
 - Schema creation helpers
 
 **Features**:
+
 - Type checking
 - Min/max validation
 - Length validation
@@ -59,20 +66,24 @@ Includes:
 - Custom validators
 
 #### Helper Utilities (`backend/src/utils/helpers.util.ts`)
+
 Multiple utility classes:
 
 **ResponseFormatter**:
+
 - Success responses
 - Paginated responses
 - List responses with metadata
 
 **DateUtils**:
+
 - Date range calculation
 - Business days calculation
 - Date validation
 - ISO string formatting
 
 **NumberUtils**:
+
 - Rounding
 - Currency formatting
 - Percentage formatting
@@ -80,6 +91,7 @@ Multiple utility classes:
 - Random number generation
 
 **ArrayUtils**:
+
 - Chunking
 - Unique values
 - Grouping
@@ -87,28 +99,33 @@ Multiple utility classes:
 - Statistical functions (sum, average, median, std dev)
 
 **ObjectUtils**:
+
 - Deep cloning
 - Pick/omit keys
 - Deep merge
 - Empty check
 
 **StringUtils**:
+
 - Case conversion (camelCase, snake_case, kebab-case)
 - Capitalization
 - Truncation
 - Random string generation
 
 **MongoUtils**:
+
 - ObjectId conversion
 - Query building
 - Sort building
 
 **AsyncUtils**:
+
 - Sleep function
 - Retry with exponential backoff
 - Parallel execution with limit
 
 **CacheUtils**:
+
 - In-memory caching
 - TTL support
 - Get-or-set pattern
@@ -116,6 +133,7 @@ Multiple utility classes:
 ### 3. Middleware
 
 #### Error Middleware (`backend/src/middleware/error.middleware.ts`)
+
 - Global error handler
 - AppError handling
 - Fastify validation error handling
@@ -126,6 +144,7 @@ Multiple utility classes:
 - Async handler wrapper
 
 #### Validation Middleware (`backend/src/middleware/validation.middleware.ts`)
+
 - Body validation
 - Query parameter validation
 - URL parameter validation
@@ -135,6 +154,7 @@ Multiple utility classes:
 - File upload validation
 
 #### Rate Limiting Middleware (`backend/src/middleware/rate-limit.middleware.ts`)
+
 - In-memory rate limit store
 - Configurable windows and limits
 - Multiple key generators (IP, user ID, API key)
@@ -147,15 +167,18 @@ Multiple utility classes:
   - Report: 5 req/min
 
 #### Authentication Middleware (`backend/src/middleware/auth.middleware.ts`)
+
 - JWT verification
 - User extraction
 - Role-based access control
 - Token refresh support
 
 ### 4. Architecture Documentation
+
 **File**: `docs/BACKEND_ARCHITECTURE.md`
 
 Comprehensive documentation covering:
+
 - Technology stack
 - Architecture layers
 - Project structure
@@ -194,6 +217,7 @@ backend/src/
 ### 1. Scenario Service Module
 
 **Files to Create**:
+
 - `backend/src/api/v1/scenarios/scenarios.controller.ts`
 - `backend/src/api/v1/scenarios/scenarios.schemas.ts`
 - `backend/src/services/scenario.service.ts` (enhance existing)
@@ -201,6 +225,7 @@ backend/src/
 - `backend/src/types/scenario.types.ts`
 
 **Endpoints**:
+
 - POST /scenarios - Create scenario
 - GET /scenarios - List scenarios
 - GET /scenarios/:id - Get scenario
@@ -209,6 +234,7 @@ backend/src/
 - POST /scenarios/:id/simulate - Run simulation
 
 **Key Features**:
+
 - Scenario templates
 - Parameter validation
 - Simulation orchestration
@@ -217,6 +243,7 @@ backend/src/
 ### 2. Market Engine Module
 
 **Files to Create**:
+
 - `backend/src/api/v1/market/market.controller.ts`
 - `backend/src/api/v1/market/market.schemas.ts`
 - `backend/src/services/market.service.ts`
@@ -224,12 +251,14 @@ backend/src/
 - `backend/src/types/market.types.ts`
 
 **Endpoints**:
+
 - GET /market/data - Get market data
 - GET /market/indicators - Get technical indicators
 - POST /market/simulate - Simulate market conditions
 - GET /market/volatility - Get volatility metrics
 
 **Key Features**:
+
 - Market data fetching
 - Technical indicators (RSI, MACD, MA, Bollinger Bands)
 - Monte Carlo simulation
@@ -238,6 +267,7 @@ backend/src/
 ### 3. Portfolio Service Module
 
 **Files to Create**:
+
 - `backend/src/api/v1/portfolios/portfolios.controller.ts`
 - `backend/src/api/v1/portfolios/portfolios.schemas.ts`
 - `backend/src/services/portfolio.service.ts` (enhance existing)
@@ -245,6 +275,7 @@ backend/src/
 - `backend/src/types/portfolio.types.ts`
 
 **Endpoints**:
+
 - POST /portfolios - Create portfolio
 - GET /portfolios - List portfolios
 - GET /portfolios/:id - Get portfolio
@@ -256,6 +287,7 @@ backend/src/
 - GET /portfolios/:id/performance - Get performance
 
 **Key Features**:
+
 - Portfolio CRUD
 - Holdings management
 - Performance calculation
@@ -264,6 +296,7 @@ backend/src/
 ### 4. Risk Engine Module
 
 **Files to Create**:
+
 - `backend/src/api/v1/risk/risk.controller.ts`
 - `backend/src/api/v1/risk/risk.schemas.ts`
 - `backend/src/services/risk.service.ts`
@@ -271,12 +304,14 @@ backend/src/
 - `backend/src/types/risk.types.ts`
 
 **Endpoints**:
+
 - POST /risk/calculate - Calculate portfolio risk
 - GET /risk/heatmap/:portfolioId - Get risk heatmap
 - POST /risk/stress-test - Perform stress test
 - GET /risk/alerts/:portfolioId - Get risk alerts
 
 **Key Features**:
+
 - VaR/CVaR calculation
 - Risk metrics (volatility, beta, Sharpe ratio)
 - Stress testing
@@ -286,6 +321,7 @@ backend/src/
 ### 5. Recommendation Engine Module
 
 **Files to Create**:
+
 - `backend/src/api/v1/recommendations/recommendations.controller.ts`
 - `backend/src/api/v1/recommendations/recommendations.schemas.ts`
 - `backend/src/services/recommendation.service.ts`
@@ -293,12 +329,14 @@ backend/src/
 - `backend/src/types/recommendation.types.ts`
 
 **Endpoints**:
+
 - GET /recommendations/:portfolioId - Get recommendations
 - POST /recommendations/rebalance - Generate rebalancing plan
 - POST /recommendations/suggest-assets - Get asset suggestions
 - POST /recommendations/:id/apply - Apply recommendation
 
 **Key Features**:
+
 - Portfolio analysis
 - Rebalancing suggestions
 - Asset recommendations
@@ -308,6 +346,7 @@ backend/src/
 ### 6. Report Service Module
 
 **Files to Create**:
+
 - `backend/src/api/v1/reports/reports.controller.ts`
 - `backend/src/api/v1/reports/reports.schemas.ts`
 - `backend/src/services/report.service.ts`
@@ -315,6 +354,7 @@ backend/src/
 - `backend/src/types/report.types.ts`
 
 **Endpoints**:
+
 - POST /reports/portfolio - Generate portfolio report
 - GET /reports/:id/status - Get report status
 - GET /reports/:id/download - Download report
@@ -323,6 +363,7 @@ backend/src/
 - POST /reports/comparison - Generate comparison report
 
 **Key Features**:
+
 - Report generation
 - Multiple formats (PDF, CSV, JSON)
 - Chart generation
@@ -332,6 +373,7 @@ backend/src/
 ## Implementation Guidelines
 
 ### Controller Pattern
+
 ```typescript
 export class ModuleController {
   constructor(private service: ModuleService) {}
@@ -339,7 +381,7 @@ export class ModuleController {
   async create(request: FastifyRequest, reply: FastifyReply) {
     const data = request.body;
     const userId = (request as any).user.id;
-    
+
     const result = await this.service.create(data, userId);
     return reply.status(201).send(ResponseFormatter.success(result));
   }
@@ -347,38 +389,33 @@ export class ModuleController {
   async findAll(request: FastifyRequest, reply: FastifyReply) {
     const { page, limit } = (request as any).pagination;
     const filters = request.query;
-    
+
     const result = await this.service.findAll(filters, page, limit);
-    return reply.send(ResponseFormatter.paginated(
-      result.items,
-      page,
-      limit,
-      result.total
-    ));
+    return reply.send(ResponseFormatter.paginated(result.items, page, limit, result.total));
   }
 
   async findById(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
-    
+
     const result = await this.service.findById(id);
     if (!result) {
       throw new NotFoundError('Resource', id);
     }
-    
+
     return reply.send(ResponseFormatter.success(result));
   }
 
   async update(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
     const data = request.body;
-    
+
     const result = await this.service.update(id, data);
     return reply.send(ResponseFormatter.success(result));
   }
 
   async delete(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
-    
+
     await this.service.delete(id);
     return reply.send(ResponseFormatter.success({ message: 'Deleted successfully' }));
   }
@@ -386,6 +423,7 @@ export class ModuleController {
 ```
 
 ### Service Pattern
+
 ```typescript
 export class ModuleService {
   constructor(private repository: ModuleRepository) {}
@@ -393,10 +431,10 @@ export class ModuleService {
   async create(data: CreateDTO, userId: string): Promise<Entity> {
     // Validate business rules
     this.validateBusinessRules(data);
-    
+
     // Transform data
     const entity = this.transformToEntity(data, userId);
-    
+
     // Save to database
     return await this.repository.create(entity);
   }
@@ -405,7 +443,7 @@ export class ModuleService {
     const query = this.buildQuery(filters);
     const total = await this.repository.count(query);
     const items = await this.repository.findAll(query, page, limit);
-    
+
     return { items, total };
   }
 
@@ -418,10 +456,10 @@ export class ModuleService {
     if (!existing) {
       throw new NotFoundError('Resource', id);
     }
-    
+
     // Validate business rules
     this.validateBusinessRules(data);
-    
+
     return await this.repository.update(id, data);
   }
 
@@ -430,7 +468,7 @@ export class ModuleService {
     if (!existing) {
       throw new NotFoundError('Resource', id);
     }
-    
+
     await this.repository.delete(id);
   }
 
@@ -446,6 +484,7 @@ export class ModuleService {
 ```
 
 ### Repository Pattern
+
 ```typescript
 export class ModuleRepository {
   constructor(private model: Model<Document>) {}
@@ -471,10 +510,7 @@ export class ModuleRepository {
   }
 
   async update(id: string, data: any): Promise<any> {
-    return await this.model
-      .findByIdAndUpdate(id, data, { new: true })
-      .lean()
-      .exec();
+    return await this.model.findByIdAndUpdate(id, data, { new: true }).lean().exec();
   }
 
   async delete(id: string): Promise<void> {

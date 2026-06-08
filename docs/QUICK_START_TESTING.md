@@ -3,6 +3,7 @@
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 16+ installed
 - MongoDB running (or connection string)
 - Git repository cloned
@@ -10,6 +11,7 @@
 ### Step 1: Environment Setup
 
 #### Backend Setup
+
 ```bash
 cd backend
 
@@ -29,6 +31,7 @@ npm run dev
 ```
 
 #### Frontend Setup
+
 ```bash
 cd frontend
 
@@ -40,12 +43,14 @@ npm run dev
 ```
 
 ### Step 2: Access the Application
+
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:3000
 
 ## 🧪 Testing the Multi-Step Flow
 
 ### Test Scenario 1: Complete Flow
+
 1. **Login** at http://localhost:5173/login
 2. **Create Scenario**:
    - Navigate to "Scenarios" → "New Scenario"
@@ -69,6 +74,7 @@ npm run dev
    - Try replay, compare, export
 
 ### Test Scenario 2: Validation Failure
+
 1. Create scenario with missing fields
 2. Click "Run Simulation"
 3. Verify validation fails
@@ -76,6 +82,7 @@ npm run dev
 5. Proceed button should be disabled
 
 ### Test Scenario 3: Recovery Actions
+
 1. Complete simulation
 2. In recovery modal, select multiple actions
 3. Watch impact calculation update
@@ -85,6 +92,7 @@ npm run dev
 ## 📊 Expected Results
 
 ### Validation Step
+
 ```
 ✓ Scenario Name → PASS
 ✓ Minimum Events → PASS (3 events)
@@ -96,6 +104,7 @@ Ready for simulation ✓
 ```
 
 ### Preview Step
+
 ```
 Expected Loss: -25%
 Banking Risk: HIGH
@@ -110,6 +119,7 @@ Affected Sectors:
 ```
 
 ### Agent Processing
+
 ```
 📊 Market Agent        ✓ Complete (5s)
 ⚠️ Risk Agent         ✓ Complete (8s)
@@ -121,6 +131,7 @@ Overall Progress: 100%
 ```
 
 ### Recovery Results
+
 ```
 Original Risk: 84
 New Risk: 61 (-23)
@@ -134,8 +145,10 @@ Actions Applied: 3
 ## 🐛 Common Issues & Fixes
 
 ### Issue 1: Backend Won't Start
+
 **Error**: `Cannot connect to MongoDB`
-**Fix**: 
+**Fix**:
+
 ```bash
 # Start MongoDB
 mongod --dbpath /path/to/data
@@ -145,8 +158,10 @@ docker run -d -p 27017:27017 mongo
 ```
 
 ### Issue 2: Frontend Build Errors
+
 **Error**: `Module not found`
 **Fix**:
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -154,22 +169,28 @@ npm install
 ```
 
 ### Issue 3: Authentication Errors
+
 **Error**: `401 Unauthorized`
 **Fix**:
+
 - Ensure you're logged in
 - Check JWT token in localStorage
 - Verify backend JWT_SECRET matches
 
 ### Issue 4: Modal Not Opening
+
 **Error**: Modal doesn't appear
 **Fix**:
+
 - Check browser console for errors
 - Verify scenario ID exists in journey store
 - Clear localStorage and try again
 
 ### Issue 5: TypeScript Errors
+
 **Error**: Type errors in IDE
 **Fix**:
+
 - These are minor and don't affect functionality
 - Run `npm run build` to verify actual errors
 - Most are related to flexible `any` types during development
@@ -177,6 +198,7 @@ npm install
 ## 🔍 Debugging Tips
 
 ### Frontend Debugging
+
 ```javascript
 // Check journey store
 console.log(useJourneyStore.getState());
@@ -189,6 +211,7 @@ console.log(useSimulationFlowStore.getState().currentStep);
 ```
 
 ### Backend Debugging
+
 ```bash
 # Enable debug logs
 DEBUG=* npm run dev
@@ -199,6 +222,7 @@ curl http://localhost:3000/api/v1/scenarios/:id/validate \
 ```
 
 ### Browser DevTools
+
 1. Open DevTools (F12)
 2. **Console**: Check for errors
 3. **Network**: Monitor API calls
@@ -208,6 +232,7 @@ curl http://localhost:3000/api/v1/scenarios/:id/validate \
 ## ✅ Verification Checklist
 
 After testing, verify:
+
 - [ ] All modals open and close properly
 - [ ] Progress indicator updates correctly
 - [ ] Data flows between steps
@@ -223,6 +248,7 @@ After testing, verify:
 ## 📈 Performance Checks
 
 Monitor these metrics:
+
 - **Validation**: Should complete in < 2s
 - **Preview**: Should complete in < 2s
 - **Agent Processing**: Should complete in < 30s
@@ -232,6 +258,7 @@ Monitor these metrics:
 ## 🎯 Success Criteria
 
 The implementation is successful if:
+
 1. ✅ User can complete entire flow without errors
 2. ✅ All modals display correctly
 3. ✅ Data persists between steps
@@ -244,6 +271,7 @@ The implementation is successful if:
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check `docs/TESTING_AND_FIXES.md` for detailed fixes
 2. Review `docs/MULTI_STEP_SIMULATION_FLOW.md` for architecture
 3. Check browser console for specific errors
@@ -253,6 +281,7 @@ If you encounter issues:
 ## 🎉 Next Steps
 
 After successful testing:
+
 1. Deploy to staging environment
 2. Conduct user acceptance testing
 3. Monitor error logs

@@ -14,7 +14,9 @@ export class ReportAgent extends BaseAgent {
     // Get all analysis from context
     const marketAnalysis = context.parameters.marketAnalysis as Record<string, unknown> | undefined;
     const riskAnalysis = context.parameters.riskAnalysis as Record<string, unknown> | undefined;
-    const recommendations = context.parameters.recommendations as Record<string, unknown> | undefined;
+    const recommendations = context.parameters.recommendations as
+      | Record<string, unknown>
+      | undefined;
 
     if (!marketAnalysis || !riskAnalysis || !recommendations) {
       throw new Error('All agent analyses required for report generation');
@@ -56,7 +58,7 @@ export class ReportAgent extends BaseAgent {
     const sections = result.sections as Record<string, unknown> | undefined;
     const hasAllSections = sections?.market && sections?.risk && sections?.recommendations;
     const insightCount = ((result.keyInsights as Array<unknown>) || []).length;
-    
+
     return hasAllSections && insightCount > 0 ? 0.9 : 0.7;
   }
 
@@ -140,7 +142,9 @@ ${Object.keys(sectorImpacts).length} sectors analyzed with varying degrees of im
     const overallRisk = (riskAnalysis.overallRisk as number) || 0;
     const riskLevel = (riskAnalysis.riskLevel as string) || 'MODERATE';
     const concentrationRisk = (riskAnalysis.concentrationRisk as number) || 0;
-    const highRiskSectors = ((riskAnalysis.riskPropagation as Record<string, unknown>)?.highRiskSectors as string[]) || [];
+    const highRiskSectors =
+      ((riskAnalysis.riskPropagation as Record<string, unknown>)?.highRiskSectors as string[]) ||
+      [];
 
     const summary = `
 Risk Assessment:
@@ -172,10 +176,11 @@ ${overallRisk > 70 ? 'CRITICAL: Immediate risk mitigation required.' : overallRi
   } {
     const totalCount = (recommendations.totalRecommendations as number) || 0;
     const highPriorityCount = (recommendations.highPriorityCount as number) || 0;
-    const allRecommendations = (recommendations.recommendations as Array<{
-      recommendation: string;
-      priority: number;
-    }>) || [];
+    const allRecommendations =
+      (recommendations.recommendations as Array<{
+        recommendation: string;
+        priority: number;
+      }>) || [];
 
     const topRecommendations = allRecommendations.slice(0, 5);
 
@@ -208,25 +213,33 @@ ${highPriorityCount > 0 ? 'Immediate action required on high-priority recommenda
     // Market insights
     const volatility = (marketAnalysis.marketVolatility as number) || 0;
     if (volatility > 60) {
-      insights.push(`High market volatility (${volatility}%) indicates increased uncertainty and potential for sharp price movements.`);
+      insights.push(
+        `High market volatility (${volatility}%) indicates increased uncertainty and potential for sharp price movements.`
+      );
     }
 
     // Risk insights
     const overallRisk = (riskAnalysis.overallRisk as number) || 0;
     const riskLevel = (riskAnalysis.riskLevel as string) || 'MODERATE';
     if (overallRisk > 70) {
-      insights.push(`Portfolio risk is at ${riskLevel} level (${overallRisk}%), requiring immediate attention.`);
+      insights.push(
+        `Portfolio risk is at ${riskLevel} level (${overallRisk}%), requiring immediate attention.`
+      );
     }
 
     const concentrationRisk = (riskAnalysis.concentrationRisk as number) || 0;
     if (concentrationRisk > 60) {
-      insights.push(`High concentration risk (${concentrationRisk}%) suggests portfolio is not adequately diversified.`);
+      insights.push(
+        `High concentration risk (${concentrationRisk}%) suggests portfolio is not adequately diversified.`
+      );
     }
 
     // Recommendation insights
     const highPriorityCount = (recommendations.highPriorityCount as number) || 0;
     if (highPriorityCount > 3) {
-      insights.push(`${highPriorityCount} high-priority recommendations indicate multiple areas requiring immediate action.`);
+      insights.push(
+        `${highPriorityCount} high-priority recommendations indicate multiple areas requiring immediate action.`
+      );
     }
 
     // Default insight if none generated
@@ -245,11 +258,12 @@ ${highPriorityCount > 0 ? 'Immediate action required on high-priority recommenda
     priority: 'HIGH' | 'MEDIUM' | 'LOW';
     timeframe: string;
   }> {
-    const allRecommendations = (recommendations.recommendations as Array<{
-      recommendation: string;
-      priority: number;
-      category: string;
-    }>) || [];
+    const allRecommendations =
+      (recommendations.recommendations as Array<{
+        recommendation: string;
+        priority: number;
+        category: string;
+      }>) || [];
 
     return allRecommendations.slice(0, 10).map((rec) => ({
       action: rec.recommendation,

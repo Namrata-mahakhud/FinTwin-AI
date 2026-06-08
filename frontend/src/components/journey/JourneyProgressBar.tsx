@@ -7,27 +7,21 @@ import { JourneyStage, STAGE_CONFIG } from '@/types/journey.types';
 
 export const JourneyProgressBar: React.FC = () => {
   const navigate = useNavigate();
-  const {
-    currentStage,
-    completedStages,
-    canNavigateTo,
-    updateStage,
-    isActive,
-  } = useJourneyStore();
-  
+  const { currentStage, completedStages, canNavigateTo, updateStage, isActive } = useJourneyStore();
+
   const { progress } = useJourneyProgress();
-  
+
   if (!isActive) return null;
-  
+
   const stages = Object.values(JourneyStage);
-  
+
   const handleStageClick = (stage: JourneyStage) => {
     if (canNavigateTo(stage)) {
       updateStage(stage);
       navigate(STAGE_CONFIG[stage].route);
     }
   };
-  
+
   return (
     <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 shadow-sm">
       <div className="max-w-7xl mx-auto">
@@ -40,7 +34,7 @@ export const JourneyProgressBar: React.FC = () => {
             {progress}% Complete
           </span>
         </div>
-        
+
         {/* Progress Bar */}
         <div className="relative mb-4">
           <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
@@ -50,7 +44,7 @@ export const JourneyProgressBar: React.FC = () => {
             />
           </div>
         </div>
-        
+
         {/* Stage Indicators */}
         <div className="flex justify-between items-start gap-1">
           {stages.map((stage) => {
@@ -58,7 +52,7 @@ export const JourneyProgressBar: React.FC = () => {
             const isCompleted = completedStages.includes(stage);
             const isCurrent = stage === currentStage;
             const canNavigate = canNavigateTo(stage);
-            
+
             return (
               <button
                 key={stage}
@@ -74,11 +68,12 @@ export const JourneyProgressBar: React.FC = () => {
                   className={`
                     w-10 h-10 rounded-full flex items-center justify-center text-lg
                     transition-all duration-300 border-2 shadow-md
-                    ${isCurrent
-                      ? 'bg-blue-600 border-blue-600 text-white scale-110 shadow-lg ring-4 ring-blue-200 dark:ring-blue-900'
-                      : isCompleted
-                      ? 'bg-green-600 border-green-600 text-white hover:scale-105'
-                      : 'bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400'
+                    ${
+                      isCurrent
+                        ? 'bg-blue-600 border-blue-600 text-white scale-110 shadow-lg ring-4 ring-blue-200 dark:ring-blue-900'
+                        : isCompleted
+                          ? 'bg-green-600 border-green-600 text-white hover:scale-105'
+                          : 'bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400'
                     }
                   `}
                 >
@@ -91,11 +86,12 @@ export const JourneyProgressBar: React.FC = () => {
                 <span
                   className={`
                     text-xs font-medium text-center max-w-full truncate px-1
-                    ${isCurrent
-                      ? 'text-blue-600 dark:text-blue-400 font-bold'
-                      : isCompleted
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-gray-500 dark:text-gray-400'
+                    ${
+                      isCurrent
+                        ? 'text-blue-600 dark:text-blue-400 font-bold'
+                        : isCompleted
+                          ? 'text-green-600 dark:text-green-400'
+                          : 'text-gray-500 dark:text-gray-400'
                     }
                   `}
                 >

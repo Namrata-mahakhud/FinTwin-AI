@@ -7,8 +7,9 @@ The AI-Powered Market Event Journey transforms the traditional simulation experi
 ## Key Features
 
 ### 1. **Simulation Processing Overlay** 🚀
+
 - **Purpose**: Shows real-time agent activation during simulation startup
-- **Components**: 
+- **Components**:
   - Market Agent Activation
   - Inflation Model Loading
   - Currency Risk Evaluation
@@ -18,6 +19,7 @@ The AI-Powered Market Event Journey transforms the traditional simulation experi
 - **Visual**: Professional loading screen with checkmarks and progress indicators
 
 ### 2. **Market Shock Timeline** 📅
+
 - **Purpose**: Visualizes the 30-day market event cascade
 - **Features**:
   - Vertical animated timeline
@@ -34,6 +36,7 @@ The AI-Powered Market Event Journey transforms the traditional simulation experi
   - Day 30: Recovery Begins
 
 ### 3. **Live Impact Dashboard** 📊
+
 - **Purpose**: Real-time portfolio metrics visualization
 - **Metrics Displayed**:
   - Portfolio Value (before → after)
@@ -44,6 +47,7 @@ The AI-Powered Market Event Journey transforms the traditional simulation experi
 - **Visual**: Gradient cards with animated transitions
 
 ### 4. **AI Agent Discussion Panel** 🤖⭐⭐⭐
+
 - **Purpose**: THE DIFFERENTIATOR - Shows multi-agent collaboration
 - **Agents**:
   - **Market Agent** 📊: Analyzes market conditions and sector impacts
@@ -59,6 +63,7 @@ The AI-Powered Market Event Journey transforms the traditional simulation experi
   - Animated message appearance
 
 ### 5. **Recovery Simulator** 🔄
+
 - **Purpose**: Interactive strategy testing
 - **Available Strategies**:
   - Move 10% to Bonds
@@ -112,6 +117,7 @@ The AI-Powered Market Event Journey transforms the traditional simulation experi
 ### Frontend Components
 
 #### SimulationProcessingOverlay
+
 ```typescript
 Location: frontend/src/components/simulation/SimulationProcessingOverlay.tsx
 Props:
@@ -124,6 +130,7 @@ Features:
 ```
 
 #### MarketShockTimeline
+
 ```typescript
 Location: frontend/src/components/simulation/MarketShockTimeline.tsx
 Props:
@@ -137,6 +144,7 @@ Features:
 ```
 
 #### AIAgentDiscussionPanel
+
 ```typescript
 Location: frontend/src/components/simulation/AIAgentDiscussionPanel.tsx
 Props:
@@ -150,6 +158,7 @@ Features:
 ```
 
 #### RecoverySimulator
+
 ```typescript
 Location: frontend/src/components/simulation/RecoverySimulator.tsx
 Props:
@@ -166,6 +175,7 @@ Features:
 ### Backend Integration
 
 #### Agent Orchestrator Enhancement
+
 ```typescript
 Location: backend/src/agents/orchestrator.ts
 New Features:
@@ -176,6 +186,7 @@ New Features:
 ```
 
 #### API Endpoints
+
 ```
 GET /api/v1/simulations/:id/journey
   - Returns simulation journey data
@@ -192,15 +203,17 @@ POST /api/v1/simulations/:id/recovery
 ## Animations
 
 ### CSS Animations
+
 ```css
 @keyframes fade-in
 @keyframes slide-in-left
 @keyframes slide-in-right
 @keyframes slide-up
-@keyframes pulse-glow
+@keyframes pulse-glow;
 ```
 
 ### Animation Classes
+
 - `.animate-fade-in`: Smooth opacity transition
 - `.animate-slide-in-left`: Left-to-right slide
 - `.animate-slide-in-right`: Right-to-left slide
@@ -210,29 +223,34 @@ POST /api/v1/simulations/:id/recovery
 ## Why This Impresses Judges
 
 ### 1. **Multi-Agent Collaboration** 🏆
+
 - Shows real AI agents working together
 - Demonstrates Agentic SDLC principles
 - Not just a dashboard - it's a command center
 
 ### 2. **Professional UX** ✨
+
 - Smooth animations
 - Progressive disclosure
 - Interactive elements
 - Real-time updates
 
 ### 3. **Technical Sophistication** 🔧
+
 - Complex state management
 - Agent orchestration
 - Real-time data streaming
 - Recovery simulation
 
 ### 4. **Business Value** 💼
+
 - Actionable insights
 - Risk mitigation strategies
 - Recovery planning
 - Confidence scoring
 
 ### 5. **Innovation** 🚀
+
 - Transforms static reports into interactive journey
 - AI-powered decision support
 - Multi-agent system visualization

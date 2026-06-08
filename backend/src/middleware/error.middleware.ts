@@ -16,7 +16,7 @@ export async function errorHandler(
   reply: FastifyReply
 ): Promise<void> {
   // Generate request ID if not exists
-  const requestId = (request.id as string) || generateRequestId();
+  const requestId = request.id || generateRequestId();
 
   // Handle AppError (our custom errors)
   if (error instanceof AppError) {
@@ -125,10 +125,7 @@ export async function errorHandler(
 /**
  * Not found handler
  */
-export async function notFoundHandler(
-  request: FastifyRequest,
-  reply: FastifyReply
-): Promise<void> {
+export async function notFoundHandler(request: FastifyRequest, reply: FastifyReply): Promise<void> {
   logger.warn({
     message: 'Route not found',
     method: request.method,
@@ -147,10 +144,7 @@ export async function notFoundHandler(
 /**
  * Request timeout handler
  */
-export async function timeoutHandler(
-  request: FastifyRequest,
-  reply: FastifyReply
-): Promise<void> {
+export async function timeoutHandler(request: FastifyRequest, reply: FastifyReply): Promise<void> {
   logger.warn({
     message: 'Request timeout',
     method: request.method,

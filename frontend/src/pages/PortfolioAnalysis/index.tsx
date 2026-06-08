@@ -2,7 +2,19 @@
 
 import React, { useState } from 'react';
 import { Card, CardBody, CardHeader, Badge } from '@/components/common';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from 'recharts';
 
 interface Asset {
   id: string;
@@ -36,11 +48,51 @@ const PortfolioAnalysis: React.FC = () => {
   const totalChange = 12.5;
 
   const assets: Asset[] = [
-    { id: '1', symbol: 'STOCKS', name: 'Stocks', value: 1102500, percentage: 45, change: 12.8, sector: 'Equity' },
-    { id: '2', symbol: 'BONDS', name: 'Bonds', value: 612500, percentage: 25, change: 3.2, sector: 'Fixed Income' },
-    { id: '3', symbol: 'ETF', name: 'ETF', value: 367500, percentage: 15, change: -2.1, sector: 'Mixed' },
-    { id: '4', symbol: 'GOLD', name: 'Gold', value: 245000, percentage: 10, change: 8.5, sector: 'Commodity' },
-    { id: '5', symbol: 'CASH', name: 'Cash', value: 122500, percentage: 5, change: 0.1, sector: 'Cash' },
+    {
+      id: '1',
+      symbol: 'STOCKS',
+      name: 'Stocks',
+      value: 1102500,
+      percentage: 45,
+      change: 12.8,
+      sector: 'Equity',
+    },
+    {
+      id: '2',
+      symbol: 'BONDS',
+      name: 'Bonds',
+      value: 612500,
+      percentage: 25,
+      change: 3.2,
+      sector: 'Fixed Income',
+    },
+    {
+      id: '3',
+      symbol: 'ETF',
+      name: 'ETF',
+      value: 367500,
+      percentage: 15,
+      change: -2.1,
+      sector: 'Mixed',
+    },
+    {
+      id: '4',
+      symbol: 'GOLD',
+      name: 'Gold',
+      value: 245000,
+      percentage: 10,
+      change: 8.5,
+      sector: 'Commodity',
+    },
+    {
+      id: '5',
+      symbol: 'CASH',
+      name: 'Cash',
+      value: 122500,
+      percentage: 5,
+      change: 0.1,
+      sector: 'Cash',
+    },
   ];
 
   const assetDetails: Record<string, AssetDetail> = {
@@ -103,9 +155,7 @@ const PortfolioAnalysis: React.FC = () => {
       volatility: 0.1,
       beta: 0.0,
       sharpeRatio: 0.15,
-      holdings: [
-        { symbol: 'CASH', name: 'Money Market Fund', value: 122500, change: 0.1 },
-      ],
+      holdings: [{ symbol: 'CASH', name: 'Money Market Fund', value: 122500, change: 0.1 }],
     },
   };
 
@@ -141,10 +191,10 @@ const PortfolioAnalysis: React.FC = () => {
 
   const getSectorColor = (sector: string) => {
     const colors: Record<string, string> = {
-      'Tech': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-      'Finance': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-      'Healthcare': 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
-      'Energy': 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
+      Tech: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+      Finance: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+      Healthcare: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+      Energy: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
     };
     return colors[sector] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400';
   };
@@ -210,7 +260,10 @@ const PortfolioAnalysis: React.FC = () => {
               <LineChart data={performanceData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                 <XAxis dataKey="month" stroke="#9CA3AF" />
-                <YAxis stroke="#9CA3AF" tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`} />
+                <YAxis
+                  stroke="#9CA3AF"
+                  tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                />
                 <Tooltip
                   formatter={(value: number) => formatCurrency(value)}
                   contentStyle={{
@@ -219,7 +272,13 @@ const PortfolioAnalysis: React.FC = () => {
                     borderRadius: '0.5rem',
                   }}
                 />
-                <Line type="monotone" dataKey="value" stroke="#3B82F6" strokeWidth={2} dot={{ fill: '#3B82F6' }} />
+                <Line
+                  type="monotone"
+                  dataKey="value"
+                  stroke="#3B82F6"
+                  strokeWidth={2}
+                  dot={{ fill: '#3B82F6' }}
+                />
               </LineChart>
             </ResponsiveContainer>
           </CardBody>
@@ -269,9 +328,7 @@ const PortfolioAnalysis: React.FC = () => {
       {/* Asset Breakdown */}
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Asset Breakdown
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Asset Breakdown</h2>
         </CardHeader>
         <CardBody>
           <div className="space-y-3">
@@ -280,7 +337,10 @@ const PortfolioAnalysis: React.FC = () => {
               const isExpanded = expandedAsset === asset.id;
 
               return (
-                <div key={asset.id} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                <div
+                  key={asset.id}
+                  className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+                >
                   {/* Asset Summary */}
                   <button
                     onClick={() => toggleAsset(asset.id)}
@@ -307,7 +367,9 @@ const PortfolioAnalysis: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <div className={`text-sm font-medium ${asset.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        <div
+                          className={`text-sm font-medium ${asset.change >= 0 ? 'text-green-600' : 'text-red-600'}`}
+                        >
                           {asset.change >= 0 ? '↑' : '↓'} {Math.abs(asset.change)}%
                         </div>
                         <svg
@@ -316,7 +378,12 @@ const PortfolioAnalysis: React.FC = () => {
                           stroke="currentColor"
                           viewBox="0 0 24 24"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -329,27 +396,41 @@ const PortfolioAnalysis: React.FC = () => {
                       <div className="grid grid-cols-4 gap-4 mb-4">
                         <div>
                           <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gain/Loss</p>
-                          <p className={`font-semibold ${detail.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          <p
+                            className={`font-semibold ${detail.change >= 0 ? 'text-green-600' : 'text-red-600'}`}
+                          >
                             {formatCurrency((detail.value * detail.change) / 100)}
                           </p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Volatility</p>
-                          <p className="font-semibold text-gray-900 dark:text-white">{detail.volatility}%</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                            Volatility
+                          </p>
+                          <p className="font-semibold text-gray-900 dark:text-white">
+                            {detail.volatility}%
+                          </p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Beta</p>
-                          <p className="font-semibold text-gray-900 dark:text-white">{detail.beta}</p>
+                          <p className="font-semibold text-gray-900 dark:text-white">
+                            {detail.beta}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sharpe Ratio</p>
-                          <p className="font-semibold text-gray-900 dark:text-white">{detail.sharpeRatio}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                            Sharpe Ratio
+                          </p>
+                          <p className="font-semibold text-gray-900 dark:text-white">
+                            {detail.sharpeRatio}
+                          </p>
                         </div>
                       </div>
 
                       {/* Holdings */}
                       <div>
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Holdings</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                          Holdings
+                        </h4>
                         <div className="space-y-2">
                           {detail.holdings.map((holding) => (
                             <div
@@ -360,14 +441,19 @@ const PortfolioAnalysis: React.FC = () => {
                                 <p className="font-medium text-gray-900 dark:text-white text-sm">
                                   {holding.symbol}
                                 </p>
-                                <p className="text-xs text-gray-600 dark:text-gray-400">{holding.name}</p>
+                                <p className="text-xs text-gray-600 dark:text-gray-400">
+                                  {holding.name}
+                                </p>
                               </div>
                               <div className="text-right">
                                 <p className="font-medium text-gray-900 dark:text-white text-sm">
                                   {formatCurrency(holding.value)}
                                 </p>
-                                <p className={`text-xs ${holding.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  {holding.change >= 0 ? '+' : ''}{holding.change}%
+                                <p
+                                  className={`text-xs ${holding.change >= 0 ? 'text-green-600' : 'text-red-600'}`}
+                                >
+                                  {holding.change >= 0 ? '+' : ''}
+                                  {holding.change}%
                                 </p>
                               </div>
                             </div>

@@ -104,7 +104,7 @@ export class MarketService {
     // Generate mock historical data
     const { startDate, endDate } = DateUtils.getDateRange(period);
     const days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-    
+
     const historicalData: HistoricalDataPoint[] = [];
     let currentPrice = NumberUtils.randomInRange(50, 500);
 
@@ -114,7 +114,7 @@ export class MarketService {
 
       const volatility = 0.02; // 2% daily volatility
       const change = (Math.random() - 0.5) * 2 * volatility;
-      
+
       const open = currentPrice;
       const close = currentPrice * (1 + change);
       const high = Math.max(open, close) * (1 + Math.random() * 0.01);
@@ -155,7 +155,7 @@ export class MarketService {
    */
   private async getHistoricalPrices(symbol: string, days: number): Promise<number[]> {
     const marketData = await this.fetchMarketData(symbol, `${days}d`);
-    return marketData.historicalData.map(d => d.close);
+    return marketData.historicalData.map((d) => d.close);
   }
 
   /**
@@ -188,8 +188,8 @@ export class MarketService {
       changes.push(prices[i] - prices[i - 1]);
     }
 
-    const gains = changes.map(c => (c > 0 ? c : 0));
-    const losses = changes.map(c => (c < 0 ? Math.abs(c) : 0));
+    const gains = changes.map((c) => (c > 0 ? c : 0));
+    const losses = changes.map((c) => (c < 0 ? Math.abs(c) : 0));
 
     const avgGain = ArrayUtils.average(gains.slice(-period));
     const avgLoss = ArrayUtils.average(losses.slice(-period));
@@ -282,7 +282,7 @@ export class MarketService {
 
     // Base volatility from parameters
     const baseVolatility = parameters.volatility / 100;
-    
+
     // Trend adjustment
     const trendAdjustment =
       parameters.trend === 'bullish' ? 0.001 : parameters.trend === 'bearish' ? -0.001 : 0;
@@ -298,7 +298,7 @@ export class MarketService {
       price = price * (1 + trendAdjustment + randomShock);
 
       // Calculate confidence interval
-      const confidence = Math.max(0.5, 1 - i / days * 0.5);
+      const confidence = Math.max(0.5, 1 - (i / days) * 0.5);
       const range = price * baseVolatility * Math.sqrt(i + 1);
 
       projections.push({
@@ -356,7 +356,11 @@ export class MarketService {
       throw new ValidationError('End date must be after start date');
     }
 
-    if (!params.parameters.volatility || params.parameters.volatility < 0 || params.parameters.volatility > 100) {
+    if (
+      !params.parameters.volatility ||
+      params.parameters.volatility < 0 ||
+      params.parameters.volatility > 100
+    ) {
       throw new ValidationError('Volatility must be between 0 and 100');
     }
 

@@ -41,8 +41,10 @@ export class RecommendationAgent extends BaseAgent {
 
   protected calculateConfidence(result: Record<string, unknown>): number {
     const recommendations = (result.recommendations as Array<unknown>) || [];
-    const avgPriority = recommendations.reduce((sum: number, rec: any) => sum + (rec.priority || 0), 0) / recommendations.length;
-    
+    const avgPriority =
+      recommendations.reduce((sum: number, rec: any) => sum + (rec.priority || 0), 0) /
+      recommendations.length;
+
     // Higher confidence when we have clear high-priority recommendations
     return recommendations.length > 0 ? 0.7 + (avgPriority / 10) * 0.3 : 0.5;
   }
@@ -50,9 +52,7 @@ export class RecommendationAgent extends BaseAgent {
   /**
    * Generate risk mitigation recommendations
    */
-  private generateRiskMitigationRecommendations(
-    riskAnalysis: Record<string, unknown>
-  ): Array<{
+  private generateRiskMitigationRecommendations(riskAnalysis: Record<string, unknown>): Array<{
     category: string;
     recommendation: string;
     priority: number;
@@ -61,7 +61,9 @@ export class RecommendationAgent extends BaseAgent {
     const recommendations = [];
     const overallRisk = (riskAnalysis.overallRisk as number) || 0;
     const riskLevel = (riskAnalysis.riskLevel as string) || 'MODERATE';
-    const highRiskSectors = ((riskAnalysis.riskPropagation as Record<string, unknown>)?.highRiskSectors as string[]) || [];
+    const highRiskSectors =
+      ((riskAnalysis.riskPropagation as Record<string, unknown>)?.highRiskSectors as string[]) ||
+      [];
 
     if (overallRisk > 70) {
       recommendations.push({
@@ -164,16 +166,16 @@ export class RecommendationAgent extends BaseAgent {
   /**
    * Generate diversification recommendations
    */
-  private generateDiversificationRecommendations(
-    riskAnalysis: Record<string, unknown>
-  ): Array<{
+  private generateDiversificationRecommendations(riskAnalysis: Record<string, unknown>): Array<{
     category: string;
     recommendation: string;
     priority: number;
     reasoning: { analysis: string; confidence: number; supportingData: Record<string, unknown> };
   }> {
     const recommendations = [];
-    const correlatedSectors = ((riskAnalysis.riskPropagation as Record<string, unknown>)?.correlatedSectors as string[][]) || [];
+    const correlatedSectors =
+      ((riskAnalysis.riskPropagation as Record<string, unknown>)
+        ?.correlatedSectors as string[][]) || [];
 
     if (correlatedSectors.length > 0) {
       recommendations.push({
@@ -192,7 +194,8 @@ export class RecommendationAgent extends BaseAgent {
     if (concentrationRisk > 40) {
       recommendations.push({
         category: RecommendationCategory.SECTOR_DIVERSIFICATION,
-        recommendation: 'Add exposure to alternative asset classes (commodities, bonds, international markets) to improve diversification.',
+        recommendation:
+          'Add exposure to alternative asset classes (commodities, bonds, international markets) to improve diversification.',
         priority: 5,
         reasoning: {
           analysis: 'Portfolio lacks sufficient diversification across asset classes.',
@@ -237,7 +240,8 @@ export class RecommendationAgent extends BaseAgent {
     if (overallRisk > 60 && marketVolatility > 40) {
       recommendations.push({
         category: RecommendationCategory.FUTURE_WARNING,
-        recommendation: 'Caution: Combination of high portfolio risk and market volatility creates elevated downside risk. Monitor positions closely.',
+        recommendation:
+          'Caution: Combination of high portfolio risk and market volatility creates elevated downside risk. Monitor positions closely.',
         priority: 9,
         reasoning: {
           analysis: 'Dual risk factors significantly increase potential for losses.',

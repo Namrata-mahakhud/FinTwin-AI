@@ -1,6 +1,7 @@
 # Run Simulation Navigation & UI Fixes
 
 ## Summary
+
 Fixed the "Run Simulation" button navigation issue and updated the simulation page UI to match the Financial War Room design for a consistent user experience.
 
 ## Issues Fixed
@@ -12,6 +13,7 @@ When clicking "Run Simulation" button in the Scenarios page (`/scenarios/new`), 
 
 **Root Cause:**
 The route `/simulations/run` was not wrapped with the `JourneyRoute` guard component, which meant:
+
 1. The journey validation logic wasn't being applied
 2. The route was accessible but the journey state wasn't being properly validated
 3. Missing journey protection caused unexpected redirects
@@ -77,6 +79,7 @@ Completely redesigned `frontend/src/pages/RunSimulation/index.tsx` to match the 
 ## Technical Implementation
 
 ### Navigation Flow
+
 ```
 Dashboard → Create Scenario → Run Simulation → War Room → Continue Journey
      ↓            ↓                  ↓              ↓
@@ -85,18 +88,21 @@ Dashboard → Create Scenario → Run Simulation → War Room → Continue Journ
 ```
 
 ### Journey State Management
+
 - Uses `useJourneyStore` for state persistence
 - Validates journey progression with `JourneyRoute` guard
 - Saves simulation results to journey data
 - Marks stages as complete for navigation tracking
 
 ### UI Components Used
+
 - `JourneyWrapper`: Provides journey context and navigation
 - `SimulationProcessingOverlay`: Initial loading animation
 - `Card`, `CardBody`, `Badge`: Consistent UI components
 - `LoadingSpinner`: Activity indicators
 
 ### Animation Classes
+
 - `animate-pulse-glow`: Pulsing glow effect for active elements
 - Timeline transitions with smooth status changes
 - Agent activity state transitions
@@ -117,12 +123,14 @@ Dashboard → Create Scenario → Run Simulation → War Room → Continue Journ
 ## User Experience Improvements
 
 ### Before:
+
 - Simple progress bar with percentage
 - No visual feedback on what's happening
 - Disconnected from War Room experience
 - Auto-navigation without user control
 
 ### After:
+
 - Immersive War Room interface
 - Real-time visualization of simulation events
 - AI agent activity monitoring

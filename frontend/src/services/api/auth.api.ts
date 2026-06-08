@@ -16,10 +16,7 @@ export const authApi = {
    * Login user
    */
   login: async (credentials: LoginCredentials): Promise<LoginResponse> => {
-    const response = await apiClient.post<LoginResponse>(
-      API_ENDPOINTS.AUTH.LOGIN,
-      credentials
-    );
+    const response = await apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, credentials);
     return response.data;
   },
 
@@ -50,10 +47,9 @@ export const authApi = {
    * Refresh access token
    */
   refreshToken: async (refreshToken: string): Promise<{ accessToken: string }> => {
-    const response = await apiClient.post<{ accessToken: string }>(
-      API_ENDPOINTS.AUTH.REFRESH,
-      { refreshToken }
-    );
+    const response = await apiClient.post<{ accessToken: string }>(API_ENDPOINTS.AUTH.REFRESH, {
+      refreshToken,
+    });
     return response.data;
   },
 

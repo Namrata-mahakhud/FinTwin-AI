@@ -29,7 +29,8 @@ const Recommendations: React.FC = () => {
       agentColor: 'bg-red-100 dark:bg-red-900/20 border-red-300 dark:border-red-700',
       priority: 'HIGH',
       title: 'Banking exposure too high (35%)',
-      description: 'Current banking sector allocation exceeds optimal range for risk-adjusted returns',
+      description:
+        'Current banking sector allocation exceeds optimal range for risk-adjusted returns',
       action: 'Reduce banking exposure to 25%',
       expectedImpact: 'Risk Reduction: -8 points',
       confidence: 87,
@@ -189,9 +190,7 @@ const Recommendations: React.FC = () => {
           <CardBody>
             <div className="flex items-center gap-3 mb-2">
               <span className="text-2xl">💡</span>
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Recommendation Agent
-              </h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white">Recommendation Agent</h3>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Suggests optimal portfolio adjustments
@@ -215,9 +214,7 @@ const Recommendations: React.FC = () => {
           <CardBody>
             <div className="flex items-center gap-3 mb-2">
               <span className="text-2xl">🎯</span>
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Portfolio Agent
-              </h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white">Portfolio Agent</h3>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Monitors overall portfolio health and performance
@@ -230,9 +227,7 @@ const Recommendations: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardBody>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-              Active Recommendations
-            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Active Recommendations</p>
             <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">
               {activeRecommendations.length}
             </p>
@@ -240,9 +235,7 @@ const Recommendations: React.FC = () => {
         </Card>
         <Card>
           <CardBody>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-              Applied Actions
-            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Applied Actions</p>
             <p className="text-2xl font-bold text-green-600 dark:text-green-400">
               {appliedRecs.size}
             </p>
@@ -250,9 +243,7 @@ const Recommendations: React.FC = () => {
         </Card>
         <Card>
           <CardBody>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-              Avg Confidence
-            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Avg Confidence</p>
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
               {Math.round(
                 activeRecommendations.reduce((sum, rec) => sum + rec.confidence, 0) /
@@ -286,9 +277,7 @@ const Recommendations: React.FC = () => {
                         {rec.confidence}% confidence
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                      {rec.agent}
-                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{rec.agent}</p>
                     <p className="text-gray-700 dark:text-gray-300 mb-3">{rec.description}</p>
                     <div className="flex items-center gap-4 text-sm">
                       <div className="flex items-center gap-2">
@@ -356,9 +345,7 @@ const Recommendations: React.FC = () => {
             <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
               <span className="text-3xl">{selectedRec.agentIcon}</span>
               <div>
-                <p className="font-semibold text-gray-900 dark:text-white">
-                  {selectedRec.agent}
-                </p>
+                <p className="font-semibold text-gray-900 dark:text-white">{selectedRec.agent}</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Confidence: {selectedRec.confidence}%
                 </p>
@@ -381,9 +368,7 @@ const Recommendations: React.FC = () => {
 
             {/* Expected Impact */}
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Expected Impact
-              </h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Expected Impact</h4>
               <p className="text-green-600 dark:text-green-400 font-medium">
                 {selectedRec.expectedImpact}
               </p>
@@ -398,9 +383,7 @@ const Recommendations: React.FC = () => {
                     key={index}
                     className="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
                   >
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">
-                      {index + 1}.
-                    </span>
+                    <span className="text-blue-600 dark:text-blue-400 font-bold">{index + 1}.</span>
                     <p className="text-sm text-gray-700 dark:text-gray-300">{reason}</p>
                   </div>
                 ))}
@@ -462,8 +445,8 @@ const Recommendations: React.FC = () => {
                 Confidence Scoring
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Each recommendation includes a confidence score based on historical data,
-                market conditions, and cross-validation between agents.
+                Each recommendation includes a confidence score based on historical data, market
+                conditions, and cross-validation between agents.
               </p>
               <div className="space-y-3">
                 <div>

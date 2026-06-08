@@ -4,7 +4,18 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 import { Card, CardBody, Badge } from '@/components/common';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts';
 import { useCaseStore } from '@/store/caseStore';
 import { SEED_ACTIVE_CASE, SEED_COMPLETED_CASES, SEED_PORTFOLIOS } from '@/data/seedData';
 
@@ -22,7 +33,7 @@ const Dashboard: React.FC = () => {
       setInitialized(true);
     } else if (!activeCase && cases.length > 0) {
       // Set first active case if none selected
-      const active = cases.find(c => c.status === 'analyzing' || c.status === 'active');
+      const active = cases.find((c) => c.status === 'analyzing' || c.status === 'active');
       if (active) {
         setActiveCase(active.caseId);
       }
@@ -98,7 +109,7 @@ const Dashboard: React.FC = () => {
 
   const getRecommendedAction = () => {
     if (!activeCase) return 'Start a new crisis simulation';
-    
+
     switch (activeCase.currentStage) {
       case 'create_scenario':
         return 'Complete scenario creation';
@@ -211,7 +222,9 @@ const Dashboard: React.FC = () => {
                 </p>
               </div>
             </div>
-            <span className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(activeCase.status)}`}>
+            <span
+              className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(activeCase.status)}`}
+            >
               {activeCase.status.toUpperCase()}
             </span>
           </div>
@@ -222,27 +235,21 @@ const Dashboard: React.FC = () => {
               <p className={`text-2xl font-bold ${getRiskColor(activeCase.currentRisk)}`}>
                 {activeCase.currentRisk}/100
               </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Initial: {activeCase.initialRisk}
-              </p>
+              <p className="text-xs text-gray-500 mt-1">Initial: {activeCase.initialRisk}</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Estimated Loss</p>
               <p className="text-2xl font-bold text-red-600 dark:text-red-400">
                 {activeCase.initialLoss.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Portfolio impact
-              </p>
+              <p className="text-xs text-gray-500 mt-1">Portfolio impact</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Recovered</p>
               <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                 {activeCase.recoveredLoss.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Loss reduction
-              </p>
+              <p className="text-xs text-gray-500 mt-1">Loss reduction</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Recovery Progress</p>
@@ -270,7 +277,9 @@ const Dashboard: React.FC = () => {
 
           {activeCase.recommendations.length > 0 && (
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Active Recommendations</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Active Recommendations
+              </p>
               <div className="space-y-2">
                 {activeCase.recommendations.slice(0, 3).map((rec, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-sm">
@@ -333,15 +342,16 @@ const Dashboard: React.FC = () => {
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Portfolio Performance
               </h2>
-              <span className="text-xs text-gray-500 dark:text-gray-400">
-                Last 6 months
-              </span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">Last 6 months</span>
             </div>
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={performanceData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                 <XAxis dataKey="month" stroke="#9CA3AF" />
-                <YAxis stroke="#9CA3AF" tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`} />
+                <YAxis
+                  stroke="#9CA3AF"
+                  tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                />
                 <Tooltip
                   formatter={(value: number) => formatCurrency(value)}
                   contentStyle={{
@@ -373,9 +383,7 @@ const Dashboard: React.FC = () => {
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Asset Allocation
               </h2>
-              <span className="text-xs text-gray-500 dark:text-gray-400">
-                Current distribution
-              </span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">Current distribution</span>
             </div>
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
@@ -435,9 +443,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => setActiveCase(caseItem.caseId)}
               >
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900 dark:text-white">
-                    {caseItem.caseName}
-                  </p>
+                  <p className="font-medium text-gray-900 dark:text-white">{caseItem.caseName}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     {caseItem.scenario.name} • Risk: {caseItem.currentRisk}/100
                   </p>
@@ -451,7 +457,9 @@ const Dashboard: React.FC = () => {
                       {new Date(caseItem.updatedAt).toLocaleDateString()}
                     </p>
                   </div>
-                  <span className={`px-2 py-1 text-xs font-medium rounded ${getStatusColor(caseItem.status)}`}>
+                  <span
+                    className={`px-2 py-1 text-xs font-medium rounded ${getStatusColor(caseItem.status)}`}
+                  >
                     {caseItem.status}
                   </span>
                 </div>
@@ -468,8 +476,9 @@ const Dashboard: React.FC = () => {
       {/* Disclaimer */}
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
         <p className="text-sm text-yellow-800 dark:text-yellow-400">
-          ⚠️ <strong>Disclaimer:</strong> Simulation output is for risk planning and is not financial advice. 
-          All scenarios are based on historical data and statistical models with inherent uncertainties.
+          ⚠️ <strong>Disclaimer:</strong> Simulation output is for risk planning and is not
+          financial advice. All scenarios are based on historical data and statistical models with
+          inherent uncertainties.
         </p>
       </div>
     </div>

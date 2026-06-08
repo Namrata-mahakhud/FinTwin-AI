@@ -31,9 +31,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
           rounded-full animate-spin
         `}
       />
-      {text && (
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">{text}</p>
-      )}
+      {text && <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">{text}</p>}
     </div>
   );
 };

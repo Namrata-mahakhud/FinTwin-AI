@@ -33,6 +33,7 @@ History
 ### 1. Frontend Components
 
 #### Type Definitions
+
 - **Location**: `frontend/src/types/simulation-flow.types.ts`
 - **Purpose**: Defines all TypeScript interfaces for the simulation flow
 - **Key Types**:
@@ -44,6 +45,7 @@ History
   - `SimulationHistoryItem`: Historical simulation data
 
 #### State Management
+
 - **Location**: `frontend/src/store/simulationFlowStore.ts`
 - **Purpose**: Zustand store for managing simulation flow state
 - **Features**:
@@ -55,6 +57,7 @@ History
 #### Modal Components
 
 ##### ScenarioValidationModal
+
 - **Location**: `frontend/src/components/simulation/ScenarioValidationModal.tsx`
 - **Purpose**: Step 1 - Validates scenario before simulation
 - **Features**:
@@ -64,6 +67,7 @@ History
   - Prevents proceeding if validation fails
 
 ##### ImpactPreviewModal
+
 - **Location**: `frontend/src/components/simulation/ImpactPreviewModal.tsx`
 - **Purpose**: Step 2 - Shows estimated impact before full simulation
 - **Features**:
@@ -75,6 +79,7 @@ History
   - Portfolio value before/after comparison
 
 ##### AgentProcessingModal
+
 - **Location**: `frontend/src/components/simulation/AgentProcessingModal.tsx`
 - **Purpose**: Step 3 - Real-time agent execution tracking
 - **Features**:
@@ -86,6 +91,7 @@ History
   - Execution timing information
 
 ##### RecoveryActionsModal
+
 - **Location**: `frontend/src/components/simulation/RecoveryActionsModal.tsx`
 - **Purpose**: Step 5 - Apply recovery strategies
 - **Features**:
@@ -99,6 +105,7 @@ History
 #### Pages
 
 ##### RunSimulation (Updated)
+
 - **Location**: `frontend/src/pages/RunSimulation/index.tsx`
 - **Purpose**: Orchestrates the entire multi-step flow
 - **Features**:
@@ -110,6 +117,7 @@ History
   - Error handling and cancellation
 
 ##### SimulationHistory
+
 - **Location**: `frontend/src/pages/SimulationHistory/index.tsx`
 - **Purpose**: View, replay, and compare past simulations
 - **Features**:
@@ -123,36 +131,44 @@ History
 ### 2. Backend Components (To Be Implemented)
 
 #### Validation Endpoint
+
 ```typescript
 POST /api/v1/scenarios/:id/validate
 ```
+
 - Validates scenario configuration
 - Checks all prerequisites
 - Returns validation result with detailed checks
 
 #### Preview Calculation
+
 ```typescript
 POST /api/v1/scenarios/:id/preview
 ```
+
 - Quick impact estimation
 - No Monte Carlo simulation
 - Returns estimated metrics in < 1 second
 
 #### Recovery Application
+
 ```typescript
 POST /api/v1/simulations/:id/apply-recovery
 ```
+
 - Applies selected recovery actions
 - Recalculates portfolio metrics
 - Returns updated risk and loss values
 
 #### Simulation History
+
 ```typescript
 GET /api/v1/simulations/history
 GET /api/v1/simulations/:id/replay
 GET /api/v1/simulations/compare?ids=id1,id2
 GET /api/v1/simulations/:id/export
 ```
+
 - Retrieves simulation history
 - Supports replay functionality
 - Comparison between simulations
@@ -161,6 +177,7 @@ GET /api/v1/simulations/:id/export
 ## User Flow
 
 ### Step 1: Validation (5-10 seconds)
+
 1. User clicks "Run Simulation"
 2. Validation modal opens automatically
 3. System checks:
@@ -173,6 +190,7 @@ GET /api/v1/simulations/:id/export
 5. If any fail: Shows missing requirements, button disabled
 
 ### Step 2: Impact Preview (10-15 seconds)
+
 1. User clicks "Proceed to Impact Preview"
 2. Preview modal opens
 3. Quick calculation runs (< 2 seconds)
@@ -185,6 +203,7 @@ GET /api/v1/simulations/:id/export
 5. User reviews and clicks "Start Agent Analysis"
 
 ### Step 3: Agent Processing (20-30 seconds)
+
 1. Agent processing modal opens
 2. Agents execute sequentially:
    - Market Agent (analyzing inflation, correlations)
@@ -197,6 +216,7 @@ GET /api/v1/simulations/:id/export
 5. Automatically proceeds when complete
 
 ### Step 4: Results Display (User-controlled)
+
 1. Simulation results stored
 2. User sees complete analysis
 3. Portfolio impact visualization
@@ -204,6 +224,7 @@ GET /api/v1/simulations/:id/export
 5. Timeline of events
 
 ### Step 5: Recovery Actions (Optional)
+
 1. Recovery modal opens
 2. User selects from recommended actions:
    - Reduce banking exposure
@@ -216,6 +237,7 @@ GET /api/v1/simulations/:id/export
 5. If applied: Recalculates metrics
 
 ### Step 6: Navigation to War Room
+
 1. Journey stage completed
 2. Navigates to Financial War Room
 3. Full results available
@@ -224,6 +246,7 @@ GET /api/v1/simulations/:id/export
 ## Benefits
 
 ### User Experience
+
 - ✅ **Transparency**: Users see what's happening at each stage
 - ✅ **Control**: Users can review before committing
 - ✅ **Education**: Preview helps understand impact
@@ -231,6 +254,7 @@ GET /api/v1/simulations/:id/export
 - ✅ **Engagement**: Multi-step process is more interactive
 
 ### Technical
+
 - ✅ **Error Prevention**: Validation catches issues early
 - ✅ **Performance**: Preview uses quick calculations
 - ✅ **Modularity**: Each step is independent
@@ -238,6 +262,7 @@ GET /api/v1/simulations/:id/export
 - ✅ **Maintainability**: Clear separation of concerns
 
 ### Business
+
 - ✅ **User Retention**: Engaging flow keeps users interested
 - ✅ **Learning**: Users understand the simulation process
 - ✅ **Trust**: Transparency builds confidence
@@ -303,21 +328,25 @@ GET /api/v1/simulations/:id/export
 ## Error Handling
 
 ### Validation Errors
+
 - Display specific missing requirements
 - Disable proceed button
 - Provide guidance on how to fix
 
 ### Preview Calculation Errors
+
 - Show error message
 - Allow retry
 - Option to go back to validation
 
 ### Agent Processing Errors
+
 - Mark failed agent with error status
 - Show error message
 - Option to retry or cancel
 
 ### Recovery Application Errors
+
 - Show error message
 - Allow retry
 - Option to skip recovery
@@ -368,6 +397,7 @@ GET /api/v1/simulations/:id/export
 ## Support
 
 For questions or issues:
+
 - Check this documentation first
 - Review component source code
 - Test in development environment

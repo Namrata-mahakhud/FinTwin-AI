@@ -5,7 +5,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody } from '@/components/common';
 import { useCaseStore } from '@/store/caseStore';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from 'recharts';
 
 const ScenarioCompare: React.FC = () => {
   const navigate = useNavigate();
@@ -13,28 +22,28 @@ const ScenarioCompare: React.FC = () => {
   const [selectedCases, setSelectedCases] = useState<string[]>([]);
 
   // Get closed cases for comparison
-  const closedCases = cases.filter(c => c.status === 'closed');
+  const closedCases = cases.filter((c) => c.status === 'closed');
 
   const toggleCaseSelection = (caseId: string) => {
     if (selectedCases.includes(caseId)) {
-      setSelectedCases(selectedCases.filter(id => id !== caseId));
+      setSelectedCases(selectedCases.filter((id) => id !== caseId));
     } else if (selectedCases.length < 3) {
       setSelectedCases([...selectedCases, caseId]);
     }
   };
 
   const selectedCaseData = selectedCases
-    .map(id => cases.find(c => c.caseId === id))
+    .map((id) => cases.find((c) => c.caseId === id))
     .filter(Boolean);
 
   // Prepare comparison data for charts
-  const riskComparisonData = selectedCaseData.map(c => ({
+  const riskComparisonData = selectedCaseData.map((c) => ({
     name: c!.caseName.substring(0, 15) + '...',
     initial: c!.initialRisk,
     final: c!.currentRisk,
   }));
 
-  const lossComparisonData = selectedCaseData.map(c => ({
+  const lossComparisonData = selectedCaseData.map((c) => ({
     name: c!.caseName.substring(0, 15) + '...',
     initial: Math.abs(c!.initialLoss),
     recovered: c!.recoveredLoss,
@@ -60,9 +69,7 @@ const ScenarioCompare: React.FC = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            📊 Scenario Compare
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">📊 Scenario Compare</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             Compare crisis scenarios and recovery outcomes
           </p>
@@ -176,7 +183,10 @@ const ScenarioCompare: React.FC = () => {
                     <tr className="border-b border-gray-200 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Scenario</td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-gray-900 dark:text-white">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-gray-900 dark:text-white"
+                        >
                           {caseItem!.scenario.name}
                         </td>
                       ))}
@@ -184,7 +194,10 @@ const ScenarioCompare: React.FC = () => {
                     <tr className="border-b border-gray-200 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Initial Loss</td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-red-600 dark:text-red-400 font-semibold">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-red-600 dark:text-red-400 font-semibold"
+                        >
                           {caseItem!.initialLoss.toFixed(1)}%
                         </td>
                       ))}
@@ -192,7 +205,10 @@ const ScenarioCompare: React.FC = () => {
                     <tr className="border-b border-gray-200 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Recovered Loss</td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-green-600 dark:text-green-400 font-semibold">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-green-600 dark:text-green-400 font-semibold"
+                        >
                           {caseItem!.recoveredLoss.toFixed(1)}%
                         </td>
                       ))}
@@ -200,7 +216,10 @@ const ScenarioCompare: React.FC = () => {
                     <tr className="border-b border-gray-200 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Initial Risk</td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-gray-900 dark:text-white">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-gray-900 dark:text-white"
+                        >
                           {caseItem!.initialRisk}/100
                         </td>
                       ))}
@@ -208,7 +227,10 @@ const ScenarioCompare: React.FC = () => {
                     <tr className="border-b border-gray-200 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Final Risk</td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-gray-900 dark:text-white">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-gray-900 dark:text-white"
+                        >
                           {caseItem!.currentRisk}/100
                         </td>
                       ))}
@@ -216,21 +238,31 @@ const ScenarioCompare: React.FC = () => {
                     <tr className="border-b border-gray-200 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Recovery Time</td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-gray-900 dark:text-white">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-gray-900 dark:text-white"
+                        >
                           {getRecoveryTime(caseItem)} days
                         </td>
                       ))}
                     </tr>
                     <tr className="border-b border-gray-200 dark:border-gray-700">
-                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Actions Applied</td>
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                        Actions Applied
+                      </td>
                       {selectedCaseData.map((caseItem) => (
-                        <td key={caseItem!.caseId} className="py-3 px-4 text-gray-900 dark:text-white">
+                        <td
+                          key={caseItem!.caseId}
+                          className="py-3 px-4 text-gray-900 dark:text-white"
+                        >
                           {caseItem!.recommendations.length}
                         </td>
                       ))}
                     </tr>
                     <tr>
-                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Recovery Progress</td>
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                        Recovery Progress
+                      </td>
                       {selectedCaseData.map((caseItem) => (
                         <td key={caseItem!.caseId} className="py-3 px-4">
                           <div className="flex items-center gap-2">
@@ -326,16 +358,18 @@ const ScenarioCompare: React.FC = () => {
       {/* Data Source */}
       <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
         <p className="text-xs text-gray-600 dark:text-gray-400">
-          <strong>Data Source:</strong> Crisis Simulation Engine • <strong>Model Confidence:</strong> 85-92% • 
-          <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
+          <strong>Data Source:</strong> Crisis Simulation Engine •{' '}
+          <strong>Model Confidence:</strong> 85-92% •<strong>Last Updated:</strong>{' '}
+          {new Date().toLocaleDateString()}
         </p>
       </div>
 
       {/* Disclaimer */}
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
         <p className="text-sm text-yellow-800 dark:text-yellow-400">
-          ⚠️ <strong>Disclaimer:</strong> Comparison results are based on simulation models and historical data. 
-          Actual outcomes may vary. This analysis is for risk planning purposes only and does not constitute financial advice.
+          ⚠️ <strong>Disclaimer:</strong> Comparison results are based on simulation models and
+          historical data. Actual outcomes may vary. This analysis is for risk planning purposes
+          only and does not constitute financial advice.
         </p>
       </div>
     </div>

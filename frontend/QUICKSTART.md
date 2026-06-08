@@ -3,12 +3,14 @@
 ## 🚀 Getting Started in 3 Steps
 
 ### Step 1: Install Dependencies
+
 ```bash
 cd frontend
 npm install
 ```
 
 ### Step 2: Start Development Server
+
 ```bash
 npm run dev
 ```
@@ -20,16 +22,20 @@ The application will be available at: **http://localhost:5173**
 The application includes a **demo mode** that works without a backend!
 
 #### Option 1: Quick Demo Login Button
+
 1. Open http://localhost:5173
 2. Click the **"🚀 Quick Demo Login"** button
 3. You'll be automatically logged in and redirected to the dashboard
 
 #### Option 2: Manual Login
+
 Use these credentials:
+
 - **Email**: `demo@fintwin.ai`
 - **Password**: `demo123` (any password works in demo mode)
 
 Or for admin access:
+
 - **Email**: `admin@fintwin.ai`
 - **Password**: `admin123` (any password works in demo mode)
 
@@ -38,6 +44,7 @@ Or for admin access:
 Once logged in, you can navigate through all pages:
 
 ### Main Pages
+
 1. **Dashboard** (`/dashboard`) - Overview with metrics and recent activity
 2. **Scenarios** (`/scenarios`) - Create and manage economic scenarios
 3. **Portfolio** (`/portfolio`) - Portfolio analysis and holdings
@@ -47,6 +54,7 @@ Once logged in, you can navigate through all pages:
 7. **Admin** (`/admin`) - Admin panel (admin role only)
 
 ### UI Features
+
 - **Sidebar Navigation** - Click any menu item to navigate
 - **Sidebar Toggle** - Click the hamburger menu in header to collapse/expand
 - **Theme Toggle** - Click the sun/moon icon to switch between light/dark mode
@@ -55,6 +63,7 @@ Once logged in, you can navigate through all pages:
 ## 🎨 Demo Mode Features
 
 The demo mode provides:
+
 - ✅ Full navigation between all pages
 - ✅ Persistent login state (survives page refresh)
 - ✅ Theme preferences saved to localStorage
@@ -65,20 +74,25 @@ The demo mode provides:
 ## 🔧 Development Features
 
 ### Hot Module Replacement (HMR)
+
 Changes to code will automatically reload in the browser.
 
 ### TypeScript Support
+
 Full type checking and IntelliSense in VS Code.
 
 ### Tailwind CSS
+
 Utility-first CSS framework for rapid UI development.
 
 ### React Query DevTools
+
 Open the React Query DevTools panel (bottom-left corner) to inspect queries and cache.
 
 ## 📊 Page Descriptions
 
 ### Dashboard
+
 - Portfolio value metrics
 - Active scenarios count
 - Risk score indicator
@@ -86,35 +100,41 @@ Open the React Query DevTools panel (bottom-left corner) to inspect queries and 
 - Quick action buttons
 
 ### Scenario Builder
+
 - Create custom economic scenarios
 - Define multiple events
 - Set severity levels
 - Configure parameters
 
 ### Portfolio Analysis
+
 - Total portfolio value
 - Holdings breakdown
 - Performance metrics
 - Risk analysis
 
 ### Risk Heatmap
+
 - Visual risk representation
 - Color-coded risk levels
 - Interactive heatmap grid
 
 ### Simulation Results
+
 - Expected returns
 - Best/worst case scenarios
 - Confidence intervals
 - Detailed projections
 
 ### Recommendations
+
 - AI-generated insights
 - Priority-based recommendations
 - Expected impact metrics
 - Action buttons
 
 ### Admin Panel
+
 - User management
 - System statistics
 - Activity logs
@@ -123,7 +143,9 @@ Open the React Query DevTools panel (bottom-left corner) to inspect queries and 
 ## 🐛 Troubleshooting
 
 ### Port Already in Use
+
 If port 5173 is already in use:
+
 ```bash
 # Kill the process
 npx kill-port 5173
@@ -132,21 +154,24 @@ npx kill-port 5173
 ```
 
 ### Can't See Other Pages After Login
+
 1. Make sure you clicked the "Quick Demo Login" button or used demo credentials
 2. Check browser console for errors (F12)
 3. Clear localStorage and try again:
    ```javascript
    // In browser console
-   localStorage.clear()
-   location.reload()
+   localStorage.clear();
+   location.reload();
    ```
 
 ### Sidebar Not Showing
+
 1. The sidebar is fixed on the left side
 2. Try toggling it with the hamburger menu
 3. Check if you're on a small screen (sidebar may be hidden on mobile)
 
 ### Dark Mode Not Working
+
 1. Click the sun/moon icon in the header
 2. Theme preference is saved to localStorage
 3. Refresh the page to see if it persists

@@ -90,17 +90,15 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
   const [isApplying, setIsApplying] = useState(false);
 
   const toggleAction = (actionId: string) => {
-    setActions(prev =>
-      prev.map(action =>
-        action.id === actionId
-          ? { ...action, selected: !action.selected }
-          : action
+    setActions((prev) =>
+      prev.map((action) =>
+        action.id === actionId ? { ...action, selected: !action.selected } : action
       )
     );
   };
 
   const calculateNewMetrics = () => {
-    const selectedActions = actions.filter(a => a.selected);
+    const selectedActions = actions.filter((a) => a.selected);
     const totalRiskReduction = selectedActions.reduce(
       (sum, a) => sum + a.estimatedImpact.riskReduction,
       0
@@ -120,11 +118,11 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
 
   const handleApply = async () => {
     setIsApplying(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
 
-    const selectedActions = actions.filter(a => a.selected);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const selectedActions = actions.filter((a) => a.selected);
     const metrics = calculateNewMetrics();
 
     const result: RecoveryResult = {
@@ -141,7 +139,7 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
   };
 
   const metrics = calculateNewMetrics();
-  const hasSelectedActions = actions.some(a => a.selected);
+  const hasSelectedActions = actions.some((a) => a.selected);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -172,12 +170,7 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Recovery Actions"
-      size="xl"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title="Recovery Actions" size="xl">
       <div className="space-y-6">
         {/* Current Status */}
         <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 rounded-lg p-4">
@@ -187,15 +180,11 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-red-700 dark:text-red-400 mb-1">Risk Score:</p>
-              <p className="text-3xl font-bold text-red-600 dark:text-red-400">
-                {currentRisk}
-              </p>
+              <p className="text-3xl font-bold text-red-600 dark:text-red-400">{currentRisk}</p>
             </div>
             <div>
               <p className="text-sm text-red-700 dark:text-red-400 mb-1">Portfolio Loss:</p>
-              <p className="text-3xl font-bold text-red-600 dark:text-red-400">
-                {currentLoss}%
-              </p>
+              <p className="text-3xl font-bold text-red-600 dark:text-red-400">{currentLoss}%</p>
             </div>
           </div>
         </div>
@@ -216,9 +205,10 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
                 onClick={() => toggleAction(action.id)}
                 className={`
                   w-full text-left p-4 rounded-lg border-2 transition-all
-                  ${action.selected
-                    ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                  ${
+                    action.selected
+                      ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                   }
                 `}
               >
@@ -227,15 +217,14 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
                     <div
                       className={`
                         w-6 h-6 rounded border-2 flex items-center justify-center
-                        ${action.selected
-                          ? 'border-primary-500 bg-primary-500'
-                          : 'border-gray-300 dark:border-gray-600'
+                        ${
+                          action.selected
+                            ? 'border-primary-500 bg-primary-500'
+                            : 'border-gray-300 dark:border-gray-600'
                         }
                       `}
                     >
-                      {action.selected && (
-                        <span className="text-white text-sm">✓</span>
-                      )}
+                      {action.selected && <span className="text-white text-sm">✓</span>}
                     </div>
                   </div>
 
@@ -283,7 +272,7 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
             <h3 className="text-lg font-semibold text-green-900 dark:text-green-300 mb-3">
               Projected Impact
             </h3>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-green-700 dark:text-green-400 mb-2">Risk Score:</p>
@@ -327,8 +316,8 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
             <div className="text-sm text-blue-800 dark:text-blue-300">
               <p className="font-medium mb-1">Recovery Strategy</p>
               <p className="text-blue-700 dark:text-blue-400">
-                These actions are AI-recommended based on your scenario analysis.
-                You can select multiple actions for cumulative effect.
+                These actions are AI-recommended based on your scenario analysis. You can select
+                multiple actions for cumulative effect.
               </p>
             </div>
           </div>
@@ -365,7 +354,7 @@ const RecoveryActionsModal: React.FC<RecoveryActionsModalProps> = ({
               ) : (
                 <>
                   <span>✓</span>
-                  Apply Recovery ({actions.filter(a => a.selected).length})
+                  Apply Recovery ({actions.filter((a) => a.selected).length})
                 </>
               )}
             </button>

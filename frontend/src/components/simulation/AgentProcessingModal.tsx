@@ -125,10 +125,10 @@ const AgentProcessingModal: React.FC<AgentProcessingModalProps> = ({
     for (const agent of agentSequence) {
       // Mark agent as running
       updateAgent(agent.id, { status: 'running', startTime: new Date() });
-      
+
       // Execute phases
       for (const phase of agent.phases) {
-        await new Promise(resolve => setTimeout(resolve, phase.delay));
+        await new Promise((resolve) => setTimeout(resolve, phase.delay));
         updateAgent(agent.id, {
           progress: phase.progress,
           message: phase.message,
@@ -141,30 +141,30 @@ const AgentProcessingModal: React.FC<AgentProcessingModalProps> = ({
 
     // All agents completed
     setCurrentPhase('Simulation Complete!');
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     // Generate simulation ID and complete
     const simulationId = `sim_${Date.now()}`;
     onComplete(simulationId);
   };
 
   const updateAgent = (agentId: string, updates: Partial<AgentProgress>) => {
-    setAgents(prev => {
-      const updated = prev.map(agent =>
+    setAgents((prev) => {
+      const updated = prev.map((agent) =>
         agent.id === agentId ? { ...agent, ...updates } : agent
       );
-      
+
       // Calculate overall progress
       const totalProgress = updated.reduce((sum, a) => sum + a.progress, 0);
       const avgProgress = totalProgress / updated.length;
       setOverallProgress(Math.round(avgProgress));
-      
+
       // Update current phase
-      const runningAgent = updated.find(a => a.status === 'running');
+      const runningAgent = updated.find((a) => a.status === 'running');
       if (runningAgent) {
         setCurrentPhase(`${runningAgent.name} Processing...`);
       }
-      
+
       return updated;
     });
   };
@@ -249,45 +249,47 @@ const AgentProcessingModal: React.FC<AgentProcessingModalProps> = ({
                 <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
                   {getStatusIcon(agent)}
                 </div>
-                
+
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <span className="text-2xl">{agent.icon}</span>
-                      <h4 className="font-semibold text-gray-900 dark:text-white">
-                        {agent.name}
-                      </h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">{agent.name}</h4>
                     </div>
                     <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
                       {agent.progress}%
                     </span>
                   </div>
-                  
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                    {agent.message}
-                  </p>
-                  
+
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{agent.message}</p>
+
                   {/* Agent Progress Bar */}
                   {agent.status !== 'pending' && (
                     <div className="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div
                         className={`
                           h-full transition-all duration-500
-                          ${agent.status === 'completed' ? 'bg-green-500' : 
-                            agent.status === 'running' ? 'bg-blue-500' : 
-                            'bg-red-500'}
+                          ${
+                            agent.status === 'completed'
+                              ? 'bg-green-500'
+                              : agent.status === 'running'
+                                ? 'bg-blue-500'
+                                : 'bg-red-500'
+                          }
                         `}
                         style={{ width: `${agent.progress}%` }}
                       />
                     </div>
                   )}
-                  
+
                   {/* Timing Info */}
                   {agent.startTime && (
                     <div className="mt-2 text-xs text-gray-500 dark:text-gray-500">
                       {agent.endTime ? (
                         <span>
-                          Completed in {Math.round((agent.endTime.getTime() - agent.startTime.getTime()) / 1000)}s
+                          Completed in{' '}
+                          {Math.round((agent.endTime.getTime() - agent.startTime.getTime()) / 1000)}
+                          s
                         </span>
                       ) : (
                         <span>
@@ -309,8 +311,8 @@ const AgentProcessingModal: React.FC<AgentProcessingModalProps> = ({
             <div className="text-sm text-blue-800 dark:text-blue-300">
               <p className="font-medium mb-1">Agentic SDLC Framework</p>
               <p className="text-blue-700 dark:text-blue-400">
-                Multiple AI agents are working together to analyze your scenario,
-                assess risks, and generate actionable recommendations.
+                Multiple AI agents are working together to analyze your scenario, assess risks, and
+                generate actionable recommendations.
               </p>
             </div>
           </div>

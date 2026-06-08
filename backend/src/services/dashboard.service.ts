@@ -60,10 +60,10 @@ export class DashboardService {
         { symbol: 'MSFT', value: 380000, allocation: 15.51 },
         { symbol: 'GOOGL', value: 320000, allocation: 13.06 },
         { symbol: 'AMZN', value: 290000, allocation: 11.84 },
-        { symbol: 'TSLA', value: 250000, allocation: 10.20 },
+        { symbol: 'TSLA', value: 250000, allocation: 10.2 },
       ],
       sectors: [
-        { name: 'Technology', value: 1100000, allocation: 44.90 },
+        { name: 'Technology', value: 1100000, allocation: 44.9 },
         { name: 'Banking', value: 550000, allocation: 22.45 },
         { name: 'Healthcare', value: 450000, allocation: 18.37 },
         { name: 'Energy', value: 350000, allocation: 14.29 },

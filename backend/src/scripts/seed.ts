@@ -25,9 +25,9 @@ async function seed() {
 
     // Create demo users
     console.log('👤 Creating demo users...');
-    
+
     const hashedPassword = await bcrypt.hash('Admin@123', 10);
-    
+
     const adminUser = await User.create({
       email: 'admin@fintwin.ai',
       passwordHash: hashedPassword,
@@ -60,7 +60,7 @@ async function seed() {
 
     // Create demo scenarios
     console.log('📊 Creating demo scenarios...');
-    
+
     const scenario1 = await Scenario.create({
       name: 'Interest Rate Hike Scenario',
       description: 'Simulates a 2% interest rate increase by central banks',
@@ -140,7 +140,6 @@ async function seed() {
     console.log('   Admin: admin@fintwin.ai / Admin@123');
     console.log('   User:  demo@fintwin.ai / Admin@123');
     console.log('\n🚀 You can now login to the application!');
-
   } catch (error) {
     console.error('❌ Error seeding database:', error);
     throw error;

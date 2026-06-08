@@ -50,9 +50,7 @@ export const simulationApi = {
    * Get simulation results
    */
   getResults: async (id: string): Promise<SimulationResults> => {
-    const response = await apiClient.get<SimulationResults>(
-      API_ENDPOINTS.SIMULATIONS.RESULTS(id)
-    );
+    const response = await apiClient.get<SimulationResults>(API_ENDPOINTS.SIMULATIONS.RESULTS(id));
     return response.data;
   },
 

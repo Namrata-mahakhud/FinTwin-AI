@@ -9,10 +9,7 @@ import { SimulationFlowService } from '../../../services/simulation-flow.service
 import { ScenarioRepository } from '../../../repositories/scenario.repository';
 import { Scenario } from '../../../models/scenario.model';
 import { authenticate } from '../../../middleware/auth.middleware';
-import {
-  validateObjectId,
-  validatePagination,
-} from '../../../middleware/validation.middleware';
+import { validateObjectId, validatePagination } from '../../../middleware/validation.middleware';
 import { standardRateLimiter } from '../../../middleware/rate-limit.middleware';
 
 export async function simulationFlowRoutes(fastify: FastifyInstance) {

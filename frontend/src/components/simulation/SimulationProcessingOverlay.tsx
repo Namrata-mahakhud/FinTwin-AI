@@ -33,18 +33,16 @@ const SimulationProcessingOverlay: React.FC<SimulationProcessingOverlayProps> = 
   useEffect(() => {
     if (!isVisible) {
       setCurrentStep(0);
-      setSteps(steps.map(s => ({ ...s, completed: false })));
+      setSteps(steps.map((s) => ({ ...s, completed: false })));
       return;
     }
 
     const interval = setInterval(() => {
-      setCurrentStep(prev => {
+      setCurrentStep((prev) => {
         const next = prev + 1;
         if (next < steps.length) {
-          setSteps(current =>
-            current.map((step, idx) =>
-              idx === prev ? { ...step, completed: true } : step
-            )
+          setSteps((current) =>
+            current.map((step, idx) => (idx === prev ? { ...step, completed: true } : step))
           );
           return next;
         } else {
@@ -81,11 +79,12 @@ const SimulationProcessingOverlay: React.FC<SimulationProcessingOverlayProps> = 
               key={step.id}
               className={`
                 flex items-center gap-3 p-3 rounded-lg transition-all duration-300
-                ${step.completed
-                  ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
-                  : index === currentStep
-                  ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 animate-pulse'
-                  : 'bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-700'
+                ${
+                  step.completed
+                    ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
+                    : index === currentStep
+                      ? 'bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 animate-pulse'
+                      : 'bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-700'
                 }
               `}
               style={{
@@ -104,11 +103,12 @@ const SimulationProcessingOverlay: React.FC<SimulationProcessingOverlayProps> = 
               <span
                 className={`
                   text-sm font-medium
-                  ${step.completed
-                    ? 'text-green-700 dark:text-green-300'
-                    : index === currentStep
-                    ? 'text-primary-700 dark:text-primary-300'
-                    : 'text-gray-500 dark:text-gray-400'
+                  ${
+                    step.completed
+                      ? 'text-green-700 dark:text-green-300'
+                      : index === currentStep
+                        ? 'text-primary-700 dark:text-primary-300'
+                        : 'text-gray-500 dark:text-gray-400'
                   }
                 `}
               >

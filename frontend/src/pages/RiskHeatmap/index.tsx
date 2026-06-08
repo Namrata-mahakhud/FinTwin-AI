@@ -85,7 +85,12 @@ const RiskHeatmap: React.FC = () => {
     setSelectedSector(cell.sector);
   };
 
-  const handleCellHover = (cell: HeatmapCell, rowIndex: number, colIndex: number, event: React.MouseEvent) => {
+  const handleCellHover = (
+    cell: HeatmapCell,
+    rowIndex: number,
+    colIndex: number,
+    event: React.MouseEvent
+  ) => {
     const rect = event.currentTarget.getBoundingClientRect();
     setHoveredCell({
       ...cell,
@@ -227,8 +232,8 @@ const RiskHeatmap: React.FC = () => {
                   hoveredCell.riskLevel === 'Low'
                     ? 'success'
                     : hoveredCell.riskLevel === 'Medium'
-                    ? 'warning'
-                    : 'danger'
+                      ? 'warning'
+                      : 'danger'
                 }
               >
                 {hoveredCell.riskLevel} Risk

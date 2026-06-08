@@ -23,7 +23,10 @@ export default async function authRoutes(fastify: FastifyInstance): Promise<void
             password: { type: 'string', minLength: 8 },
             firstName: { type: 'string', minLength: 1 },
             lastName: { type: 'string', minLength: 1 },
-            role: { type: 'string', enum: ['ANALYST', 'RISK_MANAGER', 'PORTFOLIO_MANAGER', 'ADMIN'] },
+            role: {
+              type: 'string',
+              enum: ['ANALYST', 'RISK_MANAGER', 'PORTFOLIO_MANAGER', 'ADMIN'],
+            },
           },
         },
         response: {

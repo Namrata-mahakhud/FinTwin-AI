@@ -15,17 +15,13 @@ import { JourneyStage } from '@/types/journey.types';
 import { JourneyWrapper } from '@/components/journey';
 import { useToastStore } from '@/store/toastStore';
 import { ROUTES } from '@/constants/routes';
-import {
-  ValidationResult,
-  ImpactPreview,
-  RecoveryResult,
-} from '@/types/simulation-flow.types';
+import { ValidationResult, ImpactPreview, RecoveryResult } from '@/types/simulation-flow.types';
 
 const RunSimulation: React.FC = () => {
   const navigate = useNavigate();
   const { data, setJourneyData, completeStage } = useJourneyStore();
   const { addToast } = useToastStore();
-  
+
   const {
     currentStep,
     scenarioId,
@@ -60,7 +56,7 @@ const RunSimulation: React.FC = () => {
 
     // Initialize flow
     setScenarioId(data.scenarioId);
-    
+
     // Start with validation
     setCurrentStep('validation');
     setShowValidation(true);
@@ -70,7 +66,7 @@ const RunSimulation: React.FC = () => {
   const handleValidationComplete = (result: ValidationResult) => {
     setValidationResult(result);
     setShowValidation(false);
-    
+
     addToast({
       type: 'success',
       message: 'Scenario validation passed!',
@@ -90,7 +86,7 @@ const RunSimulation: React.FC = () => {
   const handlePreviewComplete = (preview: ImpactPreview) => {
     setImpactPreview(preview);
     setShowPreview(false);
-    
+
     addToast({
       type: 'info',
       message: 'Starting AI agent analysis...',
@@ -173,7 +169,7 @@ const RunSimulation: React.FC = () => {
 
   const handleRecoverySkip = () => {
     setShowRecovery(false);
-    
+
     addToast({
       type: 'info',
       message: 'Recovery skipped. Proceeding to results.',
@@ -185,7 +181,7 @@ const RunSimulation: React.FC = () => {
 
   const navigateToResults = () => {
     completeStage(JourneyStage.RUN_SIMULATION);
-    
+
     // Navigate to War Room with simulation results
     setTimeout(() => {
       navigate('/war-room');
@@ -201,23 +197,28 @@ const RunSimulation: React.FC = () => {
   };
 
   return (
-    <JourneyWrapper
-      stage={JourneyStage.RUN_SIMULATION}
-      showNavigation={false}
-    >
+    <JourneyWrapper stage={JourneyStage.RUN_SIMULATION} showNavigation={false}>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
         {/* Progress Indicator */}
         <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
           <div className="bg-white dark:bg-gray-800 rounded-full px-6 py-3 shadow-lg">
             <div className="flex items-center gap-4">
               {/* Step 1 */}
-              <div className={`flex items-center gap-2 ${currentStep === 'validation' ? 'text-primary-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  currentStep === 'validation' ? 'bg-primary-600 text-white' :
-                  ['preview', 'agent-processing', 'results', 'recovery'].includes(currentStep) ? 'bg-green-500 text-white' :
-                  'bg-gray-300 text-gray-600'
-                }`}>
-                  {['preview', 'agent-processing', 'results', 'recovery'].includes(currentStep) ? '✓' : '1'}
+              <div
+                className={`flex items-center gap-2 ${currentStep === 'validation' ? 'text-primary-600' : 'text-gray-400'}`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    currentStep === 'validation'
+                      ? 'bg-primary-600 text-white'
+                      : ['preview', 'agent-processing', 'results', 'recovery'].includes(currentStep)
+                        ? 'bg-green-500 text-white'
+                        : 'bg-gray-300 text-gray-600'
+                  }`}
+                >
+                  {['preview', 'agent-processing', 'results', 'recovery'].includes(currentStep)
+                    ? '✓'
+                    : '1'}
                 </div>
                 <span className="text-sm font-medium hidden md:inline">Validate</span>
               </div>
@@ -225,12 +226,18 @@ const RunSimulation: React.FC = () => {
               <div className="w-8 h-0.5 bg-gray-300" />
 
               {/* Step 2 */}
-              <div className={`flex items-center gap-2 ${currentStep === 'preview' ? 'text-primary-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  currentStep === 'preview' ? 'bg-primary-600 text-white' :
-                  ['agent-processing', 'results', 'recovery'].includes(currentStep) ? 'bg-green-500 text-white' :
-                  'bg-gray-300 text-gray-600'
-                }`}>
+              <div
+                className={`flex items-center gap-2 ${currentStep === 'preview' ? 'text-primary-600' : 'text-gray-400'}`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    currentStep === 'preview'
+                      ? 'bg-primary-600 text-white'
+                      : ['agent-processing', 'results', 'recovery'].includes(currentStep)
+                        ? 'bg-green-500 text-white'
+                        : 'bg-gray-300 text-gray-600'
+                  }`}
+                >
                   {['agent-processing', 'results', 'recovery'].includes(currentStep) ? '✓' : '2'}
                 </div>
                 <span className="text-sm font-medium hidden md:inline">Preview</span>
@@ -239,12 +246,18 @@ const RunSimulation: React.FC = () => {
               <div className="w-8 h-0.5 bg-gray-300" />
 
               {/* Step 3 */}
-              <div className={`flex items-center gap-2 ${currentStep === 'agent-processing' ? 'text-primary-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  currentStep === 'agent-processing' ? 'bg-primary-600 text-white' :
-                  ['results', 'recovery'].includes(currentStep) ? 'bg-green-500 text-white' :
-                  'bg-gray-300 text-gray-600'
-                }`}>
+              <div
+                className={`flex items-center gap-2 ${currentStep === 'agent-processing' ? 'text-primary-600' : 'text-gray-400'}`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    currentStep === 'agent-processing'
+                      ? 'bg-primary-600 text-white'
+                      : ['results', 'recovery'].includes(currentStep)
+                        ? 'bg-green-500 text-white'
+                        : 'bg-gray-300 text-gray-600'
+                  }`}
+                >
                   {['results', 'recovery'].includes(currentStep) ? '✓' : '3'}
                 </div>
                 <span className="text-sm font-medium hidden md:inline">Analyze</span>
@@ -253,11 +266,16 @@ const RunSimulation: React.FC = () => {
               <div className="w-8 h-0.5 bg-gray-300" />
 
               {/* Step 4 */}
-              <div className={`flex items-center gap-2 ${currentStep === 'recovery' ? 'text-primary-600' : 'text-gray-400'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  currentStep === 'recovery' ? 'bg-primary-600 text-white' :
-                  'bg-gray-300 text-gray-600'
-                }`}>
+              <div
+                className={`flex items-center gap-2 ${currentStep === 'recovery' ? 'text-primary-600' : 'text-gray-400'}`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    currentStep === 'recovery'
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-gray-300 text-gray-600'
+                  }`}
+                >
                   4
                 </div>
                 <span className="text-sm font-medium hidden md:inline">Recovery</span>

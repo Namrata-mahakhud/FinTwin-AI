@@ -2,7 +2,17 @@
 
 import React from 'react';
 import { Card, CardBody, CardHeader, Badge } from '@/components/common';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from 'recharts';
 
 interface ActivityLog {
   id: string;
@@ -186,9 +196,7 @@ const Admin: React.FC = () => {
         <Card>
           <CardBody>
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Average Risk
-              </h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Average Risk</h3>
               <span className="text-2xl">📊</span>
             </div>
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -203,9 +211,7 @@ const Admin: React.FC = () => {
         <Card>
           <CardBody>
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Last Shock
-              </h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Last Shock</h3>
               <span className="text-2xl">💥</span>
             </div>
             <p className="text-lg font-bold text-gray-900 dark:text-white">
@@ -221,9 +227,7 @@ const Admin: React.FC = () => {
       {/* Recovery Timeline */}
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Recovery Timeline
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Recovery Timeline</h2>
         </CardHeader>
         <CardBody>
           <div className="flex items-center gap-4">
@@ -325,9 +329,7 @@ const Admin: React.FC = () => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Recent Activity
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
             <button className="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400">
               Export Audit Trail →
             </button>
@@ -346,9 +348,7 @@ const Admin: React.FC = () => {
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
                       {log.description}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      {log.timestamp}
-                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{log.timestamp}</p>
                   </div>
                 </div>
                 <Badge variant={getStatusColor(log.status)} size="sm">
@@ -364,17 +364,13 @@ const Admin: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              API Health
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">API Health</h3>
           </CardHeader>
           <CardBody>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Response Time</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                  45ms
-                </span>
+                <span className="text-sm font-medium text-green-600 dark:text-green-400">45ms</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Uptime</span>
@@ -384,9 +380,7 @@ const Admin: React.FC = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Error Rate</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                  0.1%
-                </span>
+                <span className="text-sm font-medium text-green-600 dark:text-green-400">0.1%</span>
               </div>
             </div>
           </CardBody>
@@ -394,29 +388,21 @@ const Admin: React.FC = () => {
 
         <Card>
           <CardHeader>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Database
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Database</h3>
           </CardHeader>
           <CardBody>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Scenarios</span>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  156
-                </span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">156</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Simulations</span>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  1,243
-                </span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">1,243</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Storage</span>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  2.4 GB
-                </span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">2.4 GB</span>
               </div>
             </div>
           </CardBody>
@@ -424,29 +410,21 @@ const Admin: React.FC = () => {
 
         <Card>
           <CardHeader>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              AI Agents
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">AI Agents</h3>
           </CardHeader>
           <CardBody>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Active Agents</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                  4/4
-                </span>
+                <span className="text-sm font-medium text-green-600 dark:text-green-400">4/4</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Avg Confidence</span>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  84%
-                </span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">84%</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Recommendations</span>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  176
-                </span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">176</span>
               </div>
             </div>
           </CardBody>

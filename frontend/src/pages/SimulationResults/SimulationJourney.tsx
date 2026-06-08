@@ -12,13 +12,7 @@ import {
 } from '@/components/simulation';
 import { useSimulation, useSimulationResults } from '@/hooks/useSimulations';
 
-type SimulationStage = 
-  | 'processing'
-  | 'timeline'
-  | 'impact'
-  | 'agents'
-  | 'recovery'
-  | 'complete';
+type SimulationStage = 'processing' | 'timeline' | 'impact' | 'agents' | 'recovery' | 'complete';
 
 const SimulationJourney: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,7 +86,8 @@ const SimulationJourney: React.FC = () => {
     {
       agent: 'Market Agent',
       agentType: 'market' as const,
-      message: 'Oil price spike detected. Energy sector costs increasing by 15%. This will cascade through transportation and manufacturing.',
+      message:
+        'Oil price spike detected. Energy sector costs increasing by 15%. This will cascade through transportation and manufacturing.',
       icon: '📊',
       timestamp: Date.now(),
       confidence: 92,
@@ -101,7 +96,8 @@ const SimulationJourney: React.FC = () => {
     {
       agent: 'Risk Agent',
       agentType: 'risk' as const,
-      message: 'Banking exposure exceeds safe threshold at 35%. Current market conditions suggest reducing to 25% or below.',
+      message:
+        'Banking exposure exceeds safe threshold at 35%. Current market conditions suggest reducing to 25% or below.',
       icon: '⚠️',
       timestamp: Date.now() + 1000,
       confidence: 88,
@@ -110,7 +106,8 @@ const SimulationJourney: React.FC = () => {
     {
       agent: 'Portfolio Agent',
       agentType: 'portfolio' as const,
-      message: 'Expected portfolio loss: 25% over 30-day period. High correlation between banking and energy sectors amplifying impact.',
+      message:
+        'Expected portfolio loss: 25% over 30-day period. High correlation between banking and energy sectors amplifying impact.',
       icon: '💼',
       timestamp: Date.now() + 2000,
       confidence: 85,
@@ -119,7 +116,8 @@ const SimulationJourney: React.FC = () => {
     {
       agent: 'Recommendation Agent',
       agentType: 'recommendation' as const,
-      message: 'Immediate action required: Move 10% of assets to government bonds. Reduce banking sector allocation by 10%. Add defensive stocks.',
+      message:
+        'Immediate action required: Move 10% of assets to government bonds. Reduce banking sector allocation by 10%. Add defensive stocks.',
       icon: '🎯',
       timestamp: Date.now() + 3000,
       confidence: 90,
@@ -128,7 +126,8 @@ const SimulationJourney: React.FC = () => {
     {
       agent: 'Reporting Agent',
       agentType: 'reporting' as const,
-      message: 'Generating comprehensive crisis report with recovery strategies. Report includes stress test results and Monte Carlo projections.',
+      message:
+        'Generating comprehensive crisis report with recovery strategies. Report includes stress test results and Monte Carlo projections.',
       icon: '📋',
       timestamp: Date.now() + 4000,
       confidence: 95,
@@ -168,11 +167,11 @@ const SimulationJourney: React.FC = () => {
 
   const handleRecoverySimulation = async (strategies: string[]) => {
     // Simulate recovery calculation
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const improvement = strategies.length * 3.5;
     const riskReduction = strategies.length * 4;
-    
+
     return {
       beforeLoss: -25,
       beforeRisk: 84,
@@ -227,9 +226,13 @@ const SimulationJourney: React.FC = () => {
                   <div
                     className={`
                       w-10 h-10 rounded-full flex items-center justify-center font-semibold
-                      ${index <= ['timeline', 'impact', 'agents', 'recovery', 'complete'].indexOf(currentStage)
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-gray-200 dark:bg-gray-700 text-gray-500'
+                      ${
+                        index <=
+                        ['timeline', 'impact', 'agents', 'recovery', 'complete'].indexOf(
+                          currentStage
+                        )
+                          ? 'bg-primary-600 text-white'
+                          : 'bg-gray-200 dark:bg-gray-700 text-gray-500'
                       }
                     `}
                   >
@@ -238,9 +241,7 @@ const SimulationJourney: React.FC = () => {
                   <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                     {stage}
                   </span>
-                  {index < 4 && (
-                    <div className="w-16 h-0.5 bg-gray-300 dark:bg-gray-600 mx-2" />
-                  )}
+                  {index < 4 && <div className="w-16 h-0.5 bg-gray-300 dark:bg-gray-600 mx-2" />}
                 </div>
               ))}
             </div>
@@ -262,9 +263,7 @@ const SimulationJourney: React.FC = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg">
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  Portfolio Value
-                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">Portfolio Value</div>
                 <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                   ${portfolioImpact.before.value.toLocaleString()}
                 </div>
@@ -275,9 +274,7 @@ const SimulationJourney: React.FC = () => {
               </div>
 
               <div className="text-center p-6 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg">
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  Loss Percentage
-                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">Loss Percentage</div>
                 <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">
                   {portfolioImpact.before.loss}%
                 </div>
@@ -287,9 +284,7 @@ const SimulationJourney: React.FC = () => {
               </div>
 
               <div className="text-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg">
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  Risk Score
-                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">Risk Score</div>
                 <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                   {portfolioImpact.before.risk}
                 </div>
@@ -305,10 +300,7 @@ const SimulationJourney: React.FC = () => {
 
       {/* AI Agent Discussion Panel */}
       {!showProcessing && (
-        <AIAgentDiscussionPanel
-          messages={agentMessages}
-          isActive={currentStage === 'agents'}
-        />
+        <AIAgentDiscussionPanel messages={agentMessages} isActive={currentStage === 'agents'} />
       )}
 
       {/* Recovery Simulator */}

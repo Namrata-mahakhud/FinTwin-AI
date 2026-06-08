@@ -10,27 +10,27 @@ export const ROUTES = {
 
   // Protected Routes
   DASHBOARD: '/dashboard',
-  
+
   // Scenarios
   SCENARIOS: '/scenarios',
   SCENARIOS_NEW: '/scenarios/new',
   SCENARIOS_DETAIL: '/scenarios/:id',
   SCENARIOS_EDIT: '/scenarios/:id/edit',
-  
+
   // Portfolio
   PORTFOLIO: '/portfolio',
   PORTFOLIO_ANALYSIS: '/portfolio/analysis',
-  
+
   // Risk
   RISK_HEATMAP: '/risk-heatmap',
-  
+
   // Simulations
   SIMULATIONS: '/simulations',
   SIMULATIONS_DETAIL: '/simulations/:id',
   SIMULATIONS_NEW: '/simulations/new',
   SIMULATIONS_JOURNEY: '/simulations/:id/journey',
   SIMULATIONS_WAR_ROOM: '/simulations/:id/war-room',
-  
+
   // Journey-based Routes
   JOURNEY_CREATE_SCENARIO: '/journey/create-scenario',
   JOURNEY_RUN_SIMULATION: '/journey/run-simulation',
@@ -41,16 +41,16 @@ export const ROUTES = {
   JOURNEY_RECOVERY: '/journey/recovery',
   JOURNEY_AGENT_STUDIO: '/journey/agent-studio',
   JOURNEY_EXPORT: '/journey/export',
-  
+
   // Recommendations
   RECOMMENDATIONS: '/recommendations',
-  
+
   // Admin
   ADMIN: '/admin',
   ADMIN_USERS: '/admin/users',
   ADMIN_SETTINGS: '/admin/settings',
   ADMIN_LOGS: '/admin/logs',
-  
+
   // User
   PROFILE: '/profile',
   SETTINGS: '/settings',

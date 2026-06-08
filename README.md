@@ -33,6 +33,7 @@ This project leverages **IBM's Agentic SDLC** approach, combining:
 FinTwin AI follows **ICA (IBM Consulting Advantage)** architecture principles:
 
 ### Technology Stack:
+
 - **Frontend**: React + TypeScript with Vite
 - **Backend**: Node.js + Fastify (ICA-compliant service architecture)
 - **Database**: MongoDB
@@ -41,6 +42,7 @@ FinTwin AI follows **ICA (IBM Consulting Advantage)** architecture principles:
 - **SDLC**: Bob + ICA Context Studio integration
 
 ### ICA Architecture Layers:
+
 ```
 ┌─────────────────────────────────────────┐
 │     Presentation Layer (React)          │
@@ -70,17 +72,20 @@ FinTwin AI follows **ICA (IBM Consulting Advantage)** architecture principles:
 ### Using npm with Agentic SDLC
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd fintwin-ai
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Setup environment variables:
+
 ```bash
 cp .env.example .env
 # Edit .env with your configuration
@@ -88,12 +93,14 @@ cp .env.example .env
 ```
 
 4. Initialize ICA Context Studio:
+
 ```bash
 # Connect to ICA Context Studio for domain knowledge
 npm run ica:init
 ```
 
 5. Run the application:
+
 ```bash
 npm run dev
 ```
@@ -101,17 +108,20 @@ npm run dev
 ### Using Docker
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd fintwin-ai
 ```
 
 2. Setup environment variables:
+
 ```bash
 cp .env.example .env
 ```
 
 3. Start all services:
+
 ```bash
 npm run docker:up
 ```
@@ -158,12 +168,14 @@ fintwin-ai/
 ## 🤖 Agentic SDLC Workflow
 
 ### Development Agents:
+
 1. **Code Generation Agent (Bob)**: Generates ICA-compliant code
 2. **Testing Agent**: Creates and executes test suites
 3. **Review Agent**: Performs code quality checks
 4. **Documentation Agent**: Generates technical documentation
 
 ### Workflow:
+
 ```mermaid
 graph LR
     A[Requirements] --> B[ICA Context Studio]
@@ -179,26 +191,31 @@ graph LR
 ## 🧪 Testing (AI-Generated)
 
 Run all tests:
+
 ```bash
 npm test
 ```
 
 Run unit tests:
+
 ```bash
 npm run test:unit
 ```
 
 Run integration tests:
+
 ```bash
 npm run test:integration
 ```
 
 Run E2E tests:
+
 ```bash
 npm run test:e2e
 ```
 
 Generate new tests with Bob:
+
 ```bash
 npm run bob:generate-tests
 ```
@@ -206,16 +223,19 @@ npm run bob:generate-tests
 ## 🚢 Deployment (Agentic)
 
 ### Build for production:
+
 ```bash
 npm run build
 ```
 
 ### Deploy with Bob automation:
+
 ```bash
 npm run bob:deploy
 ```
 
 ### Using Docker:
+
 ```bash
 npm run docker:build
 docker-compose -f docker-compose.prod.yml up -d
@@ -224,6 +244,7 @@ docker-compose -f docker-compose.prod.yml up -d
 ## 📚 API Documentation
 
 Once the backend is running, access the Swagger documentation at:
+
 ```
 http://localhost:3000/api/docs
 ```
@@ -238,12 +259,14 @@ http://localhost:3000/api/docs
 ## 🤖 AI Agents (Multi-Agent System)
 
 ### Application Agents:
+
 - **Market Agent**: Analyzes market reactions to economic events
 - **Risk Agent**: Calculates risk scores and propagation
 - **Recommendation Agent**: Generates actionable insights
 - **Report Agent**: Compiles comprehensive reports
 
 ### SDLC Agents (Bob):
+
 - **Code Generation Agent**: Generates ICA-compliant code
 - **Testing Agent**: Creates comprehensive test suites
 - **Deployment Agent**: Automates deployment pipeline
@@ -269,12 +292,14 @@ http://localhost:3000/api/docs
 ## 🎓 ICA Context Studio Integration
 
 ### Context Management:
+
 - **Domain Context**: Financial domain knowledge and terminology
 - **Business Context**: Market simulation rules and constraints
 - **Technical Context**: Architecture patterns and best practices
 - **Regulatory Context**: Compliance and security requirements
 
 ### Benefits:
+
 - Consistent code generation aligned with enterprise standards
 - Reusable patterns and templates
 - Knowledge sharing across teams

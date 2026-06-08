@@ -31,10 +31,10 @@ export interface JourneyState {
   completedStages: JourneyStage[];
   journeyId: string | null;
   startedAt: Date | null;
-  
+
   // Journey data
   data: JourneyData;
-  
+
   // Actions
   startJourney: (scenarioId?: string) => void;
   updateStage: (stage: JourneyStage) => void;

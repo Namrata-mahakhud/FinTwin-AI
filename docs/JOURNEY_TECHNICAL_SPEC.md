@@ -48,10 +48,10 @@ interface JourneyState {
   completedStages: JourneyStage[];
   journeyId: string | null;
   startedAt: Date | null;
-  
+
   // Journey data
   data: JourneyData;
-  
+
   // Actions
   startJourney: (scenarioId?: string) => void;
   updateStage: (stage: JourneyStage) => void;
@@ -73,7 +73,7 @@ export const useJourneyStore = create<JourneyState>()(
       journeyId: null,
       startedAt: null,
       data: {},
-      
+
       startJourney: (scenarioId) => {
         const journeyId = `journey_${Date.now()}`;
         set({
@@ -85,46 +85,46 @@ export const useJourneyStore = create<JourneyState>()(
           data: scenarioId ? { scenarioId } : {},
         });
       },
-      
+
       updateStage: (stage) => {
         set({ currentStage: stage });
       },
-      
+
       completeStage: (stage) => {
         const { completedStages } = get();
         if (!completedStages.includes(stage)) {
           set({ completedStages: [...completedStages, stage] });
         }
       },
-      
+
       setJourneyData: (key, value) => {
         set((state) => ({
           data: { ...state.data, [key]: value },
         }));
       },
-      
+
       canNavigateTo: (stage) => {
         const { completedStages } = get();
         const stageOrder = Object.values(JourneyStage);
         const targetIndex = stageOrder.indexOf(stage);
         const currentIndex = stageOrder.indexOf(get().currentStage);
-        
+
         // Can navigate to completed stages or next stage
         return completedStages.includes(stage) || targetIndex === currentIndex + 1;
       },
-      
+
       getNextStage: () => {
         const stages = Object.values(JourneyStage);
         const currentIndex = stages.indexOf(get().currentStage);
         return currentIndex < stages.length - 1 ? stages[currentIndex + 1] : null;
       },
-      
+
       getPreviousStage: () => {
         const stages = Object.values(JourneyStage);
         const currentIndex = stages.indexOf(get().currentStage);
         return currentIndex > 0 ? stages[currentIndex - 1] : null;
       },
-      
+
       resetJourney: () => {
         set({
           isActive: false,
@@ -135,7 +135,7 @@ export const useJourneyStore = create<JourneyState>()(
           data: {},
         });
       },
-      
+
       completeJourney: () => {
         set({
           isActive: false,
@@ -183,20 +183,20 @@ const STAGE_CONFIG = {
 export const JourneyProgressBar: React.FC = () => {
   const navigate = useNavigate();
   const { currentStage, completedStages, canNavigateTo, updateStage, isActive } = useJourneyStore();
-  
+
   if (!isActive) return null;
-  
+
   const stages = Object.values(JourneyStage);
   const currentIndex = stages.indexOf(currentStage);
   const progress = ((currentIndex + 1) / stages.length) * 100;
-  
+
   const handleStageClick = (stage: JourneyStage) => {
     if (canNavigateTo(stage)) {
       updateStage(stage);
       navigate(STAGE_CONFIG[stage].route);
     }
   };
-  
+
   return (
     <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
       <div className="max-w-7xl mx-auto">
@@ -208,7 +208,7 @@ export const JourneyProgressBar: React.FC = () => {
             {Math.round(progress)}% Complete
           </span>
         </div>
-        
+
         {/* Progress Bar */}
         <div className="relative">
           <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
@@ -217,7 +217,7 @@ export const JourneyProgressBar: React.FC = () => {
               style={{ width: `${progress}%` }}
             />
           </div>
-          
+
           {/* Stage Indicators */}
           <div className="flex justify-between mt-4">
             {stages.map((stage, index) => {
@@ -225,7 +225,7 @@ export const JourneyProgressBar: React.FC = () => {
               const isCompleted = completedStages.includes(stage);
               const isCurrent = stage === currentStage;
               const canNavigate = canNavigateTo(stage);
-              
+
               return (
                 <button
                   key={stage}
@@ -336,40 +336,40 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
     completeStage,
     isActive,
   } = useJourneyStore();
-  
+
   if (!isActive) return null;
-  
+
   const nextStage = getNextStage();
   const previousStage = getPreviousStage();
-  
+
   const handleNext = async () => {
     // Execute custom validation if provided
     if (onNext) {
       const canProceed = await onNext();
       if (!canProceed) return;
     }
-    
+
     // Mark current stage as complete
     completeStage(currentStage);
-    
+
     // Navigate to next stage
     if (nextStage) {
       updateStage(nextStage);
       navigate(STAGE_ROUTES[nextStage]);
     }
   };
-  
+
   const handlePrevious = () => {
     if (onPrevious) {
       onPrevious();
     }
-    
+
     if (previousStage) {
       updateStage(previousStage);
       navigate(STAGE_ROUTES[previousStage]);
     }
   };
-  
+
   return (
     <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4 shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -388,7 +388,7 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
           <span>←</span>
           <span>{previousLabel || (previousStage ? `Back to ${STAGE_LABELS[previousStage]}` : 'Back')}</span>
         </button>
-        
+
         {/* Progress Info */}
         {showProgress && (
           <div className="text-center">
@@ -402,7 +402,7 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
             )}
           </div>
         )}
-        
+
         {/* Next Button */}
         <button
           onClick={handleNext}
@@ -458,21 +458,21 @@ export const JourneyWrapper: React.FC<JourneyWrapperProps> = ({
   showProgress = true,
 }) => {
   const { updateStage, isActive } = useJourneyStore();
-  
+
   useEffect(() => {
     if (isActive) {
       updateStage(stage);
     }
   }, [stage, isActive, updateStage]);
-  
+
   return (
     <div className="min-h-screen flex flex-col">
       {showProgress && <JourneyProgressBar />}
-      
+
       <div className="flex-1 overflow-auto">
         {children}
       </div>
-      
+
       {showNavigation && (
         <ContextualNavigation
           onNext={onNext}
@@ -502,22 +502,22 @@ import { JourneyStage, useJourneyStore } from '@/store/journeyStore';
 const ScenarioBuilder: React.FC = () => {
   const { setJourneyData } = useJourneyStore();
   const [scenarioData, setScenarioData] = useState({});
-  
+
   const handleNext = async () => {
     // Validate scenario
     if (!scenarioData.name || !scenarioData.events) {
       toast.error('Please complete all required fields');
       return false;
     }
-    
+
     // Save scenario
     const scenario = await createScenario(scenarioData);
     setJourneyData('scenarioId', scenario.id);
     setJourneyData('scenario', scenario);
-    
+
     return true;
   };
-  
+
   return (
     <JourneyWrapper
       stage={JourneyStage.CREATE_SCENARIO}
@@ -541,7 +541,7 @@ import { JourneyStage, useJourneyStore } from '@/store/journeyStore';
 const FinancialWarRoom: React.FC = () => {
   const { data, setJourneyData } = useJourneyStore();
   const [simulationComplete, setSimulationComplete] = useState(false);
-  
+
   const handleNext = () => {
     if (!simulationComplete) {
       toast.error('Please wait for simulation to complete');
@@ -549,7 +549,7 @@ const FinancialWarRoom: React.FC = () => {
     }
     return true;
   };
-  
+
   return (
     <JourneyWrapper
       stage={JourneyStage.CRISIS_CENTER}
@@ -600,18 +600,21 @@ import { JourneyStage } from '@/store/journeyStore';
 ## Testing Strategy
 
 ### Unit Tests
+
 - Journey store state management
 - Navigation logic
 - Stage validation
 - Data persistence
 
 ### Integration Tests
+
 - Complete journey flow
 - Stage transitions
 - Data passing between stages
 - Error handling
 
 ### E2E Tests
+
 - Full user journey from start to finish
 - Resume journey functionality
 - Multiple concurrent journeys
@@ -642,6 +645,7 @@ import { JourneyStage } from '@/store/journeyStore';
 ## Analytics Events
 
 Track these events:
+
 - `journey_started`
 - `journey_stage_completed`
 - `journey_stage_skipped`

@@ -109,17 +109,13 @@ const ScenarioBuilder: React.FC = () => {
 
   const toggleEvent = (eventType: EventType) => {
     setSelectedEvents((prev) =>
-      prev.includes(eventType)
-        ? prev.filter((e) => e !== eventType)
-        : [...prev, eventType]
+      prev.includes(eventType) ? prev.filter((e) => e !== eventType) : [...prev, eventType]
     );
   };
 
   const toggleImpactArea = (id: string) => {
     setImpactAreas((prev) =>
-      prev.map((area) =>
-        area.id === id ? { ...area, selected: !area.selected } : area
-      )
+      prev.map((area) => (area.id === id ? { ...area, selected: !area.selected } : area))
     );
   };
 
@@ -184,16 +180,16 @@ const ScenarioBuilder: React.FC = () => {
 
     try {
       const result = await createScenario.mutateAsync(scenarioData);
-      
+
       // Save to journey
       setJourneyData('scenarioId', result.id);
       setJourneyData('scenario', result);
-      
+
       addToast({
         type: 'success',
         message: 'Scenario created successfully!',
       });
-      
+
       return true;
     } catch (error) {
       console.error('Failed to create scenario:', error);
@@ -223,36 +219,36 @@ const ScenarioBuilder: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Configuration Panel */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Scenario Name */}
-          <Card>
-            <CardBody>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Scenario Name
-              </label>
-              <input
-                type="text"
-                value={scenarioName}
-                onChange={(e) => setScenarioName(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="e.g., Banking Crisis Q1"
-              />
-            </CardBody>
-          </Card>
+          {/* Main Configuration Panel */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Scenario Name */}
+            <Card>
+              <CardBody>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Scenario Name
+                </label>
+                <input
+                  type="text"
+                  value={scenarioName}
+                  onChange={(e) => setScenarioName(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="e.g., Banking Crisis Q1"
+                />
+              </CardBody>
+            </Card>
 
-          {/* Event Type Selection */}
-          <Card>
-            <CardBody>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Event Type
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {eventOptions.map((event) => (
-                  <button
-                    key={event.type}
-                    onClick={() => toggleEvent(event.type)}
-                    className={`
+            {/* Event Type Selection */}
+            <Card>
+              <CardBody>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Event Type
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {eventOptions.map((event) => (
+                    <button
+                      key={event.type}
+                      onClick={() => toggleEvent(event.type)}
+                      className={`
                       p-4 rounded-lg border-2 text-left transition-all
                       ${
                         selectedEvents.includes(event.type)
@@ -260,42 +256,42 @@ const ScenarioBuilder: React.FC = () => {
                           : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                       }
                     `}
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="text-2xl">{event.icon}</span>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <h4 className="font-medium text-gray-900 dark:text-white">
-                            {event.label}
-                          </h4>
-                          {selectedEvents.includes(event.type) && (
-                            <span className="text-primary-600 dark:text-primary-400">✓</span>
-                          )}
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="text-2xl">{event.icon}</span>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-medium text-gray-900 dark:text-white">
+                              {event.label}
+                            </h4>
+                            {selectedEvents.includes(event.type) && (
+                              <span className="text-primary-600 dark:text-primary-400">✓</span>
+                            )}
+                          </div>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            {event.description}
+                          </p>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                          {event.description}
-                        </p>
                       </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </CardBody>
-          </Card>
+                    </button>
+                  ))}
+                </div>
+              </CardBody>
+            </Card>
 
-          {/* Severity Level */}
-          <Card>
-            <CardBody>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Severity Level
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  {Object.values(SeveritLevel).map((level) => (
-                    <button
-                      key={level}
-                      onClick={() => setSeverity(level)}
-                      className={`
+            {/* Severity Level */}
+            <Card>
+              <CardBody>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Severity Level
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    {Object.values(SeveritLevel).map((level) => (
+                      <button
+                        key={level}
+                        onClick={() => setSeverity(level)}
+                        className={`
                         flex-1 py-3 px-4 rounded-lg font-medium transition-all
                         ${
                           severity === level
@@ -303,39 +299,39 @@ const ScenarioBuilder: React.FC = () => {
                             : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                         }
                       `}
-                    >
-                      <div
-                        className={`
+                      >
+                        <div
+                          className={`
                         w-full h-2 rounded-full mb-2
                         ${getSeverityColor(level)}
                       `}
-                      />
-                      <span className="text-sm text-gray-900 dark:text-white capitalize">
-                        {level}
-                      </span>
-                    </button>
-                  ))}
+                        />
+                        <span className="text-sm text-gray-900 dark:text-white capitalize">
+                          {level}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                    <span>Low Impact</span>
+                    <span>High Impact</span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-                  <span>Low Impact</span>
-                  <span>High Impact</span>
-                </div>
-              </div>
-            </CardBody>
-          </Card>
+              </CardBody>
+            </Card>
 
-          {/* Duration */}
-          <Card>
-            <CardBody>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Duration
-              </h3>
-              <div className="grid grid-cols-4 gap-3">
-                {[1, 3, 6, 12].map((months) => (
-                  <button
-                    key={months}
-                    onClick={() => setDuration(months)}
-                    className={`
+            {/* Duration */}
+            <Card>
+              <CardBody>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Duration
+                </h3>
+                <div className="grid grid-cols-4 gap-3">
+                  {[1, 3, 6, 12].map((months) => (
+                    <button
+                      key={months}
+                      onClick={() => setDuration(months)}
+                      className={`
                       py-3 px-4 rounded-lg font-medium transition-all
                       ${
                         duration === months
@@ -343,26 +339,26 @@ const ScenarioBuilder: React.FC = () => {
                           : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600'
                       }
                     `}
-                  >
-                    {months} {months === 1 ? 'Month' : 'Months'}
-                  </button>
-                ))}
-              </div>
-            </CardBody>
-          </Card>
+                    >
+                      {months} {months === 1 ? 'Month' : 'Months'}
+                    </button>
+                  ))}
+                </div>
+              </CardBody>
+            </Card>
 
-          {/* Impact Areas */}
-          <Card>
-            <CardBody>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Impact Areas
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {impactAreas.map((area) => (
-                  <button
-                    key={area.id}
-                    onClick={() => toggleImpactArea(area.id)}
-                    className={`
+            {/* Impact Areas */}
+            <Card>
+              <CardBody>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Impact Areas
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {impactAreas.map((area) => (
+                    <button
+                      key={area.id}
+                      onClick={() => toggleImpactArea(area.id)}
+                      className={`
                       px-4 py-2 rounded-full font-medium transition-all
                       ${
                         area.selected
@@ -370,63 +366,61 @@ const ScenarioBuilder: React.FC = () => {
                           : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600'
                       }
                     `}
-                  >
-                    {area.label}
-                  </button>
-                ))}
-              </div>
-            </CardBody>
-          </Card>
-        </div>
-
-        {/* Impact Preview Panel */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-6 space-y-6">
-            <Card className="border-2 border-primary-200 dark:border-primary-800">
-              <CardBody>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Estimated Impact
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                      Portfolio Loss
-                    </p>
-                    <p className="text-3xl font-bold text-red-600 dark:text-red-400">
-                      {impact.portfolioLoss}%
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                      Risk Increase
-                    </p>
-                    <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                      +{impact.riskIncrease}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                      Affected Sector
-                    </p>
-                    <Badge variant="warning" size="lg">
-                      {impact.affectedSector}
-                    </Badge>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      Suggested Rebalance
-                    </p>
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {impact.suggestedAction}
-                    </p>
-                  </div>
+                    >
+                      {area.label}
+                    </button>
+                  ))}
                 </div>
               </CardBody>
             </Card>
           </div>
+
+          {/* Impact Preview Panel */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-6 space-y-6">
+              <Card className="border-2 border-primary-200 dark:border-primary-800">
+                <CardBody>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    Estimated Impact
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                        Portfolio Loss
+                      </p>
+                      <p className="text-3xl font-bold text-red-600 dark:text-red-400">
+                        {impact.portfolioLoss}%
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Risk Increase</p>
+                      <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                        +{impact.riskIncrease}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                        Affected Sector
+                      </p>
+                      <Badge variant="warning" size="lg">
+                        {impact.affectedSector}
+                      </Badge>
+                    </div>
+                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        Suggested Rebalance
+                      </p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                        {impact.suggestedAction}
+                      </p>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </JourneyWrapper>
   );
 };

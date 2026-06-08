@@ -29,7 +29,7 @@ export const useJourneyStore = create<JourneyState>()(
           completedStages: [JourneyStage.DASHBOARD],
           data: scenarioId ? { scenarioId } : {},
         });
-        
+
         // Track analytics
         journeyAnalytics.trackJourneyStart(journeyId, { scenarioId });
       },
@@ -38,7 +38,7 @@ export const useJourneyStore = create<JourneyState>()(
       updateStage: (stage: JourneyStage) => {
         const { journeyId } = get();
         set({ currentStage: stage });
-        
+
         // Track analytics
         if (journeyId) {
           journeyAnalytics.trackStageEnter(journeyId, stage);
@@ -50,7 +50,7 @@ export const useJourneyStore = create<JourneyState>()(
         const { completedStages, journeyId } = get();
         if (!completedStages.includes(stage)) {
           set({ completedStages: [...completedStages, stage] });
-          
+
           // Track analytics
           if (journeyId) {
             journeyAnalytics.trackStageComplete(journeyId, stage);
@@ -64,7 +64,7 @@ export const useJourneyStore = create<JourneyState>()(
         set((state) => ({
           data: { ...state.data, [key]: value },
         }));
-        
+
         // Track analytics
         if (journeyId) {
           journeyAnalytics.trackDataSaved(journeyId, currentStage, key);
@@ -99,11 +99,11 @@ export const useJourneyStore = create<JourneyState>()(
       getNextStage: () => {
         const { currentStage } = get();
         const currentIndex = STAGE_ORDER.indexOf(currentStage);
-        
+
         if (currentIndex < STAGE_ORDER.length - 1) {
           return STAGE_ORDER[currentIndex + 1];
         }
-        
+
         return null;
       },
 
@@ -111,23 +111,23 @@ export const useJourneyStore = create<JourneyState>()(
       getPreviousStage: () => {
         const { currentStage } = get();
         const currentIndex = STAGE_ORDER.indexOf(currentStage);
-        
+
         if (currentIndex > 0) {
           return STAGE_ORDER[currentIndex - 1];
         }
-        
+
         return null;
       },
 
       // Reset journey to initial state
       resetJourney: () => {
         const { journeyId } = get();
-        
+
         // Track analytics
         if (journeyId) {
           journeyAnalytics.trackJourneyReset(journeyId);
         }
-        
+
         set({
           isActive: false,
           currentStage: JourneyStage.DASHBOARD,
@@ -141,7 +141,7 @@ export const useJourneyStore = create<JourneyState>()(
       // Complete the journey
       completeJourney: () => {
         const { completedStages, journeyId, data } = get();
-        
+
         // Track analytics
         if (journeyId) {
           journeyAnalytics.trackJourneyComplete(journeyId, {
@@ -151,7 +151,7 @@ export const useJourneyStore = create<JourneyState>()(
             hasRecommendations: !!data.recommendations,
           });
         }
-        
+
         set({
           isActive: false,
           completedStages: [...completedStages, JourneyStage.EXPORT_REPORT],
@@ -177,7 +177,7 @@ export const useJourneyProgress = () => {
   const { currentStage, completedStages } = useJourneyStore();
   const currentIndex = STAGE_ORDER.indexOf(currentStage);
   const progress = ((currentIndex + 1) / STAGE_ORDER.length) * 100;
-  
+
   return {
     progress: Math.round(progress),
     currentIndex,
@@ -187,14 +187,9 @@ export const useJourneyProgress = () => {
 };
 
 export const useJourneyNavigation = () => {
-  const {
-    getNextStage,
-    getPreviousStage,
-    canNavigateTo,
-    updateStage,
-    completeStage,
-  } = useJourneyStore();
-  
+  const { getNextStage, getPreviousStage, canNavigateTo, updateStage, completeStage } =
+    useJourneyStore();
+
   return {
     getNextStage,
     getPreviousStage,

@@ -21,10 +21,10 @@ const ScenarioDetail: React.FC = () => {
   const navigate = useNavigate();
   const { data: scenario, isLoading, error } = useScenario(id!);
   const runSimulation = useRunSimulation();
-  
+
   const [showSimulationModal, setShowSimulationModal] = useState(false);
   const [runningSimulationId, setRunningSimulationId] = useState<string | null>(null);
-  
+
   // Poll simulation status if one is running
   const { data: simulationStatus } = useSimulationStatus(
     runningSimulationId || '',
@@ -61,7 +61,7 @@ const ScenarioDetail: React.FC = () => {
           includeStressTests: true,
         },
       });
-      
+
       setRunningSimulationId(result.id);
       setShowSimulationModal(false);
     } catch (error) {
@@ -71,10 +71,7 @@ const ScenarioDetail: React.FC = () => {
 
   // Navigate to Financial War Room when simulation completes
   React.useEffect(() => {
-    if (
-      simulationStatus?.status === SimulationStatus.COMPLETED &&
-      runningSimulationId
-    ) {
+    if (simulationStatus?.status === SimulationStatus.COMPLETED && runningSimulationId) {
       // Navigate to the Financial War Room (Crisis Command Center)
       navigate(`/simulations/${runningSimulationId}/war-room`);
     }
@@ -102,9 +99,7 @@ const ScenarioDetail: React.FC = () => {
       <div className="flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {scenario.name}
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{scenario.name}</h1>
             <Badge variant={getSeverityColor(scenario.severity)} size="lg">
               {scenario.severity}
             </Badge>
@@ -169,9 +164,7 @@ const ScenarioDetail: React.FC = () => {
 
         <Card>
           <CardBody>
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-              Status
-            </h3>
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Status</h3>
             <Badge variant="success" size="lg">
               {scenario.status}
             </Badge>
@@ -180,9 +173,7 @@ const ScenarioDetail: React.FC = () => {
 
         <Card>
           <CardBody>
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-              Events
-            </h3>
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Events</h3>
             <p className="text-lg font-semibold text-gray-900 dark:text-white">
               {scenario.events.length} Economic Events
             </p>
@@ -193,17 +184,12 @@ const ScenarioDetail: React.FC = () => {
       {/* Economic Events */}
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Economic Events
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Economic Events</h2>
         </CardHeader>
         <CardBody>
           <div className="space-y-4">
             {scenario.events.map((event, index) => (
-              <div
-                key={event.id}
-                className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
-              >
+              <div key={event.id} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white capitalize">
@@ -235,9 +221,7 @@ const ScenarioDetail: React.FC = () => {
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                      Duration
-                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Duration</p>
                     <p className="font-medium text-gray-900 dark:text-white">
                       {event.timeframe.duration} days
                     </p>
@@ -267,9 +251,7 @@ const ScenarioDetail: React.FC = () => {
       {/* Metadata */}
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Metadata
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Metadata</h2>
         </CardHeader>
         <CardBody>
           <div className="grid grid-cols-2 gap-4">
@@ -280,9 +262,7 @@ const ScenarioDetail: React.FC = () => {
               </p>
             </div>
             <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                Last Updated
-              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Last Updated</p>
               <p className="font-medium text-gray-900 dark:text-white">
                 {new Date(scenario.updatedAt).toLocaleDateString()}
               </p>
@@ -332,9 +312,7 @@ const ScenarioDetail: React.FC = () => {
               <span className="font-medium text-gray-900 dark:text-white">Enabled</span>
             </div>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Estimated time: 30-60 seconds
-          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Estimated time: 30-60 seconds</p>
         </div>
         <ModalFooter>
           <button

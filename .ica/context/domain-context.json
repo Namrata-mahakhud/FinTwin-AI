@@ -38,7 +38,15 @@
   },
   "data_models": {
     "scenario": {
-      "properties": ["id", "name", "description", "eventType", "parameters", "targetDate", "status"],
+      "properties": [
+        "id",
+        "name",
+        "description",
+        "eventType",
+        "parameters",
+        "targetDate",
+        "status"
+      ],
       "relationships": ["createdBy:User", "generates:Simulation"]
     },
     "portfolio": {

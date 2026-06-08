@@ -29,9 +29,9 @@ const ScenarioValidationModal: React.FC<ScenarioValidationModalProps> = ({
 
   const performValidation = async () => {
     setIsValidating(true);
-    
+
     // Simulate validation API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // Mock validation result
     const checks: ValidationCheck[] = [
@@ -84,10 +84,8 @@ const ScenarioValidationModal: React.FC<ScenarioValidationModalProps> = ({
       duration: 3,
       portfolioId: 'portfolio-1',
       checks,
-      canProceed: checks.every(c => c.status === 'pass'),
-      missingRequirements: checks
-        .filter(c => c.status === 'fail')
-        .map(c => c.name),
+      canProceed: checks.every((c) => c.status === 'pass'),
+      missingRequirements: checks.filter((c) => c.status === 'fail').map((c) => c.name),
     };
 
     setValidationResult(result);
@@ -117,12 +115,7 @@ const ScenarioValidationModal: React.FC<ScenarioValidationModalProps> = ({
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Scenario Validation"
-      size="lg"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title="Scenario Validation" size="lg">
       <div className="space-y-6">
         {isValidating ? (
           <div className="flex flex-col items-center justify-center py-12">
@@ -138,7 +131,7 @@ const ScenarioValidationModal: React.FC<ScenarioValidationModalProps> = ({
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 Scenario Details
               </h3>
-              
+
               <div className="space-y-3">
                 <div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Scenario Name:</p>
@@ -183,7 +176,7 @@ const ScenarioValidationModal: React.FC<ScenarioValidationModalProps> = ({
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 Validation Status
               </h3>
-              
+
               <div className="space-y-2">
                 {validationResult.checks.map((check) => (
                   <div
@@ -196,12 +189,8 @@ const ScenarioValidationModal: React.FC<ScenarioValidationModalProps> = ({
                     <div className="flex items-center gap-3">
                       {getStatusIcon(check.status)}
                       <div>
-                        <p className="font-medium text-gray-900 dark:text-white">
-                          {check.name}
-                        </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {check.message}
-                        </p>
+                        <p className="font-medium text-gray-900 dark:text-white">{check.name}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{check.message}</p>
                       </div>
                     </div>
                   </div>

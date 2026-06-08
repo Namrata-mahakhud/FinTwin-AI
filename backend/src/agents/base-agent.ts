@@ -88,10 +88,7 @@ export abstract class BaseAgent {
    * Execute agent logic with timeout
    */
   private async executeWithTimeout(context: AgentContext): Promise<Record<string, unknown>> {
-    return Promise.race([
-      this.process(context),
-      this.timeoutPromise(),
-    ]);
+    return Promise.race([this.process(context), this.timeoutPromise()]);
   }
 
   /**

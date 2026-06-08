@@ -15,18 +15,18 @@ interface JourneyRouteProps {
 
 /**
  * Journey Route Guard Component
- * 
+ *
  * Validates that:
  * 1. Journey is active
  * 2. User has completed prerequisite stages
  * 3. Current stage matches or is ahead of required stage
- * 
+ *
  * If validation fails, redirects to appropriate stage or dashboard
  */
-export const JourneyRoute = ({ 
-  children, 
+export const JourneyRoute = ({
+  children,
   requiredStage,
-  redirectTo = ROUTES.DASHBOARD 
+  redirectTo = ROUTES.DASHBOARD,
 }: JourneyRouteProps) => {
   const navigate = useNavigate();
   const { isActive, currentStage, completedStages, canNavigateTo } = useJourneyStore();
@@ -42,12 +42,11 @@ export const JourneyRoute = ({
     // Check if user can navigate to this stage
     if (!canNavigateTo(requiredStage)) {
       console.warn(`Cannot navigate to stage ${requiredStage}, redirecting`);
-      
+
       // Find the last completed stage or current stage
-      const lastStage = completedStages.length > 0 
-        ? completedStages[completedStages.length - 1]
-        : currentStage;
-      
+      const lastStage =
+        completedStages.length > 0 ? completedStages[completedStages.length - 1] : currentStage;
+
       // Redirect to the appropriate stage
       const stageRouteMap: Record<JourneyStage, string> = {
         [JourneyStage.DASHBOARD]: ROUTES.DASHBOARD,
@@ -61,7 +60,7 @@ export const JourneyRoute = ({
         [JourneyStage.AGENT_STUDIO]: ROUTES.JOURNEY_AGENT_STUDIO,
         [JourneyStage.EXPORT_REPORT]: ROUTES.JOURNEY_EXPORT,
       };
-      
+
       navigate(stageRouteMap[lastStage] || ROUTES.DASHBOARD, { replace: true });
     }
   }, [isActive, currentStage, completedStages, requiredStage, navigate, redirectTo, canNavigateTo]);

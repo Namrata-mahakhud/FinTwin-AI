@@ -62,9 +62,11 @@ export class AgentOrchestrator {
 
     // Market Agent conversation
     if (marketResult.status === 'SUCCESS' && marketResult.data) {
-      const sectorImpacts = marketResult.data.sectorImpacts as Record<string, number> || {};
-      const topSector = Object.entries(sectorImpacts).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))[0];
-      
+      const sectorImpacts = (marketResult.data.sectorImpacts as Record<string, number>) || {};
+      const topSector = Object.entries(sectorImpacts).sort(
+        (a, b) => Math.abs(b[1]) - Math.abs(a[1])
+      )[0];
+
       conversations.push({
         agent: 'Market Agent',
         agentType: 'market',
@@ -80,8 +82,8 @@ export class AgentOrchestrator {
 
     // Risk Agent conversation
     if (riskResult.status === 'SUCCESS' && riskResult.data) {
-      const riskScore = riskResult.data.overallRisk as number || 0;
-      
+      const riskScore = (riskResult.data.overallRisk as number) || 0;
+
       conversations.push({
         agent: 'Risk Agent',
         agentType: 'risk',
@@ -108,7 +110,7 @@ export class AgentOrchestrator {
     // Recommendation Agent conversation
     if (recommendationResult.status === 'SUCCESS' && recommendationResult.data) {
       const recommendations = (recommendationResult.data.recommendations as any[]) || [];
-      
+
       conversations.push({
         agent: 'Recommendation Agent',
         agentType: 'recommendation',
@@ -125,7 +127,8 @@ export class AgentOrchestrator {
       conversations.push({
         agent: 'Reporting Agent',
         agentType: 'reporting',
-        message: 'Comprehensive analysis report generated. Includes stress test results, Monte Carlo projections, and recovery strategies.',
+        message:
+          'Comprehensive analysis report generated. Includes stress test results, Monte Carlo projections, and recovery strategies.',
         icon: '📋',
         timestamp: baseTime + 4000,
         confidence: reportResult.confidence,
@@ -157,7 +160,7 @@ export class AgentOrchestrator {
       if (marketResult.status === 'FAILED' || riskResult.status === 'FAILED') {
         logger.error('Critical agents failed, aborting orchestration');
         await this.updateSimulationStatus(context.simulationId, SimulationStatus.FAILED);
-        
+
         return {
           simulationId: context.simulationId,
           status: 'FAILED',
@@ -321,7 +324,9 @@ export class AgentOrchestrator {
     const sectorImpacts = (marketResult.data.sectorImpacts as Record<string, number>) || {};
     const sectors = Object.keys(sectorImpacts);
 
-    const totalImpact = sectors.reduce((sum, sector) => sum + Math.abs(sectorImpacts[sector]), 0) / sectors.length || 0;
+    const totalImpact =
+      sectors.reduce((sum, sector) => sum + Math.abs(sectorImpacts[sector]), 0) / sectors.length ||
+      0;
     const riskScore = (riskResult.data.overallRisk as number) || 0;
 
     return {
@@ -339,12 +344,17 @@ export class AgentOrchestrator {
     recommendationResult: AgentResult
   ): Promise<void> {
     try {
-      const recommendations = (recommendationResult.data.recommendations as Array<{
-        category: string;
-        recommendation: string;
-        priority: number;
-        reasoning: { analysis: string; confidence: number; supportingData: Record<string, unknown> };
-      }>) || [];
+      const recommendations =
+        (recommendationResult.data.recommendations as Array<{
+          category: string;
+          recommendation: string;
+          priority: number;
+          reasoning: {
+            analysis: string;
+            confidence: number;
+            supportingData: Record<string, unknown>;
+          };
+        }>) || [];
 
       for (const rec of recommendations) {
         await Recommendation.create({

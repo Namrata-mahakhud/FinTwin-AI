@@ -30,9 +30,7 @@ export class ScenariosController {
     const sort = (request.query as any).sort;
 
     const result = await this.service.findAll(filters, page, limit, sort);
-    return reply.send(
-      ResponseFormatter.paginated(result.items, page, limit, result.total)
-    );
+    return reply.send(ResponseFormatter.paginated(result.items, page, limit, result.total));
   });
 
   findById = asyncHandler(async (request: FastifyRequest, reply: FastifyReply) => {
@@ -56,9 +54,7 @@ export class ScenariosController {
     const userId = (request as any).user.id;
 
     await this.service.delete(id, userId);
-    return reply.send(
-      ResponseFormatter.success({ message: 'Scenario deleted successfully' })
-    );
+    return reply.send(ResponseFormatter.success({ message: 'Scenario deleted successfully' }));
   });
 
   simulate = asyncHandler(async (request: FastifyRequest, reply: FastifyReply) => {
@@ -70,17 +66,13 @@ export class ScenariosController {
     return reply.status(202).send(ResponseFormatter.success(result));
   });
 
-  getUserScenarios = asyncHandler(
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      const { page, limit } = (request as any).pagination;
-      const userId = (request as any).user.id;
+  getUserScenarios = asyncHandler(async (request: FastifyRequest, reply: FastifyReply) => {
+    const { page, limit } = (request as any).pagination;
+    const userId = (request as any).user.id;
 
-      const result = await this.service.getUserScenarios(userId, page, limit);
-      return reply.send(
-        ResponseFormatter.paginated(result.items, page, limit, result.total)
-      );
-    }
-  );
+    const result = await this.service.getUserScenarios(userId, page, limit);
+    return reply.send(ResponseFormatter.paginated(result.items, page, limit, result.total));
+  });
 
   activate = asyncHandler(async (request: FastifyRequest, reply: FastifyReply) => {
     const { id } = request.params as { id: string };

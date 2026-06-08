@@ -1,12 +1,15 @@
 # FinTwin API Contracts
 
 ## Base URL
+
 ```
 http://localhost:3000/api/v1
 ```
 
 ## Authentication
+
 All endpoints (except auth endpoints) require JWT token in Authorization header:
+
 ```
 Authorization: Bearer <token>
 ```
@@ -16,9 +19,11 @@ Authorization: Bearer <token>
 ## 1. Scenario Service
 
 ### 1.1 Create Scenario
+
 **POST** `/scenarios`
 
 **Request Body:**
+
 ```json
 {
   "name": "string (required, 3-100 chars)",
@@ -37,6 +42,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (201):**
+
 ```json
 {
   "success": true,
@@ -57,9 +63,11 @@ Authorization: Bearer <token>
 ```
 
 ### 1.2 Get All Scenarios
+
 **GET** `/scenarios?page=1&limit=10&type=market_crash&status=active`
 
 **Query Parameters:**
+
 - `page`: number (default: 1)
 - `limit`: number (default: 10, max: 100)
 - `type`: string (optional filter)
@@ -67,6 +75,7 @@ Authorization: Bearer <token>
 - `search`: string (optional, searches name and description)
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -83,9 +92,11 @@ Authorization: Bearer <token>
 ```
 
 ### 1.3 Get Scenario by ID
+
 **GET** `/scenarios/:id`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -107,11 +118,13 @@ Authorization: Bearer <token>
 ```
 
 ### 1.4 Update Scenario
+
 **PUT** `/scenarios/:id`
 
 **Request Body:** (same as create, all fields optional)
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -122,9 +135,11 @@ Authorization: Bearer <token>
 ```
 
 ### 1.5 Delete Scenario
+
 **DELETE** `/scenarios/:id`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -133,9 +148,11 @@ Authorization: Bearer <token>
 ```
 
 ### 1.6 Run Scenario Simulation
+
 **POST** `/scenarios/:id/simulate`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -144,6 +161,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (202):**
+
 ```json
 {
   "success": true,
@@ -160,14 +178,17 @@ Authorization: Bearer <token>
 ## 2. Market Engine
 
 ### 2.1 Get Market Data
+
 **GET** `/market/data?symbols=AAPL,GOOGL&period=1y`
 
 **Query Parameters:**
+
 - `symbols`: string (required, comma-separated)
 - `period`: string (required: 1d, 5d, 1m, 3m, 6m, 1y, 5y)
 - `interval`: string (optional: 1m, 5m, 15m, 1h, 1d)
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -196,9 +217,11 @@ Authorization: Bearer <token>
 ```
 
 ### 2.2 Get Market Indicators
+
 **GET** `/market/indicators?symbols=AAPL,GOOGL`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -229,9 +252,11 @@ Authorization: Bearer <token>
 ```
 
 ### 2.3 Simulate Market Conditions
+
 **POST** `/market/simulate`
 
 **Request Body:**
+
 ```json
 {
   "scenarioId": "string (required)",
@@ -247,6 +272,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -270,9 +296,11 @@ Authorization: Bearer <token>
 ```
 
 ### 2.4 Get Market Volatility
+
 **GET** `/market/volatility?period=30d`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -296,9 +324,11 @@ Authorization: Bearer <token>
 ## 3. Portfolio Service
 
 ### 3.1 Create Portfolio
+
 **POST** `/portfolios`
 
 **Request Body:**
+
 ```json
 {
   "name": "string (required, 3-100 chars)",
@@ -317,6 +347,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (201):**
+
 ```json
 {
   "success": true,
@@ -342,9 +373,11 @@ Authorization: Bearer <token>
 ```
 
 ### 3.2 Get All Portfolios
+
 **GET** `/portfolios?page=1&limit=10`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -361,9 +394,11 @@ Authorization: Bearer <token>
 ```
 
 ### 3.3 Get Portfolio by ID
+
 **GET** `/portfolios/:id`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -374,11 +409,13 @@ Authorization: Bearer <token>
 ```
 
 ### 3.4 Update Portfolio
+
 **PUT** `/portfolios/:id`
 
 **Request Body:** (same as create, all fields optional)
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -389,9 +426,11 @@ Authorization: Bearer <token>
 ```
 
 ### 3.5 Delete Portfolio
+
 **DELETE** `/portfolios/:id`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -400,9 +439,11 @@ Authorization: Bearer <token>
 ```
 
 ### 3.6 Add Holding
+
 **POST** `/portfolios/:id/holdings`
 
 **Request Body:**
+
 ```json
 {
   "symbol": "string (required)",
@@ -413,6 +454,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (201):**
+
 ```json
 {
   "success": true,
@@ -423,9 +465,11 @@ Authorization: Bearer <token>
 ```
 
 ### 3.7 Update Holding
+
 **PUT** `/portfolios/:id/holdings/:holdingId`
 
 **Request Body:**
+
 ```json
 {
   "quantity": "number (optional)",
@@ -435,6 +479,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -445,9 +490,11 @@ Authorization: Bearer <token>
 ```
 
 ### 3.8 Remove Holding
+
 **DELETE** `/portfolios/:id/holdings/:holdingId`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -458,12 +505,15 @@ Authorization: Bearer <token>
 ```
 
 ### 3.9 Get Portfolio Performance
+
 **GET** `/portfolios/:id/performance?period=1y`
 
 **Query Parameters:**
+
 - `period`: string (1d, 1w, 1m, 3m, 6m, 1y, all)
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -496,9 +546,11 @@ Authorization: Bearer <token>
 ## 4. Risk Engine
 
 ### 4.1 Calculate Portfolio Risk
+
 **POST** `/risk/calculate`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -509,6 +561,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -546,9 +599,11 @@ Authorization: Bearer <token>
 ```
 
 ### 4.2 Get Risk Heatmap
+
 **GET** `/risk/heatmap/:portfolioId`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -579,9 +634,11 @@ Authorization: Bearer <token>
 ```
 
 ### 4.3 Stress Test Portfolio
+
 **POST** `/risk/stress-test`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -600,6 +657,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -626,9 +684,11 @@ Authorization: Bearer <token>
 ```
 
 ### 4.4 Get Risk Alerts
+
 **GET** `/risk/alerts/:portfolioId`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -655,12 +715,15 @@ Authorization: Bearer <token>
 ## 5. Recommendation Engine
 
 ### 5.1 Get Portfolio Recommendations
+
 **GET** `/recommendations/:portfolioId?type=all`
 
 **Query Parameters:**
+
 - `type`: string (all, rebalance, diversify, risk_reduction, optimization)
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -701,9 +764,11 @@ Authorization: Bearer <token>
 ```
 
 ### 5.2 Generate Rebalancing Plan
+
 **POST** `/recommendations/rebalance`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -722,6 +787,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -751,9 +817,11 @@ Authorization: Bearer <token>
 ```
 
 ### 5.3 Get Asset Suggestions
+
 **POST** `/recommendations/suggest-assets`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -768,6 +836,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -794,9 +863,11 @@ Authorization: Bearer <token>
 ```
 
 ### 5.4 Apply Recommendation
+
 **POST** `/recommendations/:recommendationId/apply`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -805,6 +876,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -825,9 +897,11 @@ Authorization: Bearer <token>
 ## 6. Report Service
 
 ### 6.1 Generate Portfolio Report
+
 **POST** `/reports/portfolio`
 
 **Request Body:**
+
 ```json
 {
   "portfolioId": "string (required)",
@@ -840,6 +914,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (202):**
+
 ```json
 {
   "success": true,
@@ -852,9 +927,11 @@ Authorization: Bearer <token>
 ```
 
 ### 6.2 Get Report Status
+
 **GET** `/reports/:reportId/status`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -869,16 +946,20 @@ Authorization: Bearer <token>
 ```
 
 ### 6.3 Download Report
+
 **GET** `/reports/:reportId/download`
 
 **Response (200):**
+
 - Content-Type: application/pdf or application/json or text/csv
 - Binary file or JSON data
 
 ### 6.4 Get Report History
+
 **GET** `/reports/history?portfolioId=xxx&page=1&limit=10`
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -906,9 +987,11 @@ Authorization: Bearer <token>
 ```
 
 ### 6.5 Generate Simulation Report
+
 **POST** `/reports/simulation`
 
 **Request Body:**
+
 ```json
 {
   "simulationId": "string (required)",
@@ -918,6 +1001,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (202):**
+
 ```json
 {
   "success": true,
@@ -929,9 +1013,11 @@ Authorization: Bearer <token>
 ```
 
 ### 6.6 Generate Comparison Report
+
 **POST** `/reports/comparison`
 
 **Request Body:**
+
 ```json
 {
   "portfolioIds": ["array of strings (required, 2-5 portfolios)"],
@@ -942,6 +1028,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (202):**
+
 ```json
 {
   "success": true,
@@ -959,6 +1046,7 @@ Authorization: Bearer <token>
 All endpoints may return the following error responses:
 
 ### 400 Bad Request
+
 ```json
 {
   "success": false,
@@ -976,6 +1064,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 401 Unauthorized
+
 ```json
 {
   "success": false,
@@ -987,6 +1076,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 403 Forbidden
+
 ```json
 {
   "success": false,
@@ -998,6 +1088,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 404 Not Found
+
 ```json
 {
   "success": false,
@@ -1009,6 +1100,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 409 Conflict
+
 ```json
 {
   "success": false,
@@ -1020,6 +1112,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 422 Unprocessable Entity
+
 ```json
 {
   "success": false,
@@ -1032,6 +1125,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 429 Too Many Requests
+
 ```json
 {
   "success": false,
@@ -1044,6 +1138,7 @@ All endpoints may return the following error responses:
 ```
 
 ### 500 Internal Server Error
+
 ```json
 {
   "success": false,
@@ -1064,6 +1159,7 @@ All endpoints may return the following error responses:
 - Report generation: 5 requests per minute per user
 
 Rate limit headers included in all responses:
+
 ```
 X-RateLimit-Limit: 100
 X-RateLimit-Remaining: 95
@@ -1075,10 +1171,12 @@ X-RateLimit-Reset: 1234567890
 ## Pagination
 
 All list endpoints support pagination with the following query parameters:
+
 - `page`: Page number (default: 1)
 - `limit`: Items per page (default: 10, max: 100)
 
 Pagination response format:
+
 ```json
 {
   "pagination": {
@@ -1097,10 +1195,13 @@ Pagination response format:
 ## Filtering and Sorting
 
 List endpoints support:
+
 - `sort`: Field to sort by (prefix with `-` for descending)
 - `filter[field]`: Filter by field value
 - `search`: Full-text search (where applicable)
 
 Example:
+
 ```
 GET /portfolios?sort=-createdAt&filter[currency]=USD&search=retirement
+```

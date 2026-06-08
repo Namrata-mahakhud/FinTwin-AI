@@ -1,5 +1,9 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { scenarioService, CreateScenarioDto, UpdateScenarioDto } from '../../../services/scenario.service';
+import {
+  scenarioService,
+  CreateScenarioDto,
+  UpdateScenarioDto,
+} from '../../../services/scenario.service';
 import { authenticate } from '../../../middleware/auth.middleware';
 import { EventType, ScenarioStatus } from '../../../models/scenario.model';
 

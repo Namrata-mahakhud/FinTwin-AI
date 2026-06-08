@@ -11,9 +11,14 @@ interface CaseStore {
   cases: CrisisCase[];
   isLoading: boolean;
   error: string | null;
-  
+
   // Actions
-  createCase: (caseName: string, scenarioId: string, scenarioName: string, portfolioId: string) => void;
+  createCase: (
+    caseName: string,
+    scenarioId: string,
+    scenarioName: string,
+    portfolioId: string
+  ) => void;
   updateCase: (caseId: string, updates: Partial<CrisisCase>) => void;
   setActiveCase: (caseId: string | null) => void;
   advanceStage: () => void;
@@ -87,9 +92,7 @@ export const useCaseStore = create<CaseStore>()(
       updateCase: (caseId, updates) => {
         set((state) => ({
           cases: state.cases.map((c) =>
-            c.caseId === caseId
-              ? { ...c, ...updates, updatedAt: new Date().toISOString() }
-              : c
+            c.caseId === caseId ? { ...c, ...updates, updatedAt: new Date().toISOString() } : c
           ),
           activeCase:
             state.activeCase?.caseId === caseId
@@ -140,10 +143,11 @@ export const useCaseStore = create<CaseStore>()(
       updateLoss: (caseId, recoveredLoss) => {
         const caseData = get().cases.find((c) => c.caseId === caseId);
         if (caseData) {
-          const progress = caseData.initialLoss !== 0
-            ? Math.min(100, Math.abs((recoveredLoss / caseData.initialLoss) * 100))
-            : 0;
-          
+          const progress =
+            caseData.initialLoss !== 0
+              ? Math.min(100, Math.abs((recoveredLoss / caseData.initialLoss) * 100))
+              : 0;
+
           get().updateCase(caseId, {
             recoveredLoss,
             recoveryProgress: Math.round(progress),

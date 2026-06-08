@@ -6,7 +6,8 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 
 ## 🎯 Why This is the Hero Page
 
-### 1. **Visual Impact** 
+### 1. **Visual Impact**
+
 - Dark theme with red accents (war room aesthetic)
 - Three-panel military-style layout
 - Real-time animated timeline
@@ -14,6 +15,7 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 - Professional command center feel
 
 ### 2. **Technical Sophistication**
+
 - Multi-agent orchestration visualization
 - Real-time state management
 - Animated timeline progression
@@ -21,6 +23,7 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 - Complex UI coordination
 
 ### 3. **Business Value**
+
 - Immediate crisis visibility
 - Real-time decision support
 - Multi-agent collaboration
@@ -30,9 +33,11 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 ## 🏗️ Three-Panel Layout
 
 ### LEFT PANEL - Scenario Intelligence
+
 **Purpose**: Shows the selected crisis scenario and portfolio exposure
 
 **Components**:
+
 - **Scenario Name**: "Banking Crisis Q1"
 - **Severity Badge**: HIGH/CRITICAL/MEDIUM
 - **Selected Events**:
@@ -45,15 +50,18 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
   - Tech: 25% (BLUE - Moderate Risk)
 
 **Visual Style**:
+
 - Dark gray background (#1F2937)
 - Compact, information-dense
 - Color-coded risk indicators
 - Clean typography
 
 ### CENTER PANEL - Animated Timeline
+
 **Purpose**: Shows the 30-day crisis progression in real-time
 
 **Timeline Events**:
+
 1. **Day 1**: Inflation rises (+3%)
 2. **Day 5**: Banking drops (-8%)
 3. **Day 10**: Currency weakens (-12%)
@@ -61,6 +69,7 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 5. **Day 30**: Recovery begins
 
 **Visual Features**:
+
 - Vertical timeline with gradient line (red → yellow → green)
 - Large circular day markers with icons
 - Event cards that light up as they activate
@@ -71,15 +80,18 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 - Smooth animations between states
 
 **Interaction**:
+
 - Auto-progresses during simulation
 - Shows current day counter
 - Animated transitions
 - Visual feedback for each event
 
 ### RIGHT PANEL - AI Agent Activity
+
 **Purpose**: Shows real-time AI agent collaboration
 
 **Agents Displayed**:
+
 1. **Market Agent** 📊
    - Status: Running/Complete/Idle
    - Message: "Analyzing inflation impact..."
@@ -101,6 +113,7 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
    - Color: Green
 
 **Visual Features**:
+
 - Agent cards with status indicators
 - Pulsing glow for active agents
 - Color-coded by agent type
@@ -197,9 +210,10 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 ## 🎨 Visual Design
 
 ### Color Scheme
+
 - **Background**: Dark gray (#111827, #1F2937)
 - **Header**: Red gradient (#7F1D1D → #991B1B)
-- **Accents**: 
+- **Accents**:
   - Red: Crisis/High risk
   - Yellow: Warning/Medium risk
   - Green: Success/Recovery
@@ -207,12 +221,14 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
   - Purple: Analysis/Comparison
 
 ### Typography
+
 - **Headers**: Bold, large (text-3xl)
 - **Body**: Medium weight (font-medium)
 - **Stats**: Bold, extra large (text-2xl)
 - **Labels**: Small, gray (text-xs, text-gray-400)
 
 ### Animations
+
 - **Pulse Glow**: Active agents and timeline events
 - **Fade In**: New messages and updates
 - **Slide**: Panel transitions
@@ -221,6 +237,7 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 ## 🔧 Technical Implementation
 
 ### State Management
+
 ```typescript
 - showProcessing: boolean (overlay visibility)
 - currentDay: number (timeline progress)
@@ -230,6 +247,7 @@ The **Financial War Room** is the hero page of the FinTwin application - a real-
 ```
 
 ### Key Functions
+
 ```typescript
 handleRunSimulation() - Starts simulation
 handleProcessingComplete() - Transitions to timeline
@@ -238,6 +256,7 @@ updateAgentActivity() - Updates agent status/messages
 ```
 
 ### Animation Timing
+
 - Processing overlay: 4 seconds
 - Day progression: 800ms per day
 - Agent updates: Synchronized with timeline
@@ -264,27 +283,32 @@ Final Results
 ## 🏆 Why Judges Will Love This
 
 ### 1. **Immediate Visual Impact**
+
 - Opens to a stunning dark-themed command center
 - Professional military-grade aesthetic
 - Clear information hierarchy
 
 ### 2. **Real-time Engagement**
+
 - Not static - everything moves and updates
 - Feels alive and responsive
 - Keeps users engaged throughout
 
 ### 3. **Multi-Agent Showcase**
+
 - Clearly shows AI agents working together
 - Demonstrates Agentic SDLC principles
 - Not just theory - visible in action
 
 ### 4. **Professional UX**
+
 - Smooth animations
 - Clear status indicators
 - Intuitive layout
 - Responsive design
 
 ### 5. **Business Value**
+
 - Crisis monitoring
 - Real-time decision support
 - Actionable insights
@@ -320,16 +344,19 @@ Final Results
 ## 📱 Responsive Design
 
 ### Desktop (1920x1080)
+
 - Full three-panel layout
 - All features visible
 - Optimal experience
 
 ### Tablet (1024x768)
+
 - Stacked panels
 - Scrollable content
 - Touch-friendly buttons
 
 ### Mobile (375x667)
+
 - Single column
 - Collapsible panels
 - Essential features only
@@ -345,6 +372,7 @@ Final Results
 ## 📝 Usage Instructions
 
 ### For Developers
+
 ```bash
 # Navigate to War Room
 /simulations/:id/war-room
@@ -357,6 +385,7 @@ frontend/src/pages/FinancialWarRoom/index.tsx
 ```
 
 ### For Users
+
 1. Create or select a scenario
 2. Click "Run Simulation"
 3. Automatically redirected to War Room

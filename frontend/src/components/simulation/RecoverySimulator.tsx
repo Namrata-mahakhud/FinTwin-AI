@@ -96,8 +96,8 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
   ];
 
   const toggleStrategy = (id: string) => {
-    setSelectedStrategies(prev =>
-      prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+    setSelectedStrategies((prev) =>
+      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     );
   };
 
@@ -117,14 +117,14 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
 
   const calculateTotalImpact = () => {
     return selectedStrategies.reduce((total, id) => {
-      const strategy = strategies.find(s => s.id === id);
+      const strategy = strategies.find((s) => s.id === id);
       return total + (strategy?.expectedImpact || 0);
     }, 0);
   };
 
   const calculateTotalRiskReduction = () => {
     return selectedStrategies.reduce((total, id) => {
-      const strategy = strategies.find(s => s.id === id);
+      const strategy = strategies.find((s) => s.id === id);
       return total + (strategy?.riskReduction || 0);
     }, 0);
   };
@@ -152,7 +152,7 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
       <CardBody>
         {/* Strategy Selection */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          {strategies.map(strategy => (
+          {strategies.map((strategy) => (
             <button
               key={strategy.id}
               onClick={() => toggleStrategy(strategy.id)}
@@ -160,9 +160,10 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
               className={`
                 p-4 rounded-lg border-2 text-left transition-all
                 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed
-                ${selectedStrategies.includes(strategy.id)
-                  ? 'border-green-500 bg-green-50 dark:bg-green-900/20 ring-2 ring-green-500'
-                  : 'border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-700'
+                ${
+                  selectedStrategies.includes(strategy.id)
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20 ring-2 ring-green-500'
+                    : 'border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-700'
                 }
               `}
             >
@@ -187,9 +188,7 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
                     <span className="text-blue-600 dark:text-blue-400 font-medium">
                       -{strategy.riskReduction} risk
                     </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      {strategy.timeframe}
-                    </span>
+                    <span className="text-gray-500 dark:text-gray-400">{strategy.timeframe}</span>
                   </div>
                 </div>
               </div>
@@ -205,17 +204,13 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
             </h4>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                  Loss Recovery
-                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Loss Recovery</div>
                 <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                   +{calculateTotalImpact().toFixed(1)}%
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                  Risk Reduction
-                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Risk Reduction</div>
                 <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   -{calculateTotalRiskReduction()}
                 </div>
@@ -250,7 +245,7 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-center">
                 Recovery Simulation Results
               </h3>
-              
+
               <div className="grid grid-cols-2 gap-6">
                 {/* Before Recovery */}
                 <div className="text-center">
@@ -259,9 +254,7 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                        Loss
-                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Loss</div>
                       <div className="text-3xl font-bold text-red-600 dark:text-red-400">
                         {result.beforeLoss}%
                       </div>
@@ -284,9 +277,7 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                        Loss
-                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Loss</div>
                       <div className="text-3xl font-bold text-green-600 dark:text-green-400">
                         {result.afterLoss}%
                       </div>
@@ -315,9 +306,7 @@ const RecoverySimulator: React.FC<RecoverySimulatorProps> = ({
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
-                      Confidence
-                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Confidence</div>
                     <div className="text-lg font-bold text-gray-900 dark:text-white">
                       {result.confidence}%
                     </div>

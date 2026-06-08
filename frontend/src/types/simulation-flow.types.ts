@@ -1,11 +1,11 @@
 // Simulation Flow Types
 // Multi-step simulation execution flow types
 
-export type SimulationFlowStep = 
-  | 'validation' 
-  | 'preview' 
-  | 'agent-processing' 
-  | 'results' 
+export type SimulationFlowStep =
+  | 'validation'
+  | 'preview'
+  | 'agent-processing'
+  | 'results'
   | 'recovery';
 
 export interface ValidationCheck {

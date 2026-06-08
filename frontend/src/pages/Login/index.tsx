@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const from = (location.state as any)?.from?.pathname || ROUTES.DASHBOARD;
+  const from = location.state?.from?.pathname || ROUTES.DASHBOARD;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,23 +25,18 @@ const Login: React.FC = () => {
     }
   };
 
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 px-4">
       <div className="max-w-md w-full">
         {/* Logo and Title */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-primary-600 mb-2">FinTwin AI</h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Autonomous Financial Digital Twin
-          </p>
+          <p className="text-gray-600 dark:text-gray-400">Autonomous Financial Digital Twin</p>
         </div>
 
         {/* Login Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
-            Sign In
-          </h2>
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Sign In</h2>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
@@ -95,9 +90,7 @@ const Login: React.FC = () => {
                   type="checkbox"
                   className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                 />
-                <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                  Remember me
-                </span>
+                <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
               </label>
               <a
                 href="#"

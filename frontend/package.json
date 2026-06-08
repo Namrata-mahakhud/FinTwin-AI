@@ -7,7 +7,7 @@
     "dev": "vite --config vite.config.mjs",
     "build": "tsc && vite build --config vite.config.mjs",
     "preview": "vite preview --config vite.config.mjs",
-    "test": "vitest",
+    "test": "vitest --passWithNoTests",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",

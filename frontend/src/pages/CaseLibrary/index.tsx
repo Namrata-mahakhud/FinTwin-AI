@@ -14,9 +14,10 @@ const CaseLibrary: React.FC = () => {
   const [selectedCase, setSelectedCase] = useState<string | null>(null);
   const [showAssumptions, setShowAssumptions] = useState<string | null>(null);
 
-  const filteredCases = selectedType === 'all' 
-    ? SEED_CASE_LIBRARY 
-    : SEED_CASE_LIBRARY.filter(c => c.type === selectedType);
+  const filteredCases =
+    selectedType === 'all'
+      ? SEED_CASE_LIBRARY
+      : SEED_CASE_LIBRARY.filter((c) => c.type === selectedType);
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
@@ -34,7 +35,7 @@ const CaseLibrary: React.FC = () => {
   };
 
   const handleLoadCase = (caseId: string) => {
-    const caseItem = SEED_CASE_LIBRARY.find(c => c.id === caseId);
+    const caseItem = SEED_CASE_LIBRARY.find((c) => c.id === caseId);
     if (caseItem) {
       // Create a new case based on the library item
       const defaultPortfolio = SEED_PORTFOLIOS[1]; // Balanced Portfolio
@@ -59,9 +60,7 @@ const CaseLibrary: React.FC = () => {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            📚 Case Library
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">📚 Case Library</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             Historical crisis scenarios and simulation templates
           </p>
@@ -94,7 +93,7 @@ const CaseLibrary: React.FC = () => {
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
           }`}
         >
-          Historical ({SEED_CASE_LIBRARY.filter(c => c.type === 'historical').length})
+          Historical ({SEED_CASE_LIBRARY.filter((c) => c.type === 'historical').length})
         </button>
         <button
           onClick={() => setSelectedType('template')}
@@ -104,7 +103,7 @@ const CaseLibrary: React.FC = () => {
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
           }`}
         >
-          Templates ({SEED_CASE_LIBRARY.filter(c => c.type === 'template').length})
+          Templates ({SEED_CASE_LIBRARY.filter((c) => c.type === 'template').length})
         </button>
       </div>
 
@@ -114,8 +113,9 @@ const CaseLibrary: React.FC = () => {
           <div className="text-2xl">ℹ️</div>
           <div>
             <p className="text-sm text-blue-800 dark:text-blue-400">
-              <strong>About Case Library:</strong> Historical cases are based on real market events with documented outcomes. 
-              Templates are configurable scenarios for stress testing. All cases can be customized before running simulations.
+              <strong>About Case Library:</strong> Historical cases are based on real market events
+              with documented outcomes. Templates are configurable scenarios for stress testing. All
+              cases can be customized before running simulations.
             </p>
           </div>
         </div>
@@ -131,7 +131,9 @@ const CaseLibrary: React.FC = () => {
                 <div className="flex items-start justify-between">
                   <div className="text-4xl">{caseItem.icon}</div>
                   <div className="flex flex-col gap-2">
-                    <span className={`px-2 py-1 text-xs font-medium rounded border ${getSeverityColor(caseItem.severity)}`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded border ${getSeverityColor(caseItem.severity)}`}
+                    >
                       {caseItem.severity.toUpperCase()}
                     </span>
                     <span className="px-2 py-1 text-xs font-medium rounded bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
@@ -150,9 +152,7 @@ const CaseLibrary: React.FC = () => {
                       Year: {caseItem.year}
                     </p>
                   )}
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {caseItem.description}
-                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{caseItem.description}</p>
                 </div>
 
                 {/* Impact Metric */}
@@ -168,7 +168,9 @@ const CaseLibrary: React.FC = () => {
 
                 {/* Assumptions Toggle */}
                 <button
-                  onClick={() => setShowAssumptions(showAssumptions === caseItem.id ? null : caseItem.id)}
+                  onClick={() =>
+                    setShowAssumptions(showAssumptions === caseItem.id ? null : caseItem.id)
+                  }
                   className="w-full text-left text-sm text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   {showAssumptions === caseItem.id ? '▼ Hide' : '▶'} View Assumptions
@@ -251,7 +253,7 @@ const CaseLibrary: React.FC = () => {
             <div className="text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Historical Events</p>
               <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                {SEED_CASE_LIBRARY.filter(c => c.type === 'historical').length}
+                {SEED_CASE_LIBRARY.filter((c) => c.type === 'historical').length}
               </p>
               <p className="text-xs text-gray-500 mt-1">Real market crises</p>
             </div>
@@ -262,7 +264,11 @@ const CaseLibrary: React.FC = () => {
             <div className="text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Avg Impact</p>
               <p className="text-3xl font-bold text-red-600 dark:text-red-400">
-                {(SEED_CASE_LIBRARY.reduce((sum, c) => sum + Math.abs(c.estimatedImpact), 0) / SEED_CASE_LIBRARY.length).toFixed(1)}%
+                {(
+                  SEED_CASE_LIBRARY.reduce((sum, c) => sum + Math.abs(c.estimatedImpact), 0) /
+                  SEED_CASE_LIBRARY.length
+                ).toFixed(1)}
+                %
               </p>
               <p className="text-xs text-gray-500 mt-1">Portfolio loss</p>
             </div>
@@ -273,8 +279,8 @@ const CaseLibrary: React.FC = () => {
       {/* Data Source Info */}
       <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
         <p className="text-xs text-gray-600 dark:text-gray-400">
-          <strong>Data Sources:</strong> Federal Reserve Economic Data (FRED), Bloomberg Terminal, 
-          Historical Market Analysis • <strong>Last Updated:</strong> January 2024 • 
+          <strong>Data Sources:</strong> Federal Reserve Economic Data (FRED), Bloomberg Terminal,
+          Historical Market Analysis • <strong>Last Updated:</strong> January 2024 •
           <strong>Model Confidence:</strong> 85-92% depending on scenario
         </p>
       </div>
@@ -282,9 +288,9 @@ const CaseLibrary: React.FC = () => {
       {/* Disclaimer */}
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
         <p className="text-sm text-yellow-800 dark:text-yellow-400">
-          ⚠️ <strong>Disclaimer:</strong> Historical scenarios are based on past events and may not predict future outcomes. 
-          All simulations are for risk planning purposes only and do not constitute financial advice. 
-          Past performance does not guarantee future results.
+          ⚠️ <strong>Disclaimer:</strong> Historical scenarios are based on past events and may not
+          predict future outcomes. All simulations are for risk planning purposes only and do not
+          constitute financial advice. Past performance does not guarantee future results.
         </p>
       </div>
     </div>

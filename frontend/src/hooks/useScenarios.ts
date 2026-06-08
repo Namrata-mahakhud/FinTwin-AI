@@ -22,10 +22,7 @@ export const scenarioKeys = {
 };
 
 // Get all scenarios with filters
-export const useScenarios = (
-  filters?: ScenarioListFilters,
-  pagination?: PaginationParams
-) => {
+export const useScenarios = (filters?: ScenarioListFilters, pagination?: PaginationParams) => {
   return useQuery({
     queryKey: scenarioKeys.list(filters, pagination),
     queryFn: () => scenariosApi.getAll(filters, pagination),

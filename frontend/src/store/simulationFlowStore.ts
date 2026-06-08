@@ -77,9 +77,7 @@ export const useSimulationFlowStore = create<SimulationFlowStore>()(
       toggleRecoveryAction: (actionId) =>
         set((state) => ({
           selectedRecoveryActions: state.selectedRecoveryActions?.map((action) =>
-            action.id === actionId
-              ? { ...action, selected: !action.selected }
-              : action
+            action.id === actionId ? { ...action, selected: !action.selected } : action
           ),
         })),
 

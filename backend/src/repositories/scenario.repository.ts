@@ -38,10 +38,7 @@ export class ScenarioRepository {
     return (await this.model.findById(id).lean().exec()) as unknown as ScenarioDocument | null;
   }
 
-  async findByIdAndUserId(
-    id: string,
-    userId: string
-  ): Promise<ScenarioDocument | null> {
+  async findByIdAndUserId(id: string, userId: string): Promise<ScenarioDocument | null> {
     return (await this.model
       .findOne({ _id: id, createdBy: userId })
       .lean()
@@ -72,11 +69,7 @@ export class ScenarioRepository {
       .exec();
   }
 
-  async findByUserId(
-    userId: string,
-    page: number,
-    limit: number
-  ): Promise<ScenarioDocument[]> {
+  async findByUserId(userId: string, page: number, limit: number): Promise<ScenarioDocument[]> {
     const skip = (page - 1) * limit;
     return (await this.model
       .find({ createdBy: userId })

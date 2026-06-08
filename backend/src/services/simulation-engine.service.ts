@@ -26,7 +26,14 @@ export class SimulationEngine {
     config: SimulationConfig
   ): Promise<SimulationResults> {
     // Extract configuration
-    const { selectedEvents, severity, duration, impactAreas, iterations = 1000, confidenceLevel = 95 } = config;
+    const {
+      selectedEvents,
+      severity,
+      duration,
+      impactAreas,
+      iterations = 1000,
+      confidenceLevel = 95,
+    } = config;
 
     // Calculate base impact from events
     const baseImpact = this.calculateBaseImpact(selectedEvents, severity);
@@ -108,9 +115,9 @@ export class SimulationEngine {
     for (const sector of impactAreas) {
       // Calculate sector-specific multiplier based on events
       const sectorMultiplier = this.getSectorMultiplier(sector, events);
-      
+
       const impact = baseImpact * sectorMultiplier * durationMultiplier;
-      
+
       // Determine risk level
       const riskLevel = this.determineRiskLevel(Math.abs(impact));
 
@@ -160,7 +167,8 @@ export class SimulationEngine {
     if (sectorSensitivity[sectorKey]) {
       events.forEach((event) => {
         const eventType = event.type || 'default';
-        multiplier *= sectorSensitivity[sectorKey][eventType] || sectorSensitivity[sectorKey].default;
+        multiplier *=
+          sectorSensitivity[sectorKey][eventType] || sectorSensitivity[sectorKey].default;
       });
     }
 
@@ -232,23 +240,26 @@ export class SimulationEngine {
   private calculateVolatility(values: number[]): number {
     const mean = values.reduce((sum, v) => sum + v, 0) / values.length;
     const variance = values.reduce((sum, v) => sum + Math.pow(v - mean, 2), 0) / values.length;
-    return Math.sqrt(variance) / mean * 100;
+    return (Math.sqrt(variance) / mean) * 100;
   }
 
   /**
    * Calculate risk metrics
    */
-  private calculateRiskMetrics(projections: PortfolioProjection[], sectorImpacts: SectorImpact[]): any {
+  private calculateRiskMetrics(
+    projections: PortfolioProjection[],
+    sectorImpacts: SectorImpact[]
+  ): any {
     const finalProjection = projections[projections.length - 1];
-    const maxLoss = Math.min(...projections.map(p => p.percentChange));
-    
+    const maxLoss = Math.min(...projections.map((p) => p.percentChange));
+
     // Calculate overall risk score (0-100)
     const riskScore = Math.min(100, Math.max(0, 50 + Math.abs(maxLoss) * 2));
 
     return {
       overallRisk: this.determineRiskLevel(riskScore),
       riskScore,
-      riskFactors: sectorImpacts.map(s => ({
+      riskFactors: sectorImpacts.map((s) => ({
         name: s.sector,
         category: 'sector',
         severity: s.riskLevel,
@@ -257,7 +268,7 @@ export class SimulationEngine {
         description: `${s.sector} sector exposure`,
       })),
       heatmap: {
-        rows: sectorImpacts.map(s => s.sector),
+        rows: sectorImpacts.map((s) => s.sector),
         columns: ['Low', 'Medium', 'High', 'Critical'],
         values: [],
         colorScale: { min: 0, max: 100, colors: ['#10B981', '#F59E0B', '#EF4444'] },
@@ -289,7 +300,7 @@ export class SimulationEngine {
 
     // Find high-risk sectors
     const highRiskSectors = sectorImpacts.filter(
-      s => s.riskLevel === 'high' || s.riskLevel === 'very_high'
+      (s) => s.riskLevel === 'high' || s.riskLevel === 'very_high'
     );
 
     highRiskSectors.forEach((sector, index) => {
@@ -337,7 +348,7 @@ export class SimulationEngine {
    */
   private calculateSummary(projections: PortfolioProjection[], riskAnalysis: any): any {
     const finalProjection = projections[projections.length - 1];
-    const losses = projections.filter(p => p.percentChange < 0);
+    const losses = projections.filter((p) => p.percentChange < 0);
     const probabilityOfLoss = (losses.length / projections.length) * 100;
 
     // Find recovery point (when portfolio returns to initial value)
@@ -351,9 +362,9 @@ export class SimulationEngine {
 
     return {
       expectedReturn: finalProjection.percentChange,
-      expectedLoss: Math.min(...projections.map(p => p.percentChange)),
-      bestCase: Math.max(...projections.map(p => p.percentChange)),
-      worstCase: Math.min(...projections.map(p => p.percentChange)),
+      expectedLoss: Math.min(...projections.map((p) => p.percentChange)),
+      bestCase: Math.max(...projections.map((p) => p.percentChange)),
+      worstCase: Math.min(...projections.map((p) => p.percentChange)),
       probabilityOfLoss,
       timeToRecovery: recoveryDays || projections.length * 30,
       confidenceLevel: 95,
@@ -368,16 +379,15 @@ export class SimulationEngine {
     const eventsPerMonth = Math.ceil(events.length / duration);
 
     for (let month = 0; month < duration; month++) {
-      const monthEvents = events.slice(
-        month * eventsPerMonth,
-        (month + 1) * eventsPerMonth
-      );
+      const monthEvents = events.slice(month * eventsPerMonth, (month + 1) * eventsPerMonth);
 
       if (monthEvents.length > 0) {
         const event = monthEvents[0];
         timeline.push({
-          month: new Date(Date.now() + month * 30 * 24 * 60 * 60 * 1000)
-            .toLocaleDateString('en-US', { month: 'short' }),
+          month: new Date(Date.now() + month * 30 * 24 * 60 * 60 * 1000).toLocaleDateString(
+            'en-US',
+            { month: 'short' }
+          ),
           event: event.description || event.type,
           icon: this.getEventIcon(event.type),
           impact: event.impact?.magnitude || -2.5,

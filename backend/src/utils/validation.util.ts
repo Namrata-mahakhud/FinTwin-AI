@@ -26,7 +26,7 @@ export class Validator {
   /**
    * Validate a single field
    */
-validateField<T = unknown>(rule: ValidationRule<T>): boolean {
+  validateField<T = unknown>(rule: ValidationRule<T>): boolean {
     const { field, value, rules } = rule;
 
     // Required check
@@ -110,7 +110,7 @@ validateField<T = unknown>(rule: ValidationRule<T>): boolean {
     }
 
     // Enum check
-    if (rules.enum && !rules.enum.includes(value as T)) {
+    if (rules.enum && !rules.enum.includes(value)) {
       this.errors.push({
         field,
         message: `${field} must be one of: ${rules.enum.join(', ')}`,
@@ -272,7 +272,9 @@ export const validateSort = (
   const field = sort.replace(/^-/, '');
 
   if (allowedFields.length > 0 && !allowedFields.includes(field)) {
-    throw new ValidationError(`Invalid sort field: ${field}. Allowed fields: ${allowedFields.join(', ')}`);
+    throw new ValidationError(
+      `Invalid sort field: ${field}. Allowed fields: ${allowedFields.join(', ')}`
+    );
   }
 
   return { field, order };
@@ -281,7 +283,10 @@ export const validateSort = (
 /**
  * Validate query filters
  */
-export const validateFilters = (filters: Record<string, any>, allowedFields: string[] = []): Record<string, any> => {
+export const validateFilters = (
+  filters: Record<string, any>,
+  allowedFields: string[] = []
+): Record<string, any> => {
   const validFilters: Record<string, any> = {};
 
   for (const [key, value] of Object.entries(filters)) {
@@ -345,5 +350,3 @@ export const toJSONSchema = (rules: ValidationRule['rules']): Record<string, unk
 
   return schema;
 };
-
-

@@ -4,7 +4,17 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card, CardBody, CardHeader, Badge, LoadingSpinner } from '@/components/common';
 import { useSimulation, useSimulationResults } from '@/hooks/useSimulations';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from 'recharts';
 
 interface TimelineEvent {
   month: string;
@@ -139,12 +149,8 @@ const SimulationResults: React.FC = () => {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Simulation Results
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            {simulation.name}
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Simulation Results</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{simulation.name}</p>
         </div>
         <button
           onClick={() => setShowExplainability(!showExplainability)}
@@ -235,20 +241,14 @@ const SimulationResults: React.FC = () => {
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
                   {contributingFactors.map((factor, index) => (
-                    <div
-                      key={index}
-                      className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
-                    >
+                    <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                         {factor.factor}
                       </p>
                       <p className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                         {factor.value}
                       </p>
-                      <Badge
-                        variant={factor.severity === 'High' ? 'danger' : 'warning'}
-                        size="sm"
-                      >
+                      <Badge variant={factor.severity === 'High' ? 'danger' : 'warning'} size="sm">
                         {factor.severity}
                       </Badge>
                     </div>
@@ -320,11 +320,12 @@ const SimulationResults: React.FC = () => {
                       <p className="text-xs font-semibold text-gray-900 dark:text-white mb-1">
                         {event.month}
                       </p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                        {event.event}
-                      </p>
-                      <p className={`text-sm font-bold ${event.impact < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                        {event.impact > 0 ? '+' : ''}{event.impact}%
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">{event.event}</p>
+                      <p
+                        className={`text-sm font-bold ${event.impact < 0 ? 'text-red-600' : 'text-green-600'}`}
+                      >
+                        {event.impact > 0 ? '+' : ''}
+                        {event.impact}%
                       </p>
                       <p className={`text-xs font-medium mt-1 ${getRiskColor(event.riskScore)}`}>
                         Risk: {event.riskScore}
@@ -406,9 +407,7 @@ const SimulationResults: React.FC = () => {
       {/* Sector Impact */}
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Impact by Sector
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Impact by Sector</h2>
         </CardHeader>
         <CardBody>
           <ResponsiveContainer width="100%" height={300}>
@@ -439,25 +438,21 @@ const SimulationResults: React.FC = () => {
         <CardBody>
           <div className="space-y-3">
             {results.recommendations.slice(0, 3).map((rec) => (
-              <div
-                key={rec.id}
-                className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
-              >
+              <div key={rec.id} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-semibold text-gray-900 dark:text-white">
-                    {rec.title}
-                  </h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">{rec.title}</h4>
                   <Badge
-                    variant={rec.priority === 'high' || rec.priority === 'critical' ? 'danger' : 'warning'}
+                    variant={
+                      rec.priority === 'high' || rec.priority === 'critical' ? 'danger' : 'warning'
+                    }
                   >
                     {rec.priority}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  {rec.description}
-                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{rec.description}</p>
                 <p className="text-sm text-green-600 dark:text-green-400">
-                  Expected Impact: {rec.expectedImpact > 0 ? '+' : ''}{rec.expectedImpact}%
+                  Expected Impact: {rec.expectedImpact > 0 ? '+' : ''}
+                  {rec.expectedImpact}%
                 </p>
               </div>
             ))}

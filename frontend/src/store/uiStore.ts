@@ -86,9 +86,7 @@ export const useUIStore = create<UIStore>()(
 
       markNotificationAsRead: (id: string) =>
         set((state) => ({
-          notifications: state.notifications.map((n) =>
-            n.id === id ? { ...n, read: true } : n
-          ),
+          notifications: state.notifications.map((n) => (n.id === id ? { ...n, read: true } : n)),
         })),
 
       clearNotifications: () => set({ notifications: [] }),
@@ -124,11 +122,7 @@ export const useUIStore = create<UIStore>()(
 );
 
 // Helper function to show toast notifications
-export const showToast = (
-  type: NotificationType,
-  title: string,
-  message: string
-) => {
+export const showToast = (type: NotificationType, title: string, message: string) => {
   useUIStore.getState().addNotification({
     type,
     title,

@@ -28,7 +28,7 @@ export interface CrisisCase {
   updatedAt: string; // ISO string for localStorage compatibility
 }
 
-export type CaseStage = 
+export type CaseStage =
   | 'create_scenario'
   | 'validate'
   | 'simulate'

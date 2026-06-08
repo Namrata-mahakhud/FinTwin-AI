@@ -78,7 +78,7 @@ export const validateParams = (rules: Record<string, ValidationRule['rules']>) =
 export const validateObjectId = (paramName: string = 'id') => {
   return async (request: FastifyRequest, reply: FastifyReply) => {
     const id = (request.params as any)[paramName];
-    
+
     if (!id) {
       throw new ValidationError(`Parameter '${paramName}' is required`);
     }
@@ -101,10 +101,7 @@ export const validateObjectId = (paramName: string = 'id') => {
 /**
  * Validate pagination parameters
  */
-export const validatePagination = async (
-  request: FastifyRequest,
-  reply: FastifyReply
-) => {
+export const validatePagination = async (request: FastifyRequest, reply: FastifyReply) => {
   const query = request.query as any;
   const page = query.page ? parseInt(query.page) : 1;
   const limit = query.limit ? parseInt(query.limit) : 10;
@@ -124,10 +121,7 @@ export const validatePagination = async (
 /**
  * Sanitize request body
  */
-export const sanitizeBody = async (
-  request: FastifyRequest,
-  reply: FastifyReply
-) => {
+export const sanitizeBody = async (request: FastifyRequest, reply: FastifyReply) => {
   if (request.body && typeof request.body === 'object') {
     request.body = sanitizeObject(request.body);
   }
@@ -168,9 +162,11 @@ export const validateFileUpload = (options: {
   required?: boolean;
 }) => {
   return async (request: FastifyRequest, reply: FastifyReply) => {
-    const data = await (request as FastifyRequest & {
-      file?: () => Promise<any>;
-    }).file?.();
+    const data = await (
+      request as FastifyRequest & {
+        file?: () => Promise<any>;
+      }
+    ).file?.();
 
     if (!data && options.required) {
       throw new ValidationError('File is required');

@@ -221,6 +221,7 @@ VITE_APP_NAME=FinTwin AI
 ### Tailwind Configuration
 
 Custom theme configuration in `tailwind.config.js`:
+
 - Primary colors: Blue gradient
 - Secondary colors: Purple gradient
 - Custom breakpoints
@@ -267,12 +268,14 @@ Response: { data: Scenario }
 ### Common Issues
 
 1. **Port already in use**
+
    ```bash
    # Change port in vite.config.ts or kill the process
    npx kill-port 5173
    ```
 
 2. **Module not found errors**
+
    ```bash
    # Clear node_modules and reinstall
    rm -rf node_modules package-lock.json

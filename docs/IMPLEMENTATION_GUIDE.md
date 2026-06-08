@@ -7,6 +7,7 @@
 ## 🏗️ Architecture Summary
 
 ### Technology Stack
+
 - **Frontend**: React 18 + TypeScript + Vite
 - **Backend**: Node.js 20 + Fastify + TypeScript
 - **Database**: MongoDB 7.0
@@ -15,6 +16,7 @@
 - **DevOps**: Docker + GitHub Actions
 
 ### ICA Architecture Layers
+
 ```
 ┌─────────────────────────────────────────┐
 │   Presentation Layer (React + Vite)     │
@@ -97,23 +99,25 @@ fintwin-ai/
 ## 🗄️ Database Models
 
 ### 1. User Model
+
 ```typescript
 {
-  email: string (unique, indexed)
-  passwordHash: string
-  role: 'ANALYST' | 'RISK_MANAGER' | 'PORTFOLIO_MANAGER' | 'ADMIN'
-  firstName: string
-  lastName: string
-  lastLogin: Date
+  email: string(unique, indexed);
+  passwordHash: string;
+  role: 'ANALYST' | 'RISK_MANAGER' | 'PORTFOLIO_MANAGER' | 'ADMIN';
+  firstName: string;
+  lastName: string;
+  lastLogin: Date;
   preferences: {
-    theme: string
-    notifications: boolean
-    defaultCurrency: string
+    theme: string;
+    notifications: boolean;
+    defaultCurrency: string;
   }
 }
 ```
 
 ### 2. Scenario Model
+
 ```typescript
 {
   name: string
@@ -132,6 +136,7 @@ fintwin-ai/
 ```
 
 ### 3. Portfolio Model
+
 ```typescript
 {
   name: string
@@ -150,6 +155,7 @@ fintwin-ai/
 ```
 
 ### 4. Simulation Model
+
 ```typescript
 {
   scenarioId: ObjectId (ref: Scenario)
@@ -179,6 +185,7 @@ fintwin-ai/
 ```
 
 ### 5. Recommendation Model
+
 ```typescript
 {
   simulationId: ObjectId (ref: Simulation)
@@ -197,6 +204,7 @@ fintwin-ai/
 ## 🔐 Authentication System
 
 ### JWT Implementation
+
 - **Access Token**: 7 days expiry
 - **Refresh Token**: 30 days expiry
 - **Algorithm**: HS256
@@ -205,7 +213,9 @@ fintwin-ai/
 ### API Endpoints
 
 #### POST /api/v1/auth/register
+
 Register a new user
+
 ```json
 {
   "email": "user@example.com",
@@ -217,7 +227,9 @@ Register a new user
 ```
 
 #### POST /api/v1/auth/login
+
 Login user
+
 ```json
 {
   "email": "user@example.com",
@@ -226,7 +238,9 @@ Login user
 ```
 
 #### POST /api/v1/auth/refresh
+
 Refresh access token
+
 ```json
 {
   "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
@@ -234,26 +248,30 @@ Refresh access token
 ```
 
 #### GET /api/v1/auth/profile
+
 Get current user profile (requires authentication)
 
 #### PUT /api/v1/auth/profile
+
 Update user profile (requires authentication)
 
 #### POST /api/v1/auth/logout
+
 Logout user (requires authentication)
 
 ### Role-Based Access Control (RBAC)
 
-| Role | Permissions |
-|------|-------------|
-| **ANALYST** | Create scenarios, view simulations, basic analytics |
-| **RISK_MANAGER** | All analyst permissions + risk management features |
-| **PORTFOLIO_MANAGER** | All analyst permissions + portfolio management |
-| **ADMIN** | Full system access + user management |
+| Role                  | Permissions                                         |
+| --------------------- | --------------------------------------------------- |
+| **ANALYST**           | Create scenarios, view simulations, basic analytics |
+| **RISK_MANAGER**      | All analyst permissions + risk management features  |
+| **PORTFOLIO_MANAGER** | All analyst permissions + portfolio management      |
+| **ADMIN**             | Full system access + user management                |
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 ```bash
 node >= 20.0.0
 npm >= 10.0.0
@@ -265,6 +283,7 @@ Docker & Docker Compose (optional)
 ### Installation Steps
 
 1. **Clone and Install**
+
 ```bash
 git clone <repository-url>
 cd fintwin-ai
@@ -272,23 +291,27 @@ npm install
 ```
 
 2. **Environment Setup**
+
 ```bash
 cp .env.example .env
 # Edit .env with your configuration
 ```
 
 Required environment variables:
+
 - `MONGODB_URI`: MongoDB connection string
 - `JWT_SECRET`: Secret key for JWT (min 32 characters)
 - `JWT_REFRESH_SECRET`: Secret key for refresh tokens
 - `CORS_ORIGIN`: Frontend URL
 
 3. **Start with Docker (Recommended)**
+
 ```bash
 npm run docker:up
 ```
 
 4. **Start Manually**
+
 ```bash
 # Terminal 1: Start MongoDB
 mongod
@@ -303,6 +326,7 @@ npm run dev
 ```
 
 ### Access Points
+
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:3000
 - **API Documentation**: http://localhost:3000/api/docs
@@ -311,6 +335,7 @@ npm run dev
 ## 🧪 Testing
 
 ### Run Tests
+
 ```bash
 # All tests
 npm test
@@ -329,6 +354,7 @@ npm run test:coverage
 ```
 
 ### Test Structure
+
 ```
 tests/
 ├── unit/              # Unit tests for services, utils
@@ -339,12 +365,14 @@ tests/
 ## 🤖 Agentic SDLC Workflow
 
 ### Bob AI Agents
+
 1. **Code Generation Agent**: Generates ICA-compliant code
 2. **Testing Agent**: Creates comprehensive test suites
 3. **Review Agent**: Performs code quality checks
 4. **Deployment Agent**: Automates deployment pipeline
 
 ### Workflow Phases
+
 1. **Requirements Analysis** → ICA Context Studio
 2. **Design** → Architecture + API specs
 3. **Code Generation** → Bob generates code
@@ -357,6 +385,7 @@ tests/
 ## 📊 CI/CD Pipeline
 
 ### GitHub Actions Workflow
+
 - **Lint**: ESLint + Prettier
 - **Test**: Unit + Integration tests
 - **Build**: TypeScript compilation
@@ -364,6 +393,7 @@ tests/
 - **Docker**: Build and test images
 
 ### Quality Gates
+
 - ✅ Lint pass
 - ✅ Type check pass
 - ✅ Test coverage >= 80%
@@ -395,12 +425,14 @@ tests/
 ### Common Issues
 
 **TypeScript Errors**
+
 ```bash
 # Install dependencies first
 npm install
 ```
 
 **MongoDB Connection Failed**
+
 ```bash
 # Check MongoDB is running
 mongod --version
@@ -408,12 +440,14 @@ mongod --version
 ```
 
 **Port Already in Use**
+
 ```bash
 # Change port in .env
 PORT=3001
 ```
 
 **Docker Issues**
+
 ```bash
 # Clean and rebuild
 npm run docker:down

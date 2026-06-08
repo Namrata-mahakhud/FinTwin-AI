@@ -35,13 +35,7 @@ const toastStyles: Record<ToastType, { bg: string; icon: string; border: string 
   },
 };
 
-export const Toast: React.FC<ToastProps> = ({
-  id,
-  type,
-  message,
-  duration = 5000,
-  onClose,
-}) => {
+export const Toast: React.FC<ToastProps> = ({ id, type, message, duration = 5000, onClose }) => {
   useEffect(() => {
     if (duration > 0) {
       const timer = setTimeout(() => {

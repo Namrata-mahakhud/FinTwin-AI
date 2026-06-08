@@ -3,6 +3,7 @@
 ## ✅ FIXED: MongoDB Connection Issue
 
 The backend was hanging because:
+
 1. MongoDB URI was missing authentication credentials
 2. MongoDB container wasn't started
 
@@ -26,6 +27,7 @@ docker-compose up -d mongodb
 ```
 
 **Verify MongoDB is running:**
+
 ```powershell
 docker ps
 # Should show: fintwin-mongodb container with status "Up"
@@ -73,6 +75,7 @@ npm run dev
 ## 🔧 What Was Fixed
 
 ### backend/.env
+
 ```env
 # OLD (WRONG):
 MONGODB_URI=mongodb://localhost:27017/fintwin
@@ -82,6 +85,7 @@ MONGODB_URI=mongodb://admin:admin123@localhost:27017/fintwin-ai?authSource=admin
 ```
 
 This matches the MongoDB credentials in `docker-compose.yml`:
+
 - Username: `admin`
 - Password: `admin123`
 - Database: `fintwin-ai`
@@ -125,18 +129,21 @@ npm run dev
 ### Backend Still Hangs?
 
 **Check MongoDB is actually running:**
+
 ```powershell
 docker ps
 # Must show fintwin-mongodb container
 ```
 
 **Check MongoDB logs:**
+
 ```powershell
 docker logs fintwin-mongodb
 # Should show "Waiting for connections on port 27017"
 ```
 
 **Test MongoDB connection:**
+
 ```powershell
 docker exec -it fintwin-mongodb mongosh -u admin -p admin123 --authenticationDatabase admin
 # Should connect successfully
@@ -145,6 +152,7 @@ docker exec -it fintwin-mongodb mongosh -u admin -p admin123 --authenticationDat
 ### Frontend Shows "Network Error"?
 
 **Check backend is running:**
+
 ```powershell
 # Test backend API
 curl http://localhost:3000
@@ -157,12 +165,14 @@ Look for errors in the backend terminal
 ### MongoDB Won't Start?
 
 **Check if port 27017 is already in use:**
+
 ```powershell
 netstat -ano | findstr :27017
 # If something is using it, stop that service
 ```
 
 **Reset MongoDB container:**
+
 ```powershell
 docker-compose down
 docker volume rm ica-bobathon-fintwin_mongodb_data
@@ -174,6 +184,7 @@ docker-compose up -d mongodb
 ## 📊 Expected Output
 
 ### MongoDB Startup
+
 ```
 Creating network "ica-bobathon-fintwin_fintwin-network" ... done
 Creating volume "ica-bobathon-fintwin_mongodb_data" ... done
@@ -181,6 +192,7 @@ Creating fintwin-mongodb ... done
 ```
 
 ### Backend Startup
+
 ```
 > backend@1.0.0 dev
 > tsx watch src/server.ts
@@ -190,6 +202,7 @@ Server running on http://localhost:3000
 ```
 
 ### Frontend Startup
+
 ```
 > frontend@0.0.0 dev
 > vite
@@ -205,6 +218,7 @@ Server running on http://localhost:3000
 ## 🎉 You're Ready!
 
 Once all three services are running:
+
 1. Open http://localhost:5173
 2. Login with demo credentials
 3. Start building financial scenarios!

@@ -17,7 +17,7 @@ export default async function v1Routes(fastify: FastifyInstance) {
   await fastify.register(simulationFlowRoutes, { prefix: '/' }); // No prefix, routes include /scenarios and /simulations
   await fastify.register(marketRoutes, { prefix: '/market' });
   await fastify.register(recommendationsRoutes, { prefix: '/recommendations' });
-  
+
   // TODO: Register remaining routes when implemented
   // await fastify.register(portfoliosRoutes, { prefix: '/portfolios' });
   // await fastify.register(riskRoutes, { prefix: '/risk' });

@@ -349,11 +349,7 @@ export const SEED_COMPLETED_CASES: CrisisCase[] = [
     initialLoss: -19.2,
     recoveredLoss: 13.5,
     recoveryProgress: 70,
-    recommendations: [
-      'Diversify currency exposure',
-      'Add foreign bonds',
-      'Increase gold holdings',
-    ],
+    recommendations: ['Diversify currency exposure', 'Add foreign bonds', 'Increase gold holdings'],
     reportStatus: 'ready',
     createdAt: new Date(Date.now() - 75 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 50 * 24 * 60 * 60 * 1000).toISOString(),

@@ -28,17 +28,17 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
   const navigate = useNavigate();
   const { currentStage, isActive } = useJourneyStore();
   const { getNextStage, getPreviousStage, updateStage, completeStage } = useJourneyNavigation();
-  
+
   const [isProcessing, setIsProcessing] = useState(false);
-  
+
   if (!isActive) return null;
-  
+
   const nextStage = getNextStage();
   const previousStage = getPreviousStage();
-  
+
   const handleNext = async () => {
     setIsProcessing(true);
-    
+
     try {
       // Execute custom validation if provided
       if (onNext) {
@@ -48,10 +48,10 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
           return;
         }
       }
-      
+
       // Mark current stage as complete
       completeStage(currentStage);
-      
+
       // Navigate to next stage
       if (nextStage) {
         updateStage(nextStage);
@@ -63,22 +63,22 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
       setIsProcessing(false);
     }
   };
-  
+
   const handlePrevious = () => {
     if (onPrevious) {
       onPrevious();
     }
-    
+
     if (previousStage) {
       updateStage(previousStage);
       navigate(STAGE_CONFIG[previousStage].route);
     }
   };
-  
+
   const currentConfig = STAGE_CONFIG[currentStage];
   const nextConfig = nextStage ? STAGE_CONFIG[nextStage] : null;
   const previousConfig = previousStage ? STAGE_CONFIG[previousStage] : null;
-  
+
   return (
     <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4 shadow-lg z-40">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -101,15 +101,18 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
             </span>
           </button>
         )}
-        
+
         {/* Spacer for alignment when previous is hidden */}
         {hidePrevious && <div />}
-        
+
         {/* Progress Info */}
         {showProgress && (
           <div className="text-center flex-1 px-4">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Current Stage: <span className="font-semibold text-gray-900 dark:text-white">{currentConfig.label}</span>
+              Current Stage:{' '}
+              <span className="font-semibold text-gray-900 dark:text-white">
+                {currentConfig.label}
+              </span>
             </p>
             {nextConfig && !hideNext && (
               <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
@@ -118,7 +121,7 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
             )}
           </div>
         )}
-        
+
         {/* Next Button */}
         {!hideNext && (
           <button
@@ -140,14 +143,15 @@ export const ContextualNavigation: React.FC<ContextualNavigationProps> = ({
             ) : (
               <>
                 <span>
-                  {nextLabel || (nextConfig ? `Continue to ${nextConfig.label}` : 'Complete Journey')}
+                  {nextLabel ||
+                    (nextConfig ? `Continue to ${nextConfig.label}` : 'Complete Journey')}
                 </span>
                 <span>→</span>
               </>
             )}
           </button>
         )}
-        
+
         {/* Spacer for alignment when next is hidden */}
         {hideNext && <div />}
       </div>

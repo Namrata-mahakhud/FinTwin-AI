@@ -34,9 +34,9 @@ const AIAgentDiscussionPanel: React.FC<AIAgentDiscussionPanelProps> = ({
     }
 
     const interval = setInterval(() => {
-      setCurrentIndex(prev => {
+      setCurrentIndex((prev) => {
         if (prev < messages.length) {
-          setVisibleMessages(current => [...current, messages[prev]]);
+          setVisibleMessages((current) => [...current, messages[prev]]);
           return prev + 1;
         }
         clearInterval(interval);
@@ -97,9 +97,7 @@ const AIAgentDiscussionPanel: React.FC<AIAgentDiscussionPanelProps> = ({
           {isActive && (
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-sm text-green-600 dark:text-green-400 font-medium">
-                Active
-              </span>
+              <span className="text-sm text-green-600 dark:text-green-400 font-medium">Active</span>
             </div>
           )}
         </div>
@@ -129,9 +127,7 @@ const AIAgentDiscussionPanel: React.FC<AIAgentDiscussionPanelProps> = ({
                   <div className="flex items-center gap-2">
                     <span className="text-2xl">{msg.icon}</span>
                     <div>
-                      <div className="font-semibold text-gray-900 dark:text-white">
-                        {msg.agent}
-                      </div>
+                      <div className="font-semibold text-gray-900 dark:text-white">{msg.agent}</div>
                       <Badge variant={getAgentBadgeColor(msg.agentType)} size="sm">
                         {msg.agentType}
                       </Badge>
@@ -139,9 +135,7 @@ const AIAgentDiscussionPanel: React.FC<AIAgentDiscussionPanelProps> = ({
                   </div>
                   {msg.confidence && (
                     <div className="text-right">
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                        Confidence
-                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">Confidence</div>
                       <div className="text-sm font-bold text-gray-900 dark:text-white">
                         {msg.confidence}%
                       </div>
@@ -178,13 +172,11 @@ const AIAgentDiscussionPanel: React.FC<AIAgentDiscussionPanelProps> = ({
         {visibleMessages.length > 0 && (
           <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
             <div className="grid grid-cols-5 gap-2">
-              {['market', 'risk', 'portfolio', 'recommendation', 'reporting'].map(type => {
-                const count = visibleMessages.filter(m => m.agentType === type).length;
+              {['market', 'risk', 'portfolio', 'recommendation', 'reporting'].map((type) => {
+                const count = visibleMessages.filter((m) => m.agentType === type).length;
                 return (
                   <div key={type} className="text-center">
-                    <div className="text-lg font-bold text-gray-900 dark:text-white">
-                      {count}
-                    </div>
+                    <div className="text-lg font-bold text-gray-900 dark:text-white">{count}</div>
                     <div className="text-xs text-gray-600 dark:text-gray-400 capitalize">
                       {type}
                     </div>

@@ -43,11 +43,11 @@ export class RiskAgent extends BaseAgent {
     // Confidence based on data completeness
     const hasAllMetrics = result.overallRisk && result.sectorRisks && result.concentrationRisk;
     const riskScore = (result.overallRisk as number) || 0;
-    
+
     // Higher confidence for moderate risk scores (more predictable)
     const riskFactor = 1 - Math.abs(riskScore - 50) / 50;
-    
-    return hasAllMetrics ? 0.75 + (riskFactor * 0.25) : 0.6;
+
+    return hasAllMetrics ? 0.75 + riskFactor * 0.25 : 0.6;
   }
 
   /**
@@ -65,7 +65,7 @@ export class RiskAgent extends BaseAgent {
       MODERATE: 50,
       AGGRESSIVE: 80,
     };
-    
+
     riskScore += (appetiteRisk[portfolio.riskAppetite] || 50) * 0.3;
 
     // Risk from market volatility
@@ -104,11 +104,8 @@ export class RiskAgent extends BaseAgent {
     for (const [sector, allocation] of Object.entries(sectorAllocations)) {
       const marketImpact = Math.abs(sectorImpacts[sector] || 0);
       const allocationRisk = allocation > 30 ? (allocation - 30) * 2 : 0; // Penalty for over-concentration
-      
-      sectorRisks[sector] = Math.min(
-        Math.round(marketImpact * 2 + allocationRisk),
-        100
-      );
+
+      sectorRisks[sector] = Math.min(Math.round(marketImpact * 2 + allocationRisk), 100);
     }
 
     return sectorRisks;
@@ -159,12 +156,12 @@ export class RiskAgent extends BaseAgent {
     // Simplified correlation analysis
     const correlatedSectors: string[][] = [];
     const sectors = Object.keys(sectorRisks);
-    
+
     // Banking and Real Estate are typically correlated
     if (sectors.includes('BANKING') && sectors.includes('REAL_ESTATE')) {
       correlatedSectors.push(['BANKING', 'REAL_ESTATE']);
     }
-    
+
     // Technology and Consumer sectors correlation
     if (sectors.includes('TECHNOLOGY') && sectors.includes('CONSUMER')) {
       correlatedSectors.push(['TECHNOLOGY', 'CONSUMER']);
