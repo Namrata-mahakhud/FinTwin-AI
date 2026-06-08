@@ -261,7 +261,10 @@ export const validatePagination = (
 /**
  * Validate sort parameter
  */
-export const validateSort = (sort?: string, allowedFields: string[] = []): { field: string; order: 1 | -1 } | null => {
+export const validateSort = (
+  sort?: string,
+  allowedFields: string[] = []
+): { field: string; order: 1 | -1 } | null => {
   if (!sort) return null;
 
   const order = sort.startsWith('-') ? -1 : 1;

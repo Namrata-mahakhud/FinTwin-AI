@@ -190,11 +190,7 @@ export class NumberUtils {
   /**
    * Calculate compound annual growth rate (CAGR)
    */
-  static calculateCAGR(
-    beginningValue: number,
-    endingValue: number,
-    years: number
-  ): number {
+  static calculateCAGR(beginningValue: number, endingValue: number, years: number): number {
     return (Math.pow(endingValue / beginningValue, 1 / years) - 1) * 100;
   }
 
@@ -239,15 +235,15 @@ export class ArrayUtils {
    * Group by key
    */
   static groupBy<T>(array: T[], key: keyof T): Record<string, T[]> {
-    return array.reduce((result, item) => {
-      const groupKey = String(item[key]);
-      if (!result[groupKey]) {
-        result[groupKey] = [];
-      }
-      result[groupKey].push(item);
-      return result;
-    }, {} as Record<string, T[]>);
-  }
+  return array.reduce((result, item) => {
+    const groupKey = String(item[key]);
+    if (!result[groupKey]) {
+      result[groupKey] = [];
+    }
+    result[groupKey].push(item);
+    return result;
+  }, {} as Record<string, T[]>);
+}
 
   /**
    * Sort by key
@@ -517,10 +513,7 @@ export class AsyncUtils {
   /**
    * Execute functions in parallel with limit
    */
-  static async parallelLimit<T>(
-    tasks: (() => Promise<T>)[],
-    limit: number
-  ): Promise<T[]> {
+  static async parallelLimit<T>(tasks: (() => Promise<T>)[], limit: number): Promise<T[]> {
     const results: T[] = [];
     const executing: Promise<void>[] = [];
 

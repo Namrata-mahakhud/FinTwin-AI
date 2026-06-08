@@ -151,11 +151,7 @@ export class RateLimitError extends AppError {
   public readonly retryAfter: number;
 
   constructor(retryAfter: number = 60) {
-    super(
-      'Too many requests. Please try again later.',
-      429,
-      ErrorCode.RATE_LIMIT_EXCEEDED
-    );
+    super('Too many requests. Please try again later.', 429, ErrorCode.RATE_LIMIT_EXCEEDED);
     this.retryAfter = retryAfter;
   }
 
