@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
+    "ignoreDeprecations": "5.0",
     "target": "ES2022",
     "module": "commonjs",
     "lib": ["ES2022"],
@@ -46,5 +46,3 @@
     "require": ["tsconfig-paths/register"]
   }
 }
-
-// Made with Bob
