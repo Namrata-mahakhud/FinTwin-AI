@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
@@ -34,9 +34,13 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          charts: ['recharts'],
+        manualChunks: (id) => {
+          if(id.includes('node_modules')|| id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+            return 'vendor';
+          }
+          if(id.includes('node_modules/recharts')) {
+            return 'charts';
+          }
         },
       },
     },
@@ -53,4 +57,3 @@ export default defineConfig({
   },
 });
 
-// Made with Bob
